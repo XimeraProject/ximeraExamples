@@ -1,0 +1,586 @@
+abstract.dtx
+    Commands:
+        None
+    Environments:
+        abstract
+    Other:
+        None
+accordion.dtx
+    Commands:
+        none
+    Environments:
+        accordion
+        accordion-item
+        expandable (reimplementation - also used in hint variation below)
+        hint (triggered by xmNotHintAsExpandable not defined)
+        xmhint
+    Other:
+        none
+activity.dtx
+    Commands:
+        maketitle
+        activity
+        practice
+    Environments:
+        none
+    Other:
+        Note: Heavy use of \ifxake in this dtx.
+answer.dtx
+    Commands:
+        recordvariable
+        answerFormatLength
+        answerFormatDots
+        answerFormatFlexibleLine
+        answerFormatFlexibleBox
+        answerFormatPlain
+        answerFormatBlue
+        answerFormatBoxed
+        answerFormatBoxedGiven
+        handoutAnswerFormat
+        defaultAnswerFormat
+        givenAnswerFormat
+        answer
+    Environments:
+        none
+    Other:
+        answer has the following keys defined: given,tolerance,validator,id,format,onlinenoinput,onlineshowanswerbutton
+banner.dtx
+    Commands:
+        none
+    Environments:
+        none
+    Other:
+        Note: This is just to make a banner.
+choice.dtx
+    Commands:
+        choice
+        choiceEXP
+        otherchoice
+        inlinechoice
+        wordChoice
+        selectAll
+    Environments:
+        multipleChoice
+        multipleChoice@
+    Other:
+        defined keys: 
+            choice: value, correct (boolean key)
+            multipleChoice: id
+            otherchoice: value, correct (boolean key)
+        counters defined: choiceId
+clearEnv.dtx
+    Commands:
+        clearEnv
+    Environments:
+        none
+    Other:
+        Note: Not widely implemented, as far as I know.
+dialogue.dtx
+    Commands:
+        none
+    Environments:
+        dialogue
+    Other:
+        none
+ending.dtx
+    Commands:
+        none
+    Environments:
+        none
+    Other:
+        Note: Not sure what this even is; \Hinput commands used?
+enumerate.dtx
+    Commands:
+        none
+    Environments:
+        none
+    Other:
+        Note: Just a reskin of the enumerate environment to change label types.
+            Renews: theenumi, labelenumi, theenumii, labelenumii
+feedback.dtx
+    Commands:
+        feedback
+    Environments:
+        validator
+        feedback
+    Other:
+        defines internal commands:
+            \PH@Command, @feedbackattempt, @feedbackcode
+foldable.dtx
+    Commands:
+        unfoldable
+    Environments:
+        foldable, expandable
+    Other:
+        none
+footnotes.dtx
+    Commands:
+        footnote
+    Environments:
+        none
+    Other:
+        new counters defined: footnoteNum
+        new colors defined: fncolor
+freeresponse.dtx
+    Commands:
+        none
+    Environments:
+        freeResponse
+    Other:
+        New booleans defined: given
+graded.dtx
+    Commands:
+        none
+    Environments:
+        graded
+    Other:
+        Note: graded/ungraded are depreciated.
+hideEnv.dtx
+    Commands:
+        hideEnv
+    Environments:
+        none
+    Other:
+        Note: Not widely used as far as I know.
+            Uses suppress command.
+hints.dtx
+    Commands:
+        none
+    Environments:
+        hint
+    Other:
+        Defines Counters:
+            hintLevel
+html.dtx
+    Commands:
+        none
+    Environments:
+        none
+    Other:
+        Note: Just a dtx to convert style in Latex (e.g. bold, italicize) to the HTML version (e.g. strong or em tag)
+hyperref.dtx
+    Commands:
+        none
+    Environments:
+        none
+    Other:
+        Note: Seems to be here just to load and configure hyperref?
+image.dtx
+    Commands:
+        xmDefaultGraphicsPath, alt, ifstandalone, pgfsyspdfmark
+    Environments:
+        image
+    Other:
+        defines graphics paths:
+            ./ , .\xmDefaultGraphicsPath/ , ..\xmDefaultGraphicsPath/ , ../..\xmDefaultGraphicsPath/ , ../../..\xmDefaultGraphicsPath/
+        defines new counters:
+            imagealt
+instructornotes.dtx
+    Commands:
+        none
+    Environments:
+        instructorIntro, instructorNotes
+    Other:
+        Note: instructorIntro and instructorNotes is defined in a number of different ways based on a conditional tree.
+jax.dtx
+    Commands:
+        none
+    Environments:
+        prompt
+    Other:
+        Environment prompt is defined by writing the definition out to a file.
+        redefines the LaTeX base command: DeclareMathOperator
+        Also uses the .ids file that is generated ... by problem env maybe?
+labels.dtx
+    Commands:
+        none
+    Environments:
+        none
+    Other:
+        Note: Just a renew of label and ref commands for the online setting to assign html code.
+leash.dtx
+    Commands:
+        none
+    Environments:
+        leash
+    Other:
+        Note:: I think this was depreciated, but maybe not?
+link.dtx
+    Commands:
+        link
+    Environments:
+        none
+    Other:
+        renews the \ref command using the \AtBeginDocument hook, but only for online compile (in htXimera)
+        Note: link uses footnotes, but does something weird with double footnotes?
+localize.dtx
+    Commands:
+        setLanguage
+    Environments:
+        none
+    Other:
+        Note: Implements dictionaries in the localization folder as well via input command hooked to happen before begin document.
+logo.dtx
+    Commands:
+        logo
+    Environments:
+        none
+    Other:
+        Note: Just defines a logo for the xourse?
+macros.dtx
+    Commands:
+        none
+    Environments:
+        none
+    Other:
+        Note: Just sets all math to be displaystyle math.
+            ... Why is this called "macros"?
+makeCounter.dtx
+    Commands:
+        Make@Counter, MakeCounter
+    Environments:
+        none
+    Other:
+        Note: Just a wrapper around the makecounter command to make a counter if it isn't defined, and reset it to 0 if it is.
+metadata.dtx
+    Commands:
+        license, acknowledgement
+    Environments:
+        none
+    Other:
+        none
+only.dtx
+    Commands:
+        pdfOnly, htmlOnly, ifonlineTF
+    Environments:
+        prompt, onlyPdf, onlyHtml, onlineOnly
+    Other:
+        defines new \if conditional: ifonline
+options.dtx
+    Commands:
+        none
+    Environments:
+        none
+    Other:
+        Declares the following options for ximera.cls:
+            handout, noauthor, nooutcomes, instructornotes, noinstructornotes, hints, newpage, numbers, wordchoicegiven, xake, tikzexport
+        Defines the following new \if conditionals:
+            ifhandout, ifnoauthor, ifnooutcomes, ifinstructornotes, ifhints, ifnewpage, ifnumbers, ifwordchoicegiven, iffirstinlinechoice, ifxake, iftikzexport
+optionsxourse.dtx
+    Commands:
+        none
+    Environments:
+        none
+    Other:
+        Defines the following options for Xourse:
+            notoc, nonewpage
+        Defines the following new \if conditionals:
+            ifnotoc, ifnonewpage
+outcomes.dtx
+    Commands:
+        preOutputLine
+        postOutputLine
+        preOutputBlock
+        postOutputBlock
+        outcomeHeader
+        outcomeBlock
+        outcome
+        displayOutcomes
+    Environments:
+        none
+    Other:
+        Note: Builds .oc file, which is a written file built via the outcome command and contains the content displayed via displayOutcomes.
+packages.dtx
+    Commands:
+        none
+    Environments:
+        none
+    Other:
+        Note: Just a .dtx that loads all the required packages.
+pagesetup.dtx
+    Commands:
+        none
+    Environments:
+        none
+    Other:
+        Note: dtx sets a bunch of parameters for page layout (e.g. indent size, parskip size, etc)
+preamble.dtx
+    Commands:
+        xmDefaultPreamble
+        xmDefaultPrintstyle
+    Environments:
+        none
+    Other:
+        Note: Sets default preamble and printstyle file names.
+problem.dtx
+    Commands:
+        latexProblemContent
+        hang
+        hung
+        problemNumber
+        problemEnvironmentStart
+        problemEnvironmentEnd
+        ConfigureQuestionEnv
+    Environments:
+        problem
+        exercise
+        exploration
+        question
+    Other:
+        Defines the following counters:
+            Iteration@probCnt, problem, problem@Depth, identification
+        Note: This .dtx file is redone significantly in the multilingual update. But most of these commands/env are still there and are the defiend things in it.
+proof.dtx
+    Commands:
+        none
+    Environments:
+        Renews the default environment proof.
+    Other:
+        Redefines the qed symbol by renewing the command: qedsymbol
+sectioning.dtx
+    Commands:
+        Renews the following default commands (for toc):
+            l@section, l@subsection, part
+        Renews the following default commands for html:
+            paragraph, subparagraph
+    Environments:
+        none
+    Other:
+        Defines the new counter: ximera@part
+solution.dtx
+    Commands:
+        none
+    Environments:
+        solution
+    Other:
+        Note: solution is defined via conditional.
+suppress.dtx
+    Commands:
+        suppress
+        endsuppress
+    Environments:
+        none
+    Other:
+        Note: Support command to suppress some output, while letting it actually run.
+textcolor.dtx
+    Commands:
+        Renews base LaTeX command textcolor 
+    Environments:
+        none
+    Other:
+        none
+theorems.dtx
+    Commands:
+        ConfigureTheoremEnv
+    Environments:
+        theorem
+        algorithm
+        axiom
+        claim
+        conclusion
+        condition
+        conjecture
+        corollary
+        criterion
+        definition
+        example
+        explanation
+        fact
+        lemma
+        formula
+        idea
+        notation
+        model
+        observation
+        proposition
+        paradox
+        procedure
+        remark
+        summary
+        template
+        warning
+    Other:
+        Note: This ... appears? To define environments, but only in htlatex (i.e. only online?)
+tikzexport.dtx
+    Commands:
+        none
+    Environments:
+        none
+    Other:
+        I think tikzexport is now depreciated as a thing?
+title.dtx
+    Commands:
+        chapterstyle
+        sectionstyle
+        Redefines the following default LaTeX commands:
+            author, @author, title, thetitlenumber (formatting), maketitle, thesection (formatting), thesubsection (formatting), subsection, section
+    Environments:
+        none
+    Other:
+        Defines the following new counters:
+            titlenumber, sectiontitlenumber
+        Defines the pagestyle "main" via \newpagestyle
+ungraded.dtx
+    Commands:
+        none
+    Environments:
+        ungraded
+    Other:
+        Note: Currently depreciated/inactive.
+utilitymacros.dtx
+    Commands:
+        Make@Counter
+        MakeCounter
+        latexProblemContent
+    Environments:
+        none
+    Other:
+        Defines the new counter: Iteration@probCnt
+verbatim.dtx
+    Commands:
+        none
+    Environments:
+        Defines the following "verbatime Environments" via \DefineVerbatimEnvironment:
+            code, python, javascriptCode
+    Other:
+        none
+xkcd.dtx
+    Commands:
+        xkcd
+    Environments:
+        none
+    Other:
+        Note: Just loads an xkcd comic. Might be depreciated now.
+
+(In the interactive folder)
+desmos.dtx
+    Commands:
+        desmos
+        desmosThreeD
+    Environments:
+        none
+    Other:
+        Note: No link to any kind of grade/progress.
+geogebra.dtx
+    Commands:
+        geogebra
+    Environments:
+        none
+    Other:
+        Note: Does not implement credit for interaction with object.
+        Defines the following keys for the command \geogebra:
+            rc, sdz, smb, stb, stbh, ld, sri
+google.dtx
+    Commands:
+        googleSheet
+    Environments:
+        none
+    Other:
+        Note: Implements embedding a Google Sheet?
+graph.dtx
+    Commands:
+        graph
+    Environments:
+        none
+    Other:
+        Note: Graphs via desmos I think?
+include.dtx
+    Commands:
+        includeinteractive
+    Environments:
+        none
+    Other:
+        Also defines the following keys for includeinteractive:
+            id
+        Note: No idea what this is currently?
+javascript.dtx
+    Commands:
+        js
+    Environments:
+        javascript
+    Other:
+        Defines javascript environment via \DefineVerbatimEnvironment
+sagemath.dtx
+    Commands:
+        none
+    Environments:
+        sagecell (via DefineVerbatimEnvironment)
+        sageOutput (via DefineVerbatimEnvironment)
+    Other:
+        Note: Also redefines the sageCell, sageOutput, and sagesilent env in the online setting
+video.dtx
+    Commands:
+        youtube
+    Environments:
+        none
+    Other:
+        Implements YouTube video which *should* include credit for progress through the video.
+
+(Localization Folder only contains dictionaries - no test files needed?)
+
+(Validators)
+equalMaterix.dtx
+    Commands:
+        none
+    Environments:
+        none
+    Other:
+        Implements the following validators for the answer command via the validatorHook command \appendtoverbtoks:
+            equalMaterix
+factorCheck.dtx
+    Commands:
+        none
+    Environments:
+        none
+    Other:
+        Implements the following validators for the answer command via the validatorHook command \appendtoverbtoks:
+            factorCheck (Intended validator)
+            isNum (Intended as an internal function, but can technically be used as a validator)
+            isPosInt (Intended as an internal function, but can technically be used as a validator)
+            JNFisFactored (Intended as an internal function, but can technically be used as a validator)
+            factorCheck (Intended as an internal function, but can technically be used as a validator)
+multiAns.dtx
+    Commands:
+        none
+    Environments:
+        none
+    Other:
+        Implements the following validators for the answer command via the validatorHook command \appendtoverbtoks:
+            multiAns
+sameDerivative.dtx
+    Commands:
+        none
+    Environments:
+        none
+    Other:
+        Implements the following validators for the answer command via the validatorHook command \appendtoverbtoks:
+            sameDerivative
+supplementalCommands.dtx
+    Commands:
+        none
+    Environments:
+        none
+    Other:
+        Note: Implements a number of supplemental javascript functions for use in other validators. 
+            None of these can be used as validators themselves, even formally/technically.
+unactivatedValidators.dtx
+    Commands:
+        none
+    Environments:
+        none
+    Other:
+        Records (but does not implement) the following validators for the answer command via the validatorHook command \appendtoverbtoks:
+            Note: The below are not implemented as they are commented out, but can be commented back in if desired.
+            sameParity
+            isPositive
+            caseInsensitive
+validatorHook.dtx
+    Commands:
+        appendtoverbtoks (The only non-internal command in this dtx)
+        The following commands are all defined as internal commands to make the \appendtoverbtoks work, which is tricky since we need to obliterate catcodes, but still use verbatim content.
+            Importantly, these are all internal and named in a way that means we shouldn't need to worry about overriding them or having them overridden elsewhere. 
+            UD@collectverbarg, UD@@collectverbarg, UD@@@collectverbarg, exchange, @@appendtoverbtoks, @@prependtoverbtoks, prependtoverbtoks, scantokenssetvbox, UDcollectverbarg
+    Environments:
+        none
+    Other:
+        Implements the hook that lets us hook in a javascript env at the start of a document to add in core validators (until we can fix the server)

@@ -1,0 +1,55 @@
+\documentclass{ximera}
+\title{Outcome Default List Test Activity}
+\date{Last Updated: 6/5/2025}
+
+% List of outcomes that should display where "\displayOutcomes" is used.
+\outcome{Answer some questions about some stuff.}
+\outcome{Do something productive.}
+\outcome{Learn how Questions work maybe.}
+\outcome{Maybe other stuff - who knows!}
+\input{preamble.tex}
+\begin{document}
+\begin{abstract}
+    A testbed file for Outcomes.
+\end{abstract}
+\maketitle
+
+\section{Intended Outcome of Test}
+
+In the preamble we use the \verb|\outcome| command to add an outcome, and add a new outcome with each \verb|\outcome| command. 
+Then we use the \verb|\displayOutcomes| command to display the outcomes listed in this file.
+The command \verb|\displayOutcomes| takes an optional argument to load an outcome file from a different file (if it exists).
+
+So, in the preamble, we used the following commands to populate the outcomes:
+\begin{itemize}
+    \item \verb|\outcome{Answer some questions about some stuff.} |
+    \item \verb|\outcome{Do something productive.} |
+    \item \verb|\outcome{Learn how Questions work maybe.} |
+    \item \verb|\outcome{Maybe other stuff - who knows!} |
+\end{itemize}
+
+
+The test area should look (approximately) like the following:
+
+
+Goals for this Section (Hover over me to see!)\\
+At the end of this section, students should be able to...
+\begin{itemize}
+\item Answer some questions about some stuff.
+\item Do something productive.
+\item Learn how Questions work maybe.
+\item Maybe other stuff - who knows!
+\end{itemize}
+So go forth and learn!
+
+
+
+\section{Start of Test/Demo Area}
+
+\displayOutcomes
+
+\section{End of Test/Demo Area}
+
+Some ending text to ensure that there is no unintended output between end of the test/demo and the end of the document.
+
+\end{document}
