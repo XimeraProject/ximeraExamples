@@ -38,6 +38,7 @@ xmPictures/**
 *.cb2
 .*.lb
 *.DS_Store
+*.xmjax
 
 ## Intermediate documents:
 *.dvi
