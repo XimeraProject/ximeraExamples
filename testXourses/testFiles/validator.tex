@@ -1,0 +1,102 @@
+\documentclass{ximera}
+\title{Validator Activity 1}
+\date{Last Updated: 6/5/2025}
+
+\input{preamble.tex}
+\begin{document}
+\begin{abstract}
+    A testbed file for Validators
+\end{abstract}
+\maketitle
+
+This file demonstrates the following validators: equalMaterix, multiAns, sameDerivative, 
+
+\section{Intended Outcome of Test}
+
+    \subsection*{multiAns}
+        This validator allows an instructor to provide a list of acceptable answers for a given answer prompt.
+
+        The testing area for multiAns should show a problem with the statement: 
+        " The following answer prompt will accept any of the following functions as correct: $\sin(t)$, $\tan(x)$, $e^\pi$, $21x^3 + 1$, $ex + \pi$. "
+        and then (as implied) an \verb|\answer| box that should accept any of the listed functions/values as correct, and reject any others.
+
+    \subsection*{sameDerivative}
+        The testing area for multiAns should show a problem with the statement: 
+        "This problem shows the 'same derivative' validator. It's intended to be used to test the result of an indefinite integral, so it requires the ``$+C$'' at the end, and (should) mark any answer wrong that doesn't have it. Note that the $C$ is case-sensitive. \\
+            
+            Enter in any answer whose derivative is $x^2 + \sin(x) - 3$ (and don't forget the $+C$, but notice you can also add random constants to it too)."
+        and then (as implied) it will have the equation $\int x^2 + \sin(x) - 3 dx =$ followed by an answer box that will take any (correct) answer, i.e. the 
+        indefinite integral with a +C and any other constant added.
+
+    \subsection*{equalMatrix}
+
+        This validator is designed to ensure that a matrix submitted by a student is the same as the matrix submitted by the instructor. This also establishes the format for how matricies should be entered into the answer box and answer command.
+    
+        NOTE:: This validator is still under construction. Currently this validator (seems to) work on algebraic entries of any kinda that Xronos normally supports.
+        
+        Specifically, a matrix should be entered into the answer box in the following format:
+        
+        $[ [r1c1,r1c2,r1c3],[r2c1,r2c2,r2c3],[r3c1,r3c2,r3c3] ]$.
+        
+        So, if a student wishes to enter the matrix:
+        
+        $\left[\begin{matrix}
+        1 & 2 & 3 \\
+        4 & 5 & 6 \\
+        7 & 8 & 9
+        \end{matrix}\right]$
+        
+        They would enter into the answer prompt: $[ [1,2,3], [4,5,6], [7,8,9] ]$.\\
+
+        In the test/demo area, you should see a problem with the prompt:
+            "The following answer box should accept the matrix:
+            $\left[\begin{matrix}
+            a^2 & 2 & 3 \\
+            4 & x^2 & 6 \\
+            7 & 8 & y-x+e^x
+            \end{matrix}\right]$"
+
+            And then an \verb|\answer| box that should mark correct the answer $[ [a^2,2,3], [4,x^2,6], [7,8,y-x+e^x] ]$ and no other possibilities.
+
+
+\section{Start of Test/Demo Area}
+
+    \subsection*{multiAns}
+        \begin{problem}
+            The following answer prompt will accept any of the following functions as correct: $\sin(t)$, $\tan(x)$, $e^\pi$, $21x^3 + 1$, $ex + \pi$.
+            \[
+                \answer[validator=multiAns]{[\sin(t),\tan(x),e^\pi,21x^3 + 1,ex + \pi]}
+            \]
+        \end{problem}
+
+    \subsection*{sameDerivative}
+
+        \begin{problem}
+            This problem shows the 'same derivative' validator. It's intended to be used to test the result of an indefinite integral, so it requires the ``$+C$'' at the end, and (should) mark any answer wrong that doesn't have it. Note that the $C$ is case-sensitive. \\
+            
+            Enter in any answer whose derivative is $x^2 + \sin(x) - 3$ (and don't forget the $+C$, but notice you can also add random constants to it too).
+            \[
+                \int x^2 + \sin(x) - 3 dx = \answer[validator=sameDerivative]{\frac{1}{3}x^3 - \cos(x) - 3x + C}
+            \]
+            
+            Sidenote: You can avoid the problem of the $+C$ if you don't put it in the expected answer box, which will then (correctly) mark an answer wrong that \textit{does} include a $+C$. So in a sense you can force the student to include it, or not, with this validator. Although only checking the derivatives to match has obvious issues for non indefinite integrals.
+        \end{problem}
+
+    \subsection*{equalMatrix}
+        \begin{problem}
+            The following answer box should accept the matrix:
+            
+            $\left[\begin{matrix}
+            a^2 & 2 & 3 \\
+            4 & x^2 & 6 \\
+            7 & 8 & y-x+e^x
+            \end{matrix}\right]$
+            
+            $\answer[validator=equalMatrix]{[ [a^2,2,3], [4,x^2,6], [7,8,y-x+e^x] ]}$
+        \end{problem}
+
+\section{End of Test/Demo Area}
+
+Some ending text to ensure that there is no unintended output between end of the test/demo and the end of the document.
+
+\end{document}
