@@ -7,11 +7,25 @@
 \begin{abstract}%%
     We are working on supporting additional languages!
 \end{abstract}
-\maketitle%%
+\maketitle
+
+Force Update 1.
+
 \section*{Language Support}%
 
-Currently using the language: \languagename{} And that was set by babel, and nothing else!%%%
+\makeatletter
+\@ifpackageloaded{babel}{I think package: babel is Loaded.}{I think package: babel is Not Loaded.}
 
+\@ifpackageloaded{translations}{I think package: translations is Loaded.}{I think package: translations is Not Loaded.}
+
+Currently using the language: \@ifpackageloaded{babel}{\languagename{}, 
+and that was set by babel, and nothing else!}{English by Default (since Babel wasn't loaded)} %%%
+
+\ifcsname setLanguage\endcsname \else \newcommand{\setLanguage}[1]{} \fi
+
+\makeatother
+
+\catcode`\"=12
 
     \subsection*{French}%%
     
