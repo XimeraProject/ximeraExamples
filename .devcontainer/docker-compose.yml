@@ -1,6 +1,6 @@
 services:
   app:
-    image: ghcr.io/ximeraproject/ximeralatex:v2.7uf9a-full
+    image: ghcr.io/ximeraproject/ximeralatex:v2.7uf.9b-full
     # image: ghcr.io/ximeraproject/ximeralatex:v2.6.8-full
     volumes:
       # This is where VS Code should expect to find your project's source code and the value of "workspaceFolder" in .devcontainer/devcontainer.json
