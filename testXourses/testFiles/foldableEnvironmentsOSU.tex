@@ -1,0 +1,39 @@
+%% Use the OSU variant of foldable/expandable
+%% By default a setup with accordion is used, that is not available on the OSU-server
+%
+\def\xmNotHintAsExpandable{1}
+\def\xmNotExpandableAsAccordion{1}
+\documentclass{ximera}
+
+%%\input{../preamble}
+
+\title{Foldable environments (OSU-style)}
+
+\begin{document}
+\begin{abstract}
+  Here we see expandable and foldable environments.
+\end{abstract}
+\maketitle
+
+NOTE: This does \textbf{NOT} work properly with KULeuven-styled server(s) (as used in Codespaces or local test-servers).
+
+
+You can expand this one:
+
+\begin{expandable}
+  Hello
+ \begin{center}
+   \youtube{0aQpLSu2fMs}
+ \end{center}
+\end{expandable}
+
+
+
+And fold this one:
+
+\begin{foldable}
+  You can fold me up!
+\end{foldable}
+
+
+\end{document}
