@@ -40,7 +40,7 @@ jobs:
             ximera-
 
 
-      - name: Build and publish Ximera courses
+      - name: Build and publish Ximera courses 
         env:
           # These variables can/should be set at repository level
           # If not set, defaults from xmScripts/config.txt or xlatex will be used 
@@ -49,10 +49,11 @@ jobs:
           GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
           XIMERA_URL: ${{ vars.XIMERA_URL }}
           XIMERA_NAME: ${{ vars.XIMERA_NAME }}${{ github.ref_name }}
+          XOURSES: "./testXourses/localizationTest.tex"
         run: |
           ls -alrt
           chmod +x xmScripts/xmlatex   # Overleaf sync might reset it :-()
-          ./xmScripts/xmlatex ghaction
+          ./xmScripts/xmlatex ghaction $XOURSES
           echo "✅ Published to $XIMERA_URL$XIMERA_NAME " >> $GITHUB_STEP_SUMMARY
 
       - name: Setup ximera serve cache (only .git)
@@ -69,6 +70,7 @@ jobs:
     name: Publish Ximera Courses
     needs: build-ximera # Waits for the build job to complete
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     environment: production  # Allows for 'manual review' step
     steps:
       - name: Restore ximera serve cache (only .git)
