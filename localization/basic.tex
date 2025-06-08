@@ -1,0 +1,142 @@
+\documentclass{ximera}
+\providecommand{\languagename}{default (no babel loaded)}
+
+\title{Localization Support (\languagename)}
+
+\begin{document}
+\begin{abstract}%%
+    Localized as \languagename
+\end{abstract}
+\maketitle
+
+% Show the current loaded packages and selected language. Just for demo/testing/logging purposes.
+\makeatletter
+\@ifpackageloaded{babel}       {\phantom{NOT }}{NOT } Loaded package babel.
+
+\@ifpackageloaded{translations}{\phantom{NOT }}{NOT } Loaded package translations
+
+Current language: \languagename
+
+% \ifcsname setLanguage\endcsname \else \newcommand{\setLanguage}[1]{} \fi
+\makeatother
+
+%%\catcode`\"=12
+
+\section*{Basic example}%%
+    
+        Notice the ''Problem'', ''Question'', ''Exercise'', and ''Exploration'' environment titles... 
+        \begin{problem}%
+            This is a problem, and the answer is 1! %$\answer{1}$%%%
+            \begin{multipleChoice}
+                \choice{This is a wrong choice}
+                \choice[correct]{this is a correct choice}
+            \end{multipleChoice}%%
+        \end{problem}
+            
+        \begin{question}
+            This is a problem, and the answer is 2! %$\answer{2}$
+            \begin{selectAll}
+                \choice{This is a wrong choice}
+                \choice[correct]{This is a correct choice. Note that it does have feedback this time though!}
+            \end{selectAll}%%%%
+            \begin{feedback}
+                Here's some feedback! Note that it is trivial to remove the text, if you don't want it to say ''feedback: '' before the feedback. I only did it here to add/demo the infrastructure for online feedback (since the pdf does include ''feedback: '' by default, so that needed to be translated)%
+            \end{feedback}
+            \begin{feedback}[correct]
+                I am adding this here just to show that we can indeed add tags with the existing translation system, and it will keep working.%
+            \end{feedback}
+        \end{question}
+            
+        \begin{exercise}
+            \begin{hint}
+                Here's a hint - the answer is 3!, not 3.
+            \end{hint}
+            Note: ''Hint'' is redefined in this KU Lueven printstyle and replaced by xmHint. Currently this translation works on the ''hint'' environment, but not the ''xmHint'' environment. We need to decide what we are using and I will write the code to support that.
+            This is a problem: $\answer{6}$
+        \end{exercise}
+            
+        \begin{exploration}
+            This is a problem, and the answer is 4! $\answer{24}$
+        \end{exploration}
+
+
+\section*{Extended list of environments}%%
+
+
+        \begin{algorithm}
+            This is an algorithm Environment.
+        \end{algorithm}% Used in theorems.dtx
+        \begin{axiom}
+            This is an axiom Environment.
+        \end{axiom}% Used in theorems.dtx
+        \begin{claim}
+            This is a claim Environment.
+        \end{claim}% Used in theorems.dtx
+        \begin{conclusion}
+            This is a conclusion Environment.
+        \end{conclusion}% Used in theorems.dtx
+        \begin{condition}
+            This is a condition Environment.
+        \end{condition}% Used in theorems.dtx
+        \begin{conjecture}
+            This is a conjecture Environment.
+        \end{conjecture}% Used in theorems.dtx
+        \begin{corollary}
+            This is a Theorem Environment.
+        \end{corollary}% Used in theorems.dtx
+        \begin{criterion}
+            This is a Theorem Environment.
+        \end{criterion}% Used in theorems.dtx
+        \begin{definition}
+            This is a definition Environment.
+        \end{definition}% Used in theorems.dtx
+        \begin{example}
+            This is an example Environment.
+        \end{example}% Used in theorems.dtx
+        \begin{explanation}
+            This is an explanation Environment.
+        \end{explanation}% Used in theorems.dtx
+        \begin{fact}
+            This is a fact Environment.
+        \end{fact}% Used in theorems.dtx
+        \begin{lemma}
+            This is a lemma Environment.
+        \end{lemma}% Used in theorems.dtx
+        \begin{formula}
+            This is a formula Environment.
+        \end{formula}% Used in theorems.dtx
+        \begin{idea}
+            This is an idea Environment.
+        \end{idea}% Used in theorems.dtx
+        \begin{notation}
+            This is a notation Environment.
+        \end{notation}% Used in theorems.dtx
+        \begin{model}
+            This is a model Environment.
+        \end{model}% Used in theorems.dtx
+        \begin{observation}
+            This is an observation Environment.
+        \end{observation}% Used in theorems.dtx
+        \begin{proposition}
+            This is a proposition Environment.
+        \end{proposition}% Used in theorems.dtx
+        \begin{paradox}
+            This is a paradox Environment.
+        \end{paradox}% Used in theorems.dtx
+        \begin{procedure}
+            This is a procedure Environment.
+        \end{procedure}% Used in theorems.dtx
+        \begin{remark}
+            This is a remark Environment.
+        \end{remark}% Used in theorems.dtx
+        \begin{summary}
+            This is a summary Environment.
+        \end{summary}% Used in theorems.dtx
+        \begin{template}
+            This is a template Environment.
+        \end{template}% Used in theorems.dtx
+        \begin{warning}
+            This is a warning Environment.
+        \end{warning}% Used in theorems.dtx
+
+\end{document}
