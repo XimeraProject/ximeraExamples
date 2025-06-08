@@ -23,10 +23,11 @@ Current language: \languagename
 %%\catcode`\"=12
 
 \section*{Basic example}%%
-    
-        Notice the ''Problem'', ''Question'', ''Exercise'', and ''Exploration'' environment titles... 
+
+        Using \verb|babel| and its \verb|\selectlanguage| command, the labels of the Ximera environments are translated to the current language,
+        as in the following ''Problem'', ''Question'', ''Exercise'', and ''Exploration''. 
         \begin{problem}%
-            This is a problem, and the answer is 1! %$\answer{1}$%%%
+            This is a problem, and $1+1 = \answer{2}$%%%
             \begin{multipleChoice}
                 \choice{This is a wrong choice}
                 \choice[correct]{this is a correct choice}
@@ -34,10 +35,10 @@ Current language: \languagename
         \end{problem}
             
         \begin{question}
-            This is a problem, and the answer is 2! %$\answer{2}$
+            This is a question.
             \begin{selectAll}
                 \choice{This is a wrong choice}
-                \choice[correct]{This is a correct choice. Note that it does have feedback this time though!}
+                \choice[correct]{This is a correct choice, with feedback now.}
             \end{selectAll}%%%%
             \begin{feedback}
                 Here's some feedback! Note that it is trivial to remove the text, if you don't want it to say ''feedback: '' before the feedback. I only did it here to add/demo the infrastructure for online feedback (since the pdf does include ''feedback: '' by default, so that needed to be translated)%
@@ -47,21 +48,29 @@ Current language: \languagename
             \end{feedback}
         \end{question}
             
-        \begin{exercise}
+        \begin{exercise} $2+4=\answer[onlinenoinput]{6}$.
             \begin{hint}
-                Here's a hint - the answer is 3!, not 3.
+                Here's a hint: $2 + 4 = 2 \times 3$.
             \end{hint}
-            Note: ''Hint'' is redefined in this KU Lueven printstyle and replaced by xmHint. Currently this translation works on the ''hint'' environment, but not the ''xmHint'' environment. We need to decide what we are using and I will write the code to support that.
-            This is a problem: $\answer{6}$
+            Note: ''Hint'' is redefined in this KU Leuven printstyle and replaced by xmHint. Currently this translation works on the ''hint'' environment, but not the ''xmHint'' environment. We need to decide what we are using and I will write the code to support that.
+
+            This is an exporation: $4!  = \answer{24}$
         \end{exercise}
             
-        \begin{exploration}
-            This is a problem, and the answer is 4! $\answer{24}$
-        \end{exploration}
+
+        % The language can be overwritten locally, e.g with the \verb|\selectlanguage{dutch}|:
+        % \selectlanguage{dutch} 
+        % \begin{theorem}
+        %     Dit is stelling één: $1+1 = $ \wordChoice{\choice[correct]{twee}\choice{drie}}.
+        % \end{theorem}
+
+        % \selectlanguage{french} 
+        % \begin{theorem}
+        %     Ceci est theorème un: $1+1 = $ \wordChoice{\choice[correct]{deux}\choice{trois}}.
+        % \end{theorem}
 
 
 \section*{Extended list of environments}%%
-
 
         \begin{algorithm}
             This is an algorithm Environment.

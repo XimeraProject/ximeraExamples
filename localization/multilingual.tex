@@ -1,0 +1,35 @@
+\documentclass{ximera}
+\input{multilingualPreamble.tex}
+
+
+\title{Multiple languages in one file}
+
+\begin{document}
+\begin{abstract}%%
+\end{abstract}
+\maketitle
+
+\section*{Basic example}%%
+
+        \begin{theorem}
+            This is theorem one: $1+1 = $ \wordChoice{\choice[correct]{two}\choice{three}}.
+        \end{theorem}
+
+
+        The language can be overwritten locally, e.g with the \verb|\selectlanguage{dutch}|:
+        \selectlanguage{dutch} 
+        \begin{theorem}
+            Dit is stelling één: $1+1 = $ \wordChoice{\choice[correct]{twee}\choice{drie}}.
+        \end{theorem}
+
+        \selectlanguage{french} 
+        \begin{theorem}
+            Ceci est theorème un: $1+1 = $ \wordChoice{\choice[correct]{deux}\choice{trois}}.
+        \end{theorem}
+
+        \selectlanguage{brazil} 
+        \begin{theorem}
+            $1+1 = $ \wordChoice{\choice[correct]{dos}\choice{tres}}.
+        \end{theorem}
+
+\end{document}
