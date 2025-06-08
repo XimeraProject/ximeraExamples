@@ -1,0 +1,47 @@
+\documentclass{ximera}
+
+\title{Outcomes}
+
+% List of outcomes that should display where "\displayOutcomes" is used.
+\outcome{You are familiar with outcomes.}
+\outcome{You can add outcomes to an activity.}
+\outcome{You can show all outcomes.}
+
+\begin{document}
+\begin{abstract}
+\end{abstract}
+\maketitle
+
+\section{Basic usage}
+
+Use \verb|\outcome{You'll learn about outcomes}| in the preamble of your activity to add an outcome.
+\\
+Use \verb|\displayOutcomes| to display all the outcomes listed in this file.
+
+Note: \verb|\displayOutcomes| takes an optional argument to load outcomes from a different file (if it exists).
+
+Here presumably following outcomes were set:
+
+\begin{verbatim}
+    \outcome{You are familiar with outcomes.}
+    \outcome{You can add outcomes to an activity.}
+    \outcome{You can show all outcomes.}
+\end{verbatim}
+
+and \verb|\displayOutcomes| then gives 
+
+\displayOutcomes
+
+
+\section{Extra options}
+
+The header, footer and general layout of list of outcomes can be customized, e.g as follows:
+
+\renewcommand{\outcomeHeader}{outcomeHeader}
+\renewcommand{\preOutputBlock}{\protect preOutputBlock \begin{itemize}}
+\renewcommand{\postOutputBlock}{\end{itemize} postOutputBlock}
+
+ \displayOutcomes
+
+
+\end{document}
