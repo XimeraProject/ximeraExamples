@@ -206,14 +206,14 @@ e.g. use "P1", "Problem 1", "Prob 1", "Exciting Problem 1", etc.
 /* Outcome Formatting */
 
 .outcomeContent {
-	display: none;
+	/* display: none; */
+	color: rgb(51, 0, 181);
 }
 .outcomeHead {
 	text-align: center;
 	font-weight: bold;
 }
-	  
+/* 	  
 .outcomeHead:hover + .outcomeContent {
 	display: block;
-	color: rgb(51, 0, 181);
-}
+} */
