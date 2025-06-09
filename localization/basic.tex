@@ -1,11 +1,13 @@
 \documentclass{ximera}
-\providecommand{\languagename}{default (no babel loaded)}
+\makeatletter
+\@ifpackageloaded{babel}{}{\renewcommand{\localename}{default (no babel)}}
+\makeatother
 
-\title{Localization Support (\languagename)}
+\title{Localization Support (\localename)}
 
 \begin{document}
 \begin{abstract}%%
-    Localized as \languagename
+    Localized as \localename
 \end{abstract}
 \maketitle
 
@@ -15,7 +17,7 @@
 
 \@ifpackageloaded{translations}{\phantom{NOT }}{NOT } Loaded package translations
 
-Current language: \languagename
+ Current language:  \localename
 
 % \ifcsname setLanguage\endcsname \else \newcommand{\setLanguage}[1]{} \fi
 \makeatother
