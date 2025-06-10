@@ -3,10 +3,10 @@
 \date{Last Updated: 6/5/2025}
 
 % Stylize the outcome block.
-\renewcommand{\preOutputLine}{This marks the beginning of the outcome line. }
-\renewcommand{\postOutputLine}{ This marks the end of Outcome Line.\\}
-\renewcommand{\preOutputBlock}{This is the beginning of a boring block of outcomes. No itemize.\\}
-\renewcommand{\postOutputBlock}{End of Block... a boring block without any itemize.\\}
+\renewcommand{\preOutcomeLine}{This marks the beginning of the outcome line. }
+\renewcommand{\postOutcomeLine}{ This marks the end of Outcome Line.\\}
+\renewcommand{\preOutcomeBlock}{This is the beginning of a boring block of outcomes. No itemize.\\}
+\renewcommand{\postOutcomeBlock}{End of Block... a boring block without any itemize.\\}
 \renewcommand{\outcomeHeader}{This is the header - so you should see a block below this.\\}
 
 
@@ -27,19 +27,19 @@
 
 In the preamble, before we use the outcome commands, we change the styling of the outcomes using the following commands:
 \begin{description}
-    \item[preOutputLine] The command \verb|\preOutputLine| is a macro that holds the LaTeX code that is prepended to each \verb|\outcome{text}| text. 
+    \item[preOutcomeLine] The command \verb|\preOutcomeLine| is a macro that holds the LaTeX code that is prepended to each \verb|\outcome{text}| text. 
             This is intended to be used by content authors to stylize their outcome items.\\
-            By default, the content of \verb|\preOutputLine| is: \verb|\item |
-    \item[postOutputLine] The command \verb|\postOutputLine| is a macro that holds the LaTeX code that is appended to each \verb|\outcome{text}| text. 
+            By default, the content of \verb|\preOutcomeLine| is: \verb|\item |
+    \item[postOutcomeLine] The command \verb|\postOutcomeLine| is a macro that holds the LaTeX code that is appended to each \verb|\outcome{text}| text. 
             This is intended to be used by content authors to stylize their outcome items.\\
-            By default, the content of \verb|\postOutputLine| is empty
-    \item[preOutputBlock] The command \verb|\preOutputBlock| is a macro that holds the LaTeX code that is executed prior to any of the \verb|\outcome| commands. 
+            By default, the content of \verb|\postOutcomeLine| is empty
+    \item[preOutcomeBlock] The command \verb|\preOutcomeBlock| is a macro that holds the LaTeX code that is executed prior to any of the \verb|\outcome| commands. 
             This is intended to be used by content authors to stylize their outcome lists.\\
-            By default, the content of \verb|\preOutputBlock| is: \\
+            By default, the content of \verb|\preOutcomeBlock| is: \\
             \verb|At the end of this section, students should be able to... \begin{itemize}|
-    \item[postOutputBlock] The command \verb|\postOutputBlock| is a macro that holds the LaTeX code that is executed after all of the \verb|\outcome| commands are llisted. 
+    \item[postOutcomeBlock] The command \verb|\postOutcomeBlock| is a macro that holds the LaTeX code that is executed after all of the \verb|\outcome| commands are llisted. 
             This is intended to be used by content authors to stylize their outcome lists.\\
-            By default, the content of \verb|\postOutputBlock| is: \verb|\end{itemize} So go forth and learn!|
+            By default, the content of \verb|\postOutcomeBlock| is: \verb|\end{itemize} So go forth and learn!|
     \item[outcomeHeader] The command \verb|\outcomeHeader| is a macro that holds the LaTeX code that is displayed prior to the actual outcome block. 
             This is intended to be used by content authors to display a header - e.g. for an expandable or hover text.\\
             By default, the content of \verb|\outcomeHeader| is: \verb|Goals for this Section (Hover over me to see!)|
@@ -49,10 +49,10 @@ In the preamble, before we use the outcome commands, we change the styling of th
 
 We have changed the styling from the above defaults using the following commands:
 \begin{itemize}
-    \item \verb|\preOutputLine{This marks the beginning of the outcome line. } |
-    \item \verb|\postOutputLine{ This marks the end of Outcome Line.\\} |
-    \item \verb|\preOutputBlock{This is the beginning of a boring block of outcomes. No itemize.\\} |
-    \item \verb|\postOutputBlock{End of Block... a boring block without any itemize.\\} |
+    \item \verb|\preOutcomeLine{This marks the beginning of the outcome line. } |
+    \item \verb|\postOutcomeLine{ This marks the end of Outcome Line.\\} |
+    \item \verb|\preOutcomeBlock{This is the beginning of a boring block of outcomes. No itemize.\\} |
+    \item \verb|\postOutcomeBlock{End of Block... a boring block without any itemize.\\} |
     \item \verb|\outcomeHeader{This is the header - so you should see a block below this.\\} |
 \end{itemize}
 
