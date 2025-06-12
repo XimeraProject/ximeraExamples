@@ -46,7 +46,7 @@ and that was set by babel, and nothing else!}{English by Default (since Babel wa
 The test area should have a multiple choice problem, a select all question with feedback (correct and attempt feedback), 
 and an exercise with a hint. Then it should have all the theorem-like environments.
 
-The entire section described above is done twice, once in the loaded language (french by default in localizationpreamble)
+\textbf{IF the babel package is loaded:} The entire section described above is done twice, once in the loaded language (french by default in localizationpreamble)
 and then once via the selectlanguage command (by default, Portuguese).
 
 In each section, the content that \textit{is not} author controlled (e.g. environment titles, the phrase ``feedback(correct)'', etc)
@@ -168,6 +168,9 @@ content or any other part that is directly content-author generated.
     This is a warning Environment.
 \end{warning}% Used in theorems.dtx
 
+\makeatletter
+\@ifpackageloaded{babel}{
+
 \selectlanguage{Portuguese}%%
 
 {{\bfseries\large Second Language: I think it is \languagename{}}}
@@ -284,7 +287,8 @@ content or any other part that is directly content-author generated.
 \begin{warning}
     This is a warning Environment.
 \end{warning}% Used in theorems.dtx
-
+}{}
+\makeatother
 
 \hrulefill
 \end{document}
