@@ -14,6 +14,7 @@
 \section{Basic Usage}
 
 This file demonstrates the following validators: factorCheck
+This is implemented using the \verb|validator=factorCheck| as an optional parameter in the \verb|\answer| command.
 
 \section{Intended Outcome of Test}
     \subsection*{factorCheck}
@@ -26,24 +27,24 @@ This file demonstrates the following validators: factorCheck
 \section{Start of Test/Demo Area}
 
     \subsection*{factorCheck}
-\begin{problem}
-    Consider the polynomial $x^3 - 4x^2 - 4x + 16$. You might want the student to just do the factor by grouping step 
-    and want them to enter in $(x^2-4)(x-4)$. 
-    Try trying in the full polynomial versus a fully factored version, 
-    versus the desired version: $\answer[validator=factorCheck]{(x^2-4)(x-4)}$
-\end{problem}
+        \begin{problem}
+            Consider the polynomial $x^3 - 4x^2 - 4x + 16$. You might want the student to just do the factor by grouping step 
+            and want them to enter in $(x^2-4)(x-4)$. 
+            Try trying in the full polynomial versus a fully factored version, 
+            versus the desired version: $\answer[validator=factorCheck]{(x^2-4)(x-4)}$
+        \end{problem}
 
-\begin{problem}
-    Now, let's say you want them to fully factor, not just factor by grouping. 
-    Try the factor by grouping version versus unfactored vs fully factored here: $\answer[validator=factorCheck]{(x-2)(x+2)(x-4)}$
-\end{problem}
- 
-\begin{problem}
-    Adding another problem here that deliberately has some repeated factors to show they work. 
-    The answer should be $(x-1)^3(x+1)(x^2-1)$.
-     
-    $\answer[validator=factorCheck]{(x-1)^3(x+1)(x^2-1)}$
-\end{problem}
+        \begin{problem}
+            Now, let's say you want them to fully factor, not just factor by grouping. 
+            Try the factor by grouping version versus unfactored vs fully factored here: $\answer[validator=factorCheck]{(x-2)(x+2)(x-4)}$
+        \end{problem}
+        
+        \begin{problem}
+            Adding another problem here that deliberately has some repeated factors to show they work. 
+            The answer should be $(x-1)^3(x+1)(x^2-1)$.
+            
+            $\answer[validator=factorCheck]{(x-1)^3(x+1)(x^2-1)}$
+        \end{problem}
 
 
 \hrulefill
