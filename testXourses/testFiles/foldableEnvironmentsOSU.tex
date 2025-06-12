@@ -18,9 +18,28 @@
 {{\Huge \bfseries Last Updated: \today}} \\
 
 \section{Basic Usage}
+The environment foldable creates a collapsable section in the html, so that the content can be hidden online, but is initially loaded as shown.
+
+The environment expandable creates an expandable section in the html, so that the content can be shown online, but is initially loaded as hidden.
+
+This is a purely html based feature currently.
 
 NOTE: This does \textbf{NOT} work properly with KULeuven-styled server(s) (as used in Codespaces or local test-servers).
 
+
+\section{Intended Outcome of Test}
+
+There should be two html segments below. 
+
+The first one should have \texttt{You can exand this one:} followed by 
+a collapsed box with an arrow to the right that allows you to expand it and show \text{hello} along with an embedded youtube video.
+
+Below that should text that says \texttt{And fold this one:} which should be followed by a box containing the text:
+\texttt{You can fold me up!}, along with an arrow that allows the user to collapse the box to become hidden like the 
+first box above.
+
+
+\section{Start of Test/Demo Area}
 
 You can expand this one:
 
@@ -38,13 +57,6 @@ And fold this one:
 \begin{foldable}
   You can fold me up!
 \end{foldable}
-
-
-\section{Intended Outcome of Test}
-
-
-
-\section{Start of Test/Demo Area}
 
 
 \hrulefill
