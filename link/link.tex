@@ -10,11 +10,39 @@
 \end{abstract}
 \maketitle
 
-Here is one link: \link{http://ximera.osu.edu}
+\section*{Basic Usage}\label{sec:link:basicUsage}
 
-Here is another link: \link[ximera]{http://ximera.osu.edu}, make sure that the spacing after the period looks good.
+With \verb|\link{url}| you make a hyperlink: \link{http://ximera.osu.edu}.
 
-Here sometimes you might have a \link[ximera]{http://ximera.osu.edu} with words after it. Make sure this looks good too.
+With \verb|\link[text]{url}| you display 'text', and not the url: \link[ximera]{http://ximera.osu.edu}.
+
+
+
+Notes: 
+\begin{itemize}
+ \item \label{link_spaces}   Note the spaces in and after a \link[link to ximera]{http://ximera.osu.edu} in a sentence.
+ \item \label{link_bold}     You might want a bold \textbf{\link[link to ximera]{http://ximera.osu.edu}}, or a link with a bold 'ximera' in it: \link[link to \textbf{ximera}]{http://ximera.osu.edu}.
+ \item \label{link_footnote} The PDF puts links in footnotes\footnote{This is just a normal footnote} at the bottom of the page.
+\end{itemize}
+
+Alternatives:
+
+With \verb|\url{url}| you make a hyperlink: \url{http://ximera.osu.edu}.
+
+With \verb|\href{url}{text}| you display 'text', and not the url: \href{http://ximera.osu.edu}{ximera}.
+
+With \verb|\hypertarget{label}{text}| you can create a target to link to: \hypertarget{ht_bold}{this text is important enough to be linked to}.
+
+With \verb|\hyperlink{label}{text}| you can (NOT???) link to a label: see also \hyperlink{ht_bold}{the previous sentence}.
+
+With \verb|\hyperlink{label}{text}| you can also link to a normal \verb|label|: see the item about \hyperlink{link_bold}{bold in links}, or the section with \hyperref[sec:link:intendedOutcome]{outcomes}.
+
+\section*{Intended Outcome of Test}\label{sec:link:intendedOutcome}
+
+TODO
+
+
+% Compiled at \today\  at \currenttime     %% needs datetime
 
 
 \end{document}
