@@ -1,0 +1,41 @@
+\documentclass{ximera}
+\title{Clear and Hide Environments}
+
+%\input{preamble.tex}% Only add a preamble file if it is actually necessary for the demo/test.
+\begin{document}
+\begin{abstract}
+    This demonstrates and tests the clearEnv and hideEnv commands.    
+\end{abstract}
+\maketitle
+
+{{\Huge \bfseries Last Updated: \today}} \\
+
+
+
+\section{Basic Usage}
+The \verb|\clearEnv{#1}| command will attempt to undefine any provided environment, 
+regardless of how it was defined (e.g. newenvironment or newEnviron commands).
+The (required) argument (\#1) is the name of the intended environment you wish to undefine.
+
+It will also attempt to undefine any default counters that may have been defined in that environment
+(e.g. problem counters). It should also allow compiles where those environments are still called later in 
+the document to compile (although the environment itself will do nothing, it won't throw an error and stop the compile).\\
+
+The \verb|\hideEnv[#1]{#2}| macro allows you to hide an environment by name, ensuring it - and all its contents - 
+are no longer visible on the pdf output. It also allows you an optional input to replace the block of content with 
+a new (uniform) content if desired.
+The first argument (\#1) is the (optional) replacement code. This will be code that is executed (instead of the normal environment code)
+when the env is executed, even though the content of the environment is hidden. The second (required) argument is the name of the environment 
+which gets hidden.
+
+\section{Intended Outcome of Test}
+
+{{\Huge I need to decide how I want to demo/testbed this, so leaving this while I think more.}}
+
+\section{Start of Test/Demo Area}
+
+
+\hrulefill
+
+
+\end{document}

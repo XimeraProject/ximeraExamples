@@ -1,0 +1,36 @@
+\documentclass{ximera}
+\title{Basic Dialogue}
+
+%\input{preamble.tex}% Only add a preamble file if it is actually necessary for the demo/test.
+\begin{document}
+\begin{abstract}
+    This is the testfile and demo for the basic Dialogue environment.
+\end{abstract}
+\maketitle
+
+{{\Huge \bfseries Last Updated: \today}} \\
+
+
+\section{Basic Usage}
+Dialogue is an environment is really just a wrapper with some styling around the description environment 
+to simulate a discussion between characters, where the character name is the argument provided to the \verb|\item| command.
+
+\section{Intended Outcome of Test}
+
+Below should have something that looks like:
+
+\noindent\textbf{Mom:} Time to get up!
+
+\noindent\textbf{Teenager:} But the testbed is so comfy!
+
+
+\section{Start of Test/Demo Area}
+\begin{dialogue}
+    \item[Mom] Time to get up!
+    \item[Teenager] But the testbed is so comfy!
+\end{dialogue}
+
+\hrulefill
+
+
+\end{document}

@@ -1,0 +1,40 @@
+\documentclass{ximera}
+\title{Feedback Basic Test}
+
+%\input{preamble.tex}% Only add a preamble file if it is actually necessary for the demo/test.
+\begin{document}
+\begin{abstract}
+    This is a demo/test for the basic useage level of feedback
+\end{abstract}
+\maketitle
+
+{{\Huge \bfseries Last Updated: \today}} \\
+
+\section{Basic Usage}
+Feedback is an environment that can be put inside a problem environment that also contains some kind of student interactive that can be marked as
+correct or incorrect (e.g. an \verb|\answer| command, or a multipleChoice type environment).\\
+
+Feedback currently takes one of two optional parameters, either `correct' or `attempt' and then displays the content of the feedback environment
+once the answer has been marked correct, or flagged as attempted respectively.
+
+\section{Intended Outcome of Test}
+
+Below should be a problem that asks ``what is $2 + 2$'' with an answer box. 
+Upon submitting any attempt (correct or incorrect) it should say ``valiant effort'' in the feedback.
+Upon a correct submition it should say ``You are correct!'' in the feedback.
+
+\section{Start of Test/Demo Area}
+\begin{problem}
+    What is $2+2$? $\answer{4}$
+    \begin{feedback}
+        valiant effort
+    \end{feedback}
+    \begin{feedback}[correct]
+        You are correct!
+    \end{feedback}
+\end{problem}
+
+\hrulefill
+
+
+\end{document}
