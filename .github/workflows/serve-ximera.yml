@@ -93,7 +93,7 @@ jobs:
           XIMERA_NAME: ${{ vars.XIMERA_NAME }}
         run: |
           ./xmScripts/xmlatex name         
-          ./xmScripts/xmlatex serve
+          ./xmScripts/xmlatex serve -f
           echo "✅ Published to $XIMERA_URL$XIMERA_NAME " >> $GITHUB_STEP_SUMMARY
       - name: Serve to ximera.osu.edu
         env:
@@ -103,7 +103,7 @@ jobs:
           XIMERA_NAME: ${{ vars.XIMERA_NAME }}
         run: |
           ./xmScripts/xmlatex name         
-          ./xmScripts/xmlatex serve
+          ./xmScripts/xmlatex serve -f
           echo "✅ Published to $XIMERA_URL$XIMERA_NAME " >> $GITHUB_STEP_SUMMARY
 
 
