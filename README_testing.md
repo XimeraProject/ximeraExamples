@@ -1,4 +1,6 @@
-Testing session:
+A possible testing session...
+
+Note: if you just want to *test* or *try* something, and do not plan to make any changes, all forking and making-new-branches can be skipped.
 
 * Fork, clone and checkout your copy of ximeraExamples
 ```
@@ -12,9 +14,9 @@ Already up to date.
 Switched to a new branch 'test-link'
 ```
 
-* Setup the test/development version:
+* Setup the to be tested/changed ximeraLatex version:
   * if testing a dockerimage, update config.txt(local PC) or docker_compose.yml (in Codespace)
-     * if you need to change the contents of the dockerimage, use xmlatex copySettingLocal to create a .ximera_local
+     * if you need to try a fix to the contents of the dockerimage, use can use 'xmlatex copySettingsLocal' to create a .ximera_local with the ximealatex contents from the current image.
   * if testing an existing ximeraLatex branch (perhaps on a clone somewhere) : check it out in .ximera_local
   * if making new changes to ximeraLatex: fork, clone, and checkout a new branch
 
@@ -75,12 +77,11 @@ Starting Github-action build (name; bake/frost/serve)
 ```
    * Verify the output
 
-* If yoy make useful changes in .ximera_local: commit and push, make a pull request for ximeraLatex
-* If you make useful changes in ximeraExamples: commit an push, make a pull request for ximeraExamples
+* If yoy make useful changes in .ximera_local : commit and push, make a pull request for ximeraLatex
+* If you make useful changes in ximeraExamples: commit and push, make a pull request for ximeraExamples
 * when in doubt, or when this procedure does not work as advertized: contact ximera-project!
 
 
-![screenshot expected output](../xmPictures/screenshot_links.png)
 
 
 
