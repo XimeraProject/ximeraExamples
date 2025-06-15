@@ -1,7 +1,5 @@
 \documentclass{ximera}
 
-\input{../preamble}
-
 \title{Problem environments}
 
 \begin{document}
@@ -12,59 +10,66 @@
 
 The problem environments are \verb|problem|, \verb|exercise|, \verb|question|, and \verb|exploration|.
 
+
+\begin{exercise}
+  Type $2$: $\answer{2}$.
+\end{exercise}
+
+\begin{problem}
+  Type $2$: $\answer{2}$.
+\end{problem}
+
+\begin{question}
+  Type $2$: $\answer{2}$.
+\end{question}
+
+\begin{exploration}
+  Type $2$: $\answer{2}$.
+\end{exploration}
+
 Online these act much like theorem-like environments.
 
 However in the PDF, the documentclass option \verb|newpage| will start
 a new page at the end of each of these. Moreoever, nested problem
-envionments will number as sub problems in the PDF.
+environments will number as sub problems in the PDF.
 
+An example of an exercise with two nested exercises is:
 \begin{exercise}
-  Type $2$: $\answer{2}$.
-\end{exercise}
-
-\begin{exercise}
-  Type $2$: $\answer{2}$.
+  Type $1$: $\answer{}$.
   \begin{exercise}
-  Type $2$: $\answer{2}$.
+    Type $2$: $\answer{2}$.
+    \begin{exercise}
+      Type $3$: $\answer{3}$.
+    \end{exercise}
+  \end{exercise}
+  \begin{exercise}
+    Type $2$: $\answer{2}$.
   \end{exercise}
 \end{exercise}
 
 
-\begin{problem}
-  Type $2$: $\answer{2}$.
-\end{problem}
+An example of an exercise with one \verb|answer| and two questions:
 
-\begin{problem}
-  Type $2$: $\answer{2}$.
-  \begin{problem}
-  Type $2$: $\answer{2}$.
-  \end{problem}
-\end{problem}
-
-
-\begin{question}
-  Type $2$: $\answer{2}$.
-\end{question}
-
-\begin{question}
-  Type $2$: $\answer{2}$.
+\begin{exercise}
+  Type $1$: $\answer{}$.
   \begin{question}
-  Type $2$: $\answer{2}$.
+    Type $2$: $\answer{2}$.
   \end{question}
-\end{question}
+  \begin{question}
+    Type $2$: $\answer{2}$.
+  \end{question}
+\end{exercise}
 
+An example of an exercise with just two questions:
 
-
-\begin{exploration}
-  Type $2$: $\answer{2}$.
-\end{exploration}
-
-\begin{exploration}
-  Type $2$: $\answer{2}$.
-  \begin{exploration}
-  Type $2$: $\answer{2}$.
-  \end{exploration}
-\end{exploration}
+\begin{exercise}
+  \begin{question}
+    Type $2$: $\answer{2}$.
+  \end{question}
+  \begin{question}
+    Type $2$: $\answer{2}$.
+  \end{question}
+\end{exercise}
 
 
 \end{document}
