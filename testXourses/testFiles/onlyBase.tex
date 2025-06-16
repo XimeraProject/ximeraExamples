@@ -1,0 +1,68 @@
+\documentclass{ximera}
+\title{Only-style Command Base Useage}
+
+%\input{preamble.tex}% Only add a preamble file if it is actually necessary for the demo/test.
+\begin{document}
+\begin{abstract}
+    This is a test/demo of how to use the commands: pdfOnly, htmlOnly, and ifonlineTF, along with 
+    the environments: ``onlyPdf'', ``onlyHtml'', ``onlineOnly''
+\end{abstract}
+\maketitle
+
+{{\Huge \bfseries Last Updated: \today}} \\
+
+
+\section{Basic Usage}
+The command \verb|\pdfOnly| and the environment ``onlyPdf'' suppress the contents when compiling online, and only output the contents in the pdf.\\
+
+The command \verb|\htmlOnly| and the environments ``onlyHtml'' and ``onlineOnly'' suppress the contents in the pdf, and only output the contents online.\\
+
+The command \verb|\ifonlineTF{#1}{#2}| is a command that combines the functionality of \verb|\htmlOnly| and \verb|\pdfOnly|,
+displaying (only) the first argument when compiling online, and (only) the second argument when compiling for the pdf.
+
+
+\section{Intended Outcome of Test}
+
+{{\bfseries Online, you should see:}}
+
+This is online 1
+
+This is online 2
+
+This is online 3
+
+This is online 4
+
+{{\bfseries In the pdf, you should see:}}
+
+This is in the pdf 1
+
+This is in the pdf 2
+
+This is in the pdf 3
+
+
+\section{Start of Test/Demo Area}
+\ifonlineTF{This is online 1}{This is in the pdf 1}
+
+\htmlOnly{This is online 2}
+
+\pdfOnly{This is in the pdf 2}
+
+\begin{onlineOnly}
+    This is online 3
+\end{onlineOnly}
+
+\begin{onlyHtml}
+    This is online 4
+\end{onlyHtml}
+
+\begin{onlyPdf}
+    This is in the pdf 3
+\end{onlyPdf}
+
+
+\hrulefill
+
+
+\end{document}

@@ -1,0 +1,39 @@
+\def\xmNotHintAsExpandable{1}% Required to get OSU style hints.
+\def\xmNotExpandableAsAccordion{1}% Required to get OSU style hints.
+\documentclass{ximera}
+\title{Hints - Base Useage}
+
+%\input{preamble.tex}% Only add a preamble file if it is actually necessary for the demo/test.
+\begin{document}
+\begin{abstract}
+    A demo/test set for hints base useage.
+\end{abstract}
+\maketitle
+
+{{\Huge \bfseries Last Updated: \today}} \\
+%%
+
+\section{Basic Usage}
+The hints environment is an environment that hides the content in an expandable box that cannot be expanded for
+the first 10 seconds of the page load - to be used inside a problem environment to provide hints.
+
+If you want to have multiple hints, you should have one after the other, \textbf{not} nest them.
+
+\section{Intended Outcome of Test}
+
+Below should be a problem that says ``What is the answer'' with a ``hint'' button above and to the right of the text (inside the problem)
+that, when clicked, will show the countdown until it can be opened. Once opened, it should say ``The answer is 4.''.
+
+\section{Start of Test/Demo Area}
+
+\begin{problem}
+    \begin{hint}
+        The answer is 4.
+    \end{hint}
+    What is the answer? $\answer{4}$.
+\end{problem}
+
+\hrulefill
+
+
+\end{document}
