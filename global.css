@@ -8,7 +8,85 @@
  *   - be renamed xmHtmlStyle.css   (to sync with xmPreamble.tex and xmPrintStyle.sty)
  *   - become (almost) empty by default, because the ximeraServer default settings will becom English again
  */ 
+
+ /* Fixes for expandables (hints/solution/...) */
+
+.btn-reveal-hint {
+    float: none;
+    clear: none;
+    margin-top: 0em;
+	  display: block;
+    margin-left: auto;
+    z-index: 1;
+    position: relative;
+}
+
  
+.xmhint, .xmoplossing, .xmuitkomst  {
+	background-color: #1D8DB0;
+	color: white;
+	font-family: sans-serif;
+	font-weight: normal;
+	font-size: smaller;
+	margin: 1px !important;
+	margin-left: auto !important;
+	display: block;
+	/* max-width: max-content; */
+	max-width: 10em !important;
+	line-height: 1;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	user-select: none;
+	border: 1px solid transparent;
+	padding: 0px !important;
+	font-size: 1rem;
+	transition: all 0.2s ease-in-out;
+	counter-increment: hint_number;
+}
+
+/* increase specificity with double classes ;) */
+div.xmhint-content.ui-accordion-content {
+	background-color: #00000000; /* transparent; overwrites .ui-widget-content ... */
+	border: 1px solid #005000;
+	border-top: 1px solid #005000 !important;
+	border-left: 3px solid #005000;
+	color:   #005000;
+	margin-top: 0rem;
+	padding: 2px 3rem;
+	overflow: visible;    /* set to auto for .ui-accordion .ui-accordion-content in <style> */
+}
+
+div.xmhint-content::before {
+	 content: "Hint: ";
+	 font-weight: bold;
+	 margin-left: -3rem;    /* Hack, see padding above ... */
+ }
+ 
+
+
+div.xmoplossing-content.ui-accordion-content, div.xmuitkomst-content.ui-accordion-content {
+	background-color: #00000000; /* transparent; overwrites .ui-widget-content ... */
+	background-color: white;
+	border: 1px solid black;
+	border-left: 3px solid black;
+	color:  black;
+	margin-top: 0rem;
+	padding: 5px;
+}
+/* 
+@counter-style notfirst {
+	system: alphabetic;
+	symbols: " " "2" "3" "4" "5" "6" "7" "8" "9" "0";
+}
+  
+.example, .exercise, .question {
+    counter-reset: hint_number;
+}
+ */
+
+/* Fixes for language ?? */ 
+
  
 .xmhint::before {
     content: "Show hint" counter(hint_number, notfirst);
@@ -217,3 +295,5 @@ e.g. use "P1", "Problem 1", "Prob 1", "Exciting Problem 1", etc.
 .outcomeHead:hover + .outcomeContent {
 	display: block;
 } */
+
+
