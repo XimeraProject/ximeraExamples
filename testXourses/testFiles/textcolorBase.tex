@@ -1,0 +1,28 @@
+\documentclass{ximera}
+\title{Changing Textcolor}
+
+%\input{preamble.tex}% Only add a preamble file if it is actually necessary for the demo/test.
+\begin{document}
+\begin{abstract}
+    Demo/Test for changing text coloring.
+\end{abstract}
+\maketitle
+
+{{\Huge \bfseries Last Updated: \today}} \\
+
+
+\section{Basic Usage}
+The command \verb|\textcolor{#1}{#2}| allows one to apply text color (argument \#1) to the provided text (argument \#2), both in the pdf and online. 
+This only works with colors that are defined in the underlying LaTeX. This should also work with colors defined in LaTeX via \verb|\definecolor| from
+the xcolor package. 
+
+\section{Intended Outcome of Test}
+Below should be the words ``Look at these colors'' where ``Look'' is green, ``these'' is blue, and ``colors'' is red.
+
+\section{Start of Test/Demo Area}
+\textcolor{green}{Look} at \textcolor{blue}{these} \textcolor{red}{colors}
+
+\hrulefill
+
+
+\end{document}

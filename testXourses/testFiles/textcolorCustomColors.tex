@@ -1,0 +1,29 @@
+\documentclass{ximera}
+\title{Custom Text Color}
+
+\input{textcolorpreamble}% Only add a preamble file if it is actually necessary for the demo/test.
+\begin{document}
+\begin{abstract}
+    Demo/Test for custom text coloring.
+\end{abstract}
+\maketitle
+
+{{\Huge \bfseries Last Updated: \today}} \\
+
+
+\section{Basic Usage}
+The command \verb|\textcolor{#1}{#2}| allows one to apply text color (argument \#1) to the provided text (argument \#2), both in the pdf and online. 
+This only works with colors that are defined in the underlying LaTeX. This should also work with colors defined in LaTeX via \verb|\definecolor| from
+the xcolor package. 
+
+\section{Intended Outcome of Test}
+Below should be the words ``Look at these colors'' where ``Look'' is in aquamarine (defined using RGB values), 
+and ``colors'' is in dark red (defined using hexadecimal).
+
+\section{Start of Test/Demo Area}
+\textcolor{xmlightblue}{Look} at these \textcolor{darkred}{colors}
+
+\hrulefill
+
+
+\end{document}

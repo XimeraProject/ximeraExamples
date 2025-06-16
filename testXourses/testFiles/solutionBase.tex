@@ -1,0 +1,40 @@
+\documentclass{ximera}
+\title{Solution Base Useage}
+
+%\input{preamble.tex}% Only add a preamble file if it is actually necessary for the demo/test.
+\begin{document}
+\begin{abstract}
+    Solution environment base useage.
+\end{abstract}
+\maketitle
+
+{{\Huge \bfseries Last Updated: \today}} \\
+
+
+\section{Basic Usage}
+The solution environment is intended to have special behavior when in handout mode, to give space for students to supply a solution.
+Otherwise it actually displays the solution.
+
+\section{Intended Outcome of Test}
+Below should be a solution environment that looks like:
+
+``
+
+\textbf{Solution:}\\
+This is step 1 of the solution.\\
+This is step 2 of the solution.\\
+And this is step 3 of the solution.
+
+''
+
+\section{Start of Test/Demo Area}
+\begin{solution}
+This is step 1 of the solution.\\
+This is step 2 of the solution.\\
+And this is step 3 of the solution.
+\end{solution}
+
+\hrulefill
+
+
+\end{document}
