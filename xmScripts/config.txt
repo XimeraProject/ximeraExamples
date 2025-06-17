@@ -2,6 +2,7 @@
 # version of Ximera xake container to use (with xmlatex)
 #
 # : "${XAKE_BASE:=ximeralatex}"
+: "${XAKE_VERSION:=v2.7.1pre}"   # TESTING LINK
 # : "${XAKE_VERSION:=v2.7.0}"
 # : "${XAKE_VERSION:=v2.7.0-full}"    # with texlive_full
 #

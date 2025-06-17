@@ -1,4 +1,4 @@
-\documentclass{ximera}
+\documentclass[noauthor]{ximera}
 
 \title{Links}
 
@@ -16,6 +16,18 @@ With \verb|\link{url}| you make a hyperlink: \link{http://ximera.osu.edu}.
 
 With \verb|\link[text]{url}| you display 'text', and not the url: \link[ximera]{http://ximera.osu.edu}.
 
+With \verb|\link*{url}| the link will open in the same tab: \link*{http://ximera.osu.edu}.
+
+With \verb|\link*[text]{url}| it also opens in the same tab: \link*[ximera]{http://ximera.osu.edu}.
+
+With \verb|\let\xmLinkHasFootnote\undefined| you can prevent the footnote with the url being added in the PDF:
+
+{
+  \let\xmLinkHasFootnote\undefined
+  With \verb|\link[text]{url}| you now have no footnote in the PDF : \link[ximera]{http://ximera.osu.edu}.
+}
+
+With \verb*|\link[text]{url}| you now get the footnote back: \link[ximera]{http://ximera.osu.edu}.
 
 
 Notes: 
@@ -25,7 +37,7 @@ Notes:
  \item \label{link_footnote} The PDF puts links in footnotes\footnote{This is just a normal footnote} at the bottom of the page.
 \end{itemize}
 
-Alternatives:
+Alternatives (TODO: fix, as not everything works as it should):
 
 With \verb|\url{url}| you make a hyperlink: \url{http://ximera.osu.edu}.
 
