@@ -1,0 +1,38 @@
+\documentclass{ximera}
+\title{Javascript Base Useage}
+
+%\input{preamble.tex}% Only add a preamble file if it is actually necessary for the demo/test.
+\begin{document}
+\begin{abstract}
+    Test/Demo of javascript environment and commands
+\end{abstract}
+\maketitle
+
+{{\Huge \bfseries Last Updated: \today}} \\
+
+
+\section{Basic Usage}
+The javascript environment and the \verb|\js| command should allow you to inject arbitrary javascript code into the page.
+
+\section{Intended Outcome of Test}
+Below we define a button with text ``Click me!'', then use javascript to replace the button text with ``Replaced with JS''.
+If the javascript environment is working, you should see the ``Replaced with JS'' (more or less immediately, it isn't triggered on click).
+
+
+
+\section{Start of Test/Demo Area}
+\ifdefined\HCode
+\HCode{<button id="myButton">Click me!}\HCode{</button>}\HCode{<script onButtonClick()>}\HCode{</script>}
+\fi
+
+
+\begin{javascript}
+document.getElementById("myButton").textContent = "Replaced with JS";
+\end{javascript}
+
+
+
+\hrulefill
+
+
+\end{document}
