@@ -1,0 +1,70 @@
+\documentclass{ximera}
+\title{choice Base useage}
+
+%\input{preamble.tex}% Only add a preamble file if it is actually necessary for the demo/test.
+\begin{document}
+\begin{abstract}
+    basic useage of the choice commands and environments.
+\end{abstract}
+\maketitle
+
+{{\Huge \bfseries Last Updated: \today}} \\
+
+
+\section{Basic Usage}
+There are three types of choice for answerables, i.e. three different styles of answers that allow students to select from a (supplied) finite list.
+Each of these three forms (multipleChoicec environment, selectAll environment, and wordChoice command) then contains the finite selection of provided answers, each instantiated
+using the \verb|\choice[#1]{#2}| command, 
+which takes the optional argument (\#1) ``correct'' to flag that choice as a correct 
+(if no optional argument is given, the choice is assumed to be an incorrect choice), 
+and the required argument is the displayed choice text to the student.
+
+There is the multipleChoice environment which only allows students to pick one of the options and check if it is correct. If the student selects
+\textit{any} of the choice command items flagged with the ``[correct]'' key, then it should be marked as correct.
+There is the selectAll environment which requires the student to select/highly \textit{all} of the choices that are flagged as ``correct'' 
+before submitting to get the question marked as correct.
+There is the \verb|\wordChoice{#1}| command takes the choices as its argument (same syntax as used in the environments above) 
+but displays those choices in a selectable dropdown menu in-line in the middle of text 
+(allowing for fill-in-the-blank multiple choice style in the middle of sentences without breaking formating).
+
+\section{Intended Outcome of Test}
+Below should be the following:
+
+A multipleChoice environment with the first and third marked choices as correct, and the rest should be incorrect 
+(selecting either the first or third choice and hitting submit should be marked as correct, selecting any other should not.) 
+
+A selectAll environment with the second and fourth choices marked correct, and the rest should be incorrect
+(selecting both the second and fourth choices then hitting submit should be marked correct, any other combination of any number of choices should 
+be marked incorrect).
+
+A sentence ``Here is a sentence with text'' where ``sentence'' is initially a blank dropdown box with a number of choices. 
+Only selecting the choice ``sentence'' will mark it as correct.
+
+\section{Start of Test/Demo Area}
+\begin{problem}
+\begin{multipleChoice}
+\choice[correct]{This is choice 1.}
+\choice{This is choice 2.}
+\choice[correct]{This is choice 3.}
+\choice{This is choice 4.}
+\end{multipleChoice}
+\end{problem}
+
+\begin{problem}
+
+\begin{selectAll}
+\choice{This is choice 1.}
+\choice[correct]{This is choice 2.}
+\choice{This is choice 3.}
+\choice[correct]{This is choice 4.}
+\end{selectAll}
+\end{problem}
+
+
+Here is a \wordChoice{\choice{phrase}\choice[correct]{sentence}\choice{equation}} with text
+
+
+\hrulefill
+
+
+\end{document}

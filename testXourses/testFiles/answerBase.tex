@@ -1,0 +1,35 @@
+\documentclass{ximera}
+\title{Answer Base Useage}
+
+%\input{preamble.tex}% Only add a preamble file if it is actually necessary for the demo/test.
+\begin{document}
+\begin{abstract}
+    Base useage for answer command.
+\end{abstract}
+\maketitle
+
+{{\Huge \bfseries Last Updated: \today}} \\
+
+
+\section{Basic Usage}
+The \verb|\answer{#1}| command should take the intended-correct answer as its argument, and should be just an empty box online, 
+that will take any (mathematically equivalent) answer that matches the provided answer.
+
+\textbf{Note:} Any special symbol or otherwise unparseable content in argument of answer will result in any submitted answer 
+(including a blank answer) being marked correct.
+
+\section{Intended Outcome of Test}
+Below should be an answer box that should mark anything equivalent to ``$4x + 1$'' as correct (and reject anything else). 
+
+\section{Start of Test/Demo Area}
+
+\begin{problem}
+
+    $\answer{4x + 1}$
+
+\end{problem}
+
+\hrulefill
+
+
+\end{document}

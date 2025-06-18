@@ -1,0 +1,51 @@
+\documentclass{ximera}
+\title{Answer Base Useage}
+
+%\input{preamble.tex}% Only add a preamble file if it is actually necessary for the demo/test.
+\begin{document}
+\begin{abstract}
+    Base useage for answer command.
+\end{abstract}
+\maketitle
+
+{{\Huge \bfseries Last Updated: \today}} \\
+
+
+\section{Basic Usage}
+The \verb|\answer[#1]{#2}| command has the following optional keyword-value arguments: tolerance, validator, id, format, given.
+
+Each of these should be used in the form ``key=value'' and separated by a comma.
+
+\textbf{Note:} Any special symbol or otherwise unparseable content in argument of answer will result in any submitted answer 
+(including a blank answer) being marked correct.
+
+\section{Intended Outcome of Test}
+Below should be several answer boxes, which have the optional arguments (in order) of: tolerance=0.1, id=problemX, format=string, given=true.
+
+The provided answers are (in order) $5$, $x$, $\text{problem answer}$, $3x^2 - 4$
+
+The first answer should accept any decimal from $4.9$ to $5.1$, 
+the second should save the provided response result as ``problemX'' (testable through console),
+the third should only take ``problem answer'' as the correct answer (case and order sensitive), 
+[\textbf{Note:} if format=string is not working, then it will take any permutation of those letters as correct],
+the fourth answer will be displayed in the pdf (i.e. given=true says to print the answer in the answer box, rather than a question mark).
+
+
+\section{Start of Test/Demo Area}
+\begin{problem}
+
+$\answer[tolerance=0.1]{5}$
+
+$\answer[id=problemX]{x}$
+
+$\answer[format=string]{problem answer}$
+
+$\answer[given=true]{3x^2-4}$
+
+\end{problem}
+
+
+\hrulefill
+
+
+\end{document}

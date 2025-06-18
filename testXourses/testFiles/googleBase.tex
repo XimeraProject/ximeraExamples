@@ -1,0 +1,28 @@
+\documentclass{ximera}
+\title{Google Sheets Base Useage}
+
+%\input{preamble.tex}% Only add a preamble file if it is actually necessary for the demo/test.
+\begin{document}
+\begin{abstract}
+    Test of embedding Google Sheets into ximera. 
+\end{abstract}
+\maketitle
+
+{{\Huge \bfseries Last Updated: \today}} \\
+
+
+\section{Basic Usage}
+The \verb|\google{#1}{#2}{#3}| command allows you to embed a Google Sheets into a ximera page using the Google Sheets hash out of the url (\#1)
+(url is given once you have saved the sheet and click the share button to get a static link), 
+the custom width of the embed box (\#2) and the custom height of the embed box (\#3).
+
+\section{Intended Outcome of Test}
+Below should be a Google Sheets of a circle.
+
+\section{Start of Test/Demo Area}
+\expandafter\googleSheet{\detokenize{1O7MFxJErRFP71S6Vk_q1BBW3fRxTpyJl0kk7oB6bEJo/edit?usp=sharing}}{800}{500}{}{}
+
+\hrulefill
+
+
+\end{document}
