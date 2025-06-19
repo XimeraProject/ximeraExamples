@@ -1,0 +1,114 @@
+\usepackage{lipsum} % for filler text
+
+
+\renewcommand{\theHsection}{chapter.section.\thesection}  %% MAKES LINKS WORK should be added to CLS
+
+
+
+
+\makeatletter
+\renewcommand\chapterstyle{%
+  \def\activitystyle{activity-chapter}
+  \def\maketitle{%
+    \addtocounter{titlenumber}{1}%
+    \phantomsection\addcontentsline{toc}{section}{\textbf{\thetitlenumber\hspace{1em}\@title}}
+                    {\flushleft\small\sffamily\bfseries\@pretitle\par\vspace{-1.5em}}%
+                    {\flushleft\LARGE\sffamily\bfseries\thetitlenumber\hspace{1em}\@title \par }%
+                    {\vskip .6em\noindent\textit\theabstract\setcounter{problem}{0}\setcounter{section}{0}}%
+                    \par\vspace{2em}
+}}
+
+
+
+
+
+\renewcommand\sectionstyle{%  MOVE TO CLS
+  \def\activitystyle{activity-section}
+  \def\maketitle{%
+    \gdef\headerNameContent{\thechaptertitle:~\@title}%% Needs a gdef to make the definition global.
+    \addtocounter{section}{1}%
+    \setcounter{sectiontitlenumber}{\value{section}}%
+    \phantomsection\addcontentsline{toc}{section}{\thetitlenumber.\thesectiontitlenumber\hspace{1em}\@title}%
+    {\flushleft\small\sffamily\bfseries\@pretitle\par\vspace{-1.5em}}%
+    {\flushleft\Large\sffamily\bfseries\thetitlenumber.\thesectiontitlenumber\hspace{1em}\@title \par}%
+    {\vskip .6em\noindent\textit\theabstract\setcounter{subsection}{0}}%
+    \par\vspace{2em}
+
+ \renewcommand\section{\@startsection{subsection}{2}{\z@}%
+                                       {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                       {1.5ex \@plus .2ex}%
+                                       {\normalfont\large\sffamily\bfseries}}
+
+ \renewcommand\subsection{\@startsection{subsubsection}{3}{\z@}%
+                                          {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                          {1.5ex \@plus .2ex}%
+                                          {\normalfont\normalsize\sffamily\bfseries}}
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+                                    {3.25ex \@plus1ex \@minus.2ex}%
+                                    {-1em}%
+                                    {\normalfont\normalsize\sffamily\bfseries}}
+}}
+\makeatother
+
+
+
+
+
+%%% LET'S see what this does:
+% \makeatletter
+% %% Redefine section and subsection %% MOVE TO CLS
+% \renewcommand\section{\@startsection{subsection}{1}{\z@}%
+%                                    {-3.5ex \@plus -1ex \@minus -.2ex}%
+%                                    {2.3ex \@plus.2ex}%
+%                                    {\boldmath\normalfont\Large\sffamily\bfseries}}
+% \renewcommand\subsection{\@startsection{subsubsection}{2}{\z@}%
+%                                      {-3.25ex \@plus -1ex \@minus -.2ex}%
+%                                      {1.5ex \@plus .2ex}%
+%                                      {\boldmath\normalfont\large\sffamily\bfseries}}
+% \renewcommand\subsubsection{\@startsection{paragraph}{3}{\z@}%
+%                                      {-3.25ex \@plus -1ex \@minus -.2ex}%
+%                                      {1.5ex \@plus .2ex}%
+%                                      {\normalfont\normalsize\sffamily\bfseries}}
+% \makeatother
+% \renewcommand\thesubsection{\thesection}
+% \renewcommand\thesubsubsection{\thesubsection.\arabic{subsubsection}}
+
+
+\makeatletter
+%% Redefine section and subsection %% MOVE TO CLS
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                   {\boldmath\normalfont\Large\sffamily\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                                     {-3.25ex \@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\boldmath\normalfont\large\sffamily\bfseries}}
+\renewcommand\subsubsection{\@startsection{subsection}{3}{\z@}%
+                                     {-3.25ex \@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\normalsize\sffamily\bfseries}}
+\makeatother
+
+\makeatletter %% move to CLS
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+                      {-3.25ex\@plus -1ex \@minus -.2ex}%
+                      {1.5ex \@plus .2ex}%
+                      {\normalfont\normalsize\sffamily\bfseries}}
+\makeatother
+
+\makeatletter
+\def\activitystyle{activity-chapter}
+\def\maketitle{%
+  \addtocounter{titlenumber}{1}%
+  \phantomsection\addcontentsline{toc}{section}{\textbf{\thetitlenumber\hspace{1em}\@title}}
+                  {\flushleft\small\sffamily\bfseries\@pretitle\par\vspace{-1.5em}}%
+                  {\flushleft\LARGE\sffamily\bfseries\thetitlenumber\hspace{1em}\@title \par }%
+                  {\vskip .6em\noindent\textit\theabstract\setcounter{problem}{0}\setcounter{section}{0}}%
+                  \par\vspace{2em}
+}
+\makeatother
+
+
+%% The bug is that the 
+
