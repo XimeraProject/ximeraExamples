@@ -16,7 +16,7 @@
 
 
 %% Mabe a new command for this \xmPartAsChapter
-\renewcommand{\part}[1]{\chapterstyle\def\thechaptertitle{#1}\title{#1}\begin{abstract}\end{abstract}\maketitle}
+\pdfOnly{\renewcommand{\part}[1]{\chapterstyle\def\thechaptertitle{#1}\title{#1}\begin{abstract}\end{abstract}\maketitle}}
 
 
 \part{Some chapter defined as a part} %% Part needs to be redefined in xmPreamble
