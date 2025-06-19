@@ -1,0 +1,86 @@
+\documentclass{ximera}
+\title{Clear and Hide Environments}
+
+%\input{preamble.tex}% Only add a preamble file if it is actually necessary for the demo/test.
+\begin{document}
+\begin{abstract}
+    This demonstrates and tests the clearEnv and hideEnv commands.    
+\end{abstract}
+\maketitle
+
+{{\Huge \bfseries Last Updated: \today}} \\
+
+
+
+\section{Basic Usage}
+The \verb|\clearEnv{#1}| command will attempt to undefine any provided environment, 
+regardless of how it was defined (e.g. newenvironment or newEnviron commands).
+The (required) argument (\#1) is the name of the intended environment you wish to undefine.
+
+It will also attempt to undefine any default counters that may have been defined in that environment
+(e.g. problem counters). It should also allow compiles where those environments are still called later in 
+the document to compile (although the environment itself will do nothing, it won't throw an error and stop the compile).\\
+
+The \verb|\hideEnv[#1]{#2}| macro allows you to hide an environment by name, ensuring it - and all its contents - 
+are no longer visible on the pdf output. It also allows you an optional input to replace the block of content with 
+a new (uniform) content if desired.
+The first argument (\#1) is the (optional) replacement code. This will be code that is executed (instead of the normal environment code)
+when the env is executed, even though the content of the environment is hidden. The second (required) argument is the name of the environment 
+which gets hidden.
+
+\textbf{Note:} As of a (semi)recent LaTeX update, the \verb|\hideEnv| has broken, and thus anything in the testing area that 
+relates to testing \verb|\hideEnv| has been commented out until it can be fixed.
+
+\section{Intended Outcome of Test}
+\newcommand{\tmpMsg}{}
+
+Below is a ``claim'' environment with the content: 
+\begin{quote}
+This is a claim. I am also redefining the macro tempMsg to output ``This is tempMsg 1''.
+\end{quote}
+Then the macro \verb|\tempMsg| is expanded. Then the \verb|\hideEnv[claim has been hidden!]{claim}| command is executed 
+and afterward the following is executed inside a second claim environment:
+\begin{quote}
+This is a claim. I am also redefining the macro tempMsg to output ``This is tempMsg 2''.
+\end{quote}
+Then the macro \verb|\tempMsg| is expanded a second time.
+
+Then the macro \verb|\clearEnv{claim}| is executed, followed by 
+\verb|\newenvironment{claim}{claim has been cleared and then defined as a new environment!}{}| to demonstrate that no error occurs, 
+i.e. that the clearEnv command has undefined the claim. 
+
+Finally, we have
+\begin{quote}
+So everything still works!
+\end{quote}
+in a claim environment - to demonstrate that it still works and to show the new environment content has been successfully applied.
+
+\section{Start of Test/Demo Area}
+
+\begin{claim}
+This is a claim. I am also redefining the macro tempMsg to output ``This is tempMsg 1''. \renewcommand{\tmpMsg}{This is tempMsg 1}
+\end{claim}
+
+%\tmpMsg
+
+%\hideEnv[claim has been hidden!]{problem}
+
+%\begin{problem}
+%    This is a claim. I am also redefining the macro tempMsg to output ``This is tempMsg 2''. \renewcommand{\tmpMsg}{This is tempMsg 2}
+%\end{problem}
+
+\tmpMsg
+
+\clearEnv{claim}
+
+\newenvironment{claim}{claim has been cleared and then defined as a new environment!}{}
+
+\begin{claim}
+So everything still works!
+\end{claim}
+
+
+\hrulefill
+
+
+\end{document}

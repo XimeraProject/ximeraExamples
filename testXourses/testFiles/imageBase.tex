@@ -1,0 +1,67 @@
+\documentclass{ximera}
+\title{Image Importing Basic Usage}
+
+\input{imagePreamble}% Only add a preamble file if it is actually necessary for the demo/test.
+\begin{document}
+\begin{abstract}
+    Testing/demo for including images in documents.
+\end{abstract}
+\maketitle
+
+{{\Huge \bfseries Last Updated: \today}} \\
+
+
+\section{Basic Usage}
+For more users, images should be located in the xmPictures folder which is automatically loaded.
+However, you can also put images in a folder that is included using the \verb|\graphicspath| command.
+
+Most common image formats are supported and work fine in the pdf, but due to how dynamic sizing in a browser works,
+vector based graphic formats like SVG are preferable for online images, but require the ``svg'' package and using 
+the command \verb|\includesvg| instead of \verb|\includegraphics| (currently commented out, pending result of issue on svg package resolution).
+
+Default styling can be attained using the image environment, although it isn't necessary.
+
+\section{Intended Outcome of Test}
+Below should be a sequence of images - all of which are the ximera logo - but in different formats for demonstration. 
+The first half are in image environments, the second half are not.
+
+\section{Start of Test/Demo Area}
+
+%\begin{image}
+%    svg format in an image environment:
+%
+%    \includesvg{missionPatch.svg}
+%\end{image}
+\begin{image}
+    png format in an image environment:
+
+    \includegraphics{missionPatch.png}
+\end{image}
+\begin{image}
+    pdf format in an image environment:
+
+    \includegraphics{missionPatch.pdf}
+\end{image}
+\begin{image}
+    jpg/jpeg format in an image environment:
+
+    \includegraphics{missionPatch.jpg}
+\end{image}
+
+\hrulefill
+
+{{\bfseries \large Same Formats in the same order but No image environment below here}}
+
+\hrulefill
+
+%\includesvg{missionPatch.svg}
+
+\includegraphics{missionPatch.png}
+
+\includegraphics{missionPatch.pdf}
+
+\includegraphics{missionPatch.jpg}
+
+
+\hrulefill
+\end{document}
