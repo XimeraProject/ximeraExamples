@@ -126,7 +126,7 @@ div.xmoplossing-content.ui-accordion-content, div.xmuitkomst-content.ui-accordio
 
 
 .exercise::before {
-	content: "exercise" attr(numbered) ".";
+	content: "exercise" attr(probnum) ".";
 }
 .definition::before {
 	content: "definition" attr(numbered) ".";
@@ -150,13 +150,13 @@ div.xmoplossing-content.ui-accordion-content, div.xmuitkomst-content.ui-accordio
       content: "explanation" attr(numbered) ".";
 }
 .exploration::before {
-      content: "exploration" attr(numbered) ".";
+      content: "exploration" attr(probnum) ".";
 }
 .formula::before {
       content: "formula" attr(numbered) ".";
 }
 .problem::before {
-      content: "problem" attr(numbered) ".";
+      content: "problem" attr(probnum) ".";
 }
 .notation::before {
       content: "notation" attr(numbered) ".";
@@ -247,19 +247,19 @@ Also note: We may want to decide, as a team, what the default text should *actua
 */
 
 .problem::before {
-	content:"problem" attr(numbered) ".";
+	content:"problem" attr(probnum) ".";
  }
 
 .exploration::before {
-	content:"exploration" attr(numbered) ".";
+	content:"exploration" attr(probnum) ".";
  }
 
 .exercise::before {
-	content:"exercise" attr(numbered) ".";
+	content:"exercise" attr(probnum) ".";
  }
 
 .question::before {
-	content:"question" attr(numbered) ".";
+	content:"question" attr(probnum) ".";
  }
 /*
 If the problem environment(s) have the "titletext" attribute defined, then overwrite the above default with the newly defined default text.
@@ -269,7 +269,7 @@ e.g. use "P1", "Problem 1", "Prob 1", "Exciting Problem 1", etc.
 .problem-environment[titletext]::before {
 	/* Numbered everything in CSS is causing trouble.  TeX should decide the numbering. */
 	/* content:"${nameOfClass} " counter($counterToIncrement) ". ";*/
-	content:attr(titletext) attr(numbered) ".";
+	content:attr(titletext) attr(probnum) ".";
 }
 
 .theorem-like[titletext]::before {

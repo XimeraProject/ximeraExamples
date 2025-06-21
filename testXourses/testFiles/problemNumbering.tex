@@ -1,0 +1,194 @@
+\documentclass{ximera}
+\title{Problem Environment Numbering}
+
+%\input{preamble.tex}% Only add a preamble file if it is actually necessary for the demo/test.
+\begin{document}
+\begin{abstract}
+    A demo and test of basic problem-style environments.
+\end{abstract}
+\maketitle
+
+{{\Huge \bfseries Last Updated: \today}} \\
+
+\section{Basic Usage}
+Problem numbers should iterate at the level that a new problem is being added. So, for top level problems, it should iterate as
+Problem 1, Problem 2, Problem 3, etc. Each sublevel is separated by a period, so the first subproblem to Problem 3 would be
+labeled as Problem 3.1 and the third subproblem to Problem 5.2 (the second subproblem to Problem 5) should be labeled Problem 5.2.3
+
+\section{Intended Outcome of Test}
+Below should be problems nested according to the following list depiction. All answer boxes have $4$ as the correct answer for simplicity.
+If online problem numbering is off (default) the problems are just numbered sequentially online. 
+If problem numbering is on (via the \verb|\numberedProblemstrue| command), the problem numbers should reflect the nesting online.
+In either case, the problem numbering should reflect the problem nesting in the pdf as described.
+
+\begin{itemize}
+    \item Problem 1
+    \begin{itemize}
+        \item Problem 1 Subproblem 1
+        \item Problem 1 Subproblem 2
+    \end{itemize}
+    \item Problem 2
+    \begin{itemize}
+        \item Problem 2 Subproblem 1
+        \begin{itemize}
+            \item Problem 2 Subproblem 1 Subsubproblem 1
+            \item Problem 2 Subproblem 1 Subsubproblem 2
+        \end{itemize}
+        \item Problem 2 Subproblem 2
+    \end{itemize}
+    \item Problem 3
+    \begin{itemize}
+        \item Problem 3 Subproblem 1
+        \begin{itemize}
+            \item Problem 3 Subproblem 1 Subsubproblem 1
+        \end{itemize}
+        \item Problem 3 Subproblem 2
+        \begin{itemize}
+            \item Problem 3 Subproblem 2 Subsubproblem 1
+        \end{itemize}
+    \end{itemize}
+    \item Question 4
+    \begin{itemize}
+        \item Question 3 Subproblem 1
+        \begin{itemize}
+            \item Exercise 3 Subproblem 1 Subsubproblem 1
+        \end{itemize}
+        \item Exercise 3 Subproblem 2
+        \begin{itemize}
+            \item Exploration 3 Subproblem 2 Subsubproblem 1
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+The first set above should be numbered sequentially. The second set should be numbered using the \verb|\numberedProblemstrue| command
+and thus reflect nesting.
+
+
+\section{Start of Test/Demo Area}
+
+\begin{problem}
+    Problem 1: The answer is 4. $\answer{4}$
+    \begin{problem}
+        Problem 1 Subproblem 1: The answer is 4. $\answer{4}$
+    \end{problem} 
+    \begin{problem}
+        Problem 1 Subproblem 2: The answer is 4. $\answer{4}$
+    \end{problem} 
+\end{problem} 
+
+\begin{problem}
+    Problem 2: The answer is 4. $\answer{4}$
+    \begin{problem}
+        Problem 2 Subproblem 1: The answer is 4. $\answer{4}$
+        \begin{problem}
+            Problem 2 Subproblem 1 Subsubproblem 1: The answer is 4. $\answer{4}$
+        \end{problem} 
+        \begin{problem}
+            Problem 2 Subproblem 1 Subsubproblem 2: The answer is 4. $\answer{4}$
+        \end{problem} 
+    \end{problem} 
+    \begin{problem}
+        Problem 2 Subproblem 2: The answer is 4. $\answer{4}$
+    \end{problem} 
+\end{problem} 
+
+\begin{problem}
+    Problem 3: The answer is 4. $\answer{4}$
+    \begin{problem}
+        Problem 3 Subproblem 1: The answer is 4. $\answer{4}$
+        \begin{problem}
+            Problem 3 Subproblem 1 Subsubproblem 1: The answer is 4. $\answer{4}$
+        \end{problem} 
+    \end{problem}
+    \begin{problem}
+        Problem 3 Subproblem 2: The answer is 4. $\answer{4}$
+        \begin{problem}
+            Problem 3 Subproblem 2 Subsubproblem 1: The answer is 4. $\answer{4}$
+        \end{problem} 
+    \end{problem} 
+\end{problem} 
+
+\begin{problem}
+    Problem 4: The answer is 4. $\answer{4}$
+    \begin{question}
+        Problem 4 Subquestion 1: The answer is 4. $\answer{4}$
+        \begin{exercise}
+            Exercise 4 Subquestion 1 Subsubexercise 1: The answer is 4. $\answer{4}$
+        \end{exercise}
+    \end{question}
+    \begin{exercise}
+        Problem 4 Subexercise 2: The answer is 4. $\answer{4}$
+        \begin{exploration}
+            Problem 4 Subexercise 2 Subsubexploration 1: The answer is 4. $\answer{4}$
+        \end{exploration}
+    \end{exercise}
+\end{problem}
+
+%
+\numberedProblemstrue
+
+{{\bfseries \large Second Set}}
+
+\begin{problem}
+    Problem 5: The answer is 4. $\answer{4}$
+    \begin{problem}
+        Problem 5 Subproblem 1: The answer is 4. $\answer{4}$
+    \end{problem} 
+    \begin{problem}
+        Problem 5 Subproblem 2: The answer is 4. $\answer{4}$
+    \end{problem} 
+\end{problem} 
+
+\begin{problem}
+    Problem 6: The answer is 4. $\answer{4}$
+    \begin{problem}
+        Problem 6 Subproblem 1: The answer is 4. $\answer{4}$
+        \begin{problem}
+            Problem 6 Subproblem 1 Subsubproblem 1: The answer is 4. $\answer{4}$
+        \end{problem} 
+        \begin{problem}
+            Problem 6 Subproblem 1 Subsubproblem 2: The answer is 4. $\answer{4}$
+        \end{problem} 
+    \end{problem} 
+    \begin{problem}
+        Problem 6 Subproblem 2: The answer is 4. $\answer{4}$
+    \end{problem} 
+\end{problem} 
+
+\begin{problem}
+    Problem 7: The answer is 4. $\answer{4}$
+    \begin{problem}
+        Problem 7 Subproblem 1: The answer is 4. $\answer{4}$
+        \begin{problem}
+            Problem 7 Subproblem 1 Subsubproblem 1: The answer is 4. $\answer{4}$
+        \end{problem} 
+    \end{problem}
+    \begin{problem}
+        Problem 7 Subproblem 2: The answer is 4. $\answer{4}$
+        \begin{problem}
+            Problem 7 Subproblem 2 Subsubproblem 1: The answer is 4. $\answer{4}$
+        \end{problem} 
+    \end{problem} 
+\end{problem} 
+
+\begin{problem}
+    Problem 8: The answer is 4. $\answer{4}$
+    \begin{question}
+        Problem 8 Subquestion 1: The answer is 4. $\answer{4}$
+        \begin{exercise}
+            Exercise 8 Subquestion 1 Subsubexercise 1: The answer is 4. $\answer{4}$
+        \end{exercise}
+    \end{question}
+    \begin{exercise}
+        Problem 8 Subexercise 2: The answer is 4. $\answer{4}$
+        \begin{exploration}
+            Problem 8 Subexercise 2 Subsubexploration 1: The answer is 4. $\answer{4}$
+        \end{exploration}
+    \end{exercise}
+\end{problem}
+
+
+\hrulefill
+
+
+\end{document}

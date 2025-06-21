@@ -1,0 +1,134 @@
+\documentclass{ximera}
+\title{Problem Environment Nesting}
+
+%\input{preamble.tex}% Only add a preamble file if it is actually necessary for the demo/test.
+\begin{document}
+\begin{abstract}
+    A demo and test of basic problem-style environments.
+\end{abstract}
+\maketitle
+
+{{\Huge \bfseries Last Updated: \today}} \\
+
+% \section{Breakable Boxes}
+% \begin{tcolorbox}[enhanced jigsaw,breakable,pad at break*=1mm,
+%   colback=blue!5!white,colframe=blue!75!black,title=Breakable box,
+%   watermark color=white,watermark text=\Roman{tcbbreakpart}]
+%   \lipsum[1-12]
+% \end{tcolorbox}
+
+\section{Basic Usage}
+Problems can be nested. A subproblem unlocks once the problem it is nested within (in the LaTeX) has been answered correctly.
+Problem numbering reflects nesting (see problemNumbering test tile), but credit is still split according to top level number of problems.
+So if there are two problems on the page, one with no subproblems and one with 27 sub problems, they are both still equal the same amount
+of page credit.
+%%
+
+\section{Intended Outcome of Test}
+Below should be problems nested according to the following list depiction. All answer boxes have $4$ as the correct answer for simplicity.
+
+\begin{itemize}
+    \item Problem 1
+    \begin{itemize}
+        \item Problem 1 Subproblem 1
+        \item Problem 1 Subproblem 2
+    \end{itemize}
+    \item Problem 2
+    \begin{itemize}
+        \item Problem 2 Subproblem 1
+        \begin{itemize}
+            \item Problem 2 Subproblem 1 Subsubproblem 1
+            \item Problem 2 Subproblem 1 Subsubproblem 2
+        \end{itemize}
+        \item Problem 2 Subproblem 2
+    \end{itemize}
+    \item Problem 3
+    \begin{itemize}
+        \item Problem 3 Subproblem 1
+        \begin{itemize}
+            \item Problem 3 Subproblem 1 Subsubproblem 1
+        \end{itemize}
+        \item Problem 3 Subproblem 2
+        \begin{itemize}
+            \item Problem 3 Subproblem 2 Subsubproblem 1
+        \end{itemize}
+    \end{itemize}
+    \item Question 4
+    \begin{itemize}
+        \item Question 3 Subproblem 1
+        \begin{itemize}
+            \item Exercise 3 Subproblem 1 Subsubproblem 1
+        \end{itemize}
+        \item Exercise 3 Subproblem 2
+        \begin{itemize}
+            \item Exploration 3 Subproblem 2 Subsubproblem 1
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\section{Start of Test/Demo Area}
+
+
+\begin{problem}
+    Problem 1: The answer is 4. $\answer{4}$
+    \begin{problem}
+        Problem 1 Subproblem 1: The answer is 4. $\answer{4}$
+    \end{problem} 
+    \begin{problem}
+        Problem 1 Subproblem 2: The answer is 4. $\answer{4}$
+    \end{problem} 
+\end{problem} 
+
+\begin{problem}
+    Problem 2: The answer is 4. $\answer{4}$
+    \begin{problem}
+        Problem 2 Subproblem 1: The answer is 4. $\answer{4}$
+        \begin{problem}
+            Problem 2 Subproblem 1 Subsubproblem 1: The answer is 4. $\answer{4}$
+        \end{problem} 
+        \begin{problem}
+            Problem 2 Subproblem 1 Subsubproblem 2: The answer is 4. $\answer{4}$
+        \end{problem} 
+    \end{problem} 
+    \begin{problem}
+        Problem 2 Subproblem 2: The answer is 4. $\answer{4}$
+    \end{problem} 
+\end{problem} 
+
+\begin{problem}
+    Problem 3: The answer is 4. $\answer{4}$
+    \begin{problem}
+        Problem 3 Subproblem 1: The answer is 4. $\answer{4}$
+        \begin{problem}
+            Problem 3 Subproblem 1 Subsubproblem 1: The answer is 4. $\answer{4}$
+        \end{problem} 
+    \end{problem}
+    \begin{problem}
+        Problem 3 Subproblem 2: The answer is 4. $\answer{4}$
+        \begin{problem}
+            Problem 3 Subproblem 2 Subsubproblem 1: The answer is 4. $\answer{4}$
+        \end{problem} 
+    \end{problem} 
+\end{problem} 
+
+\begin{problem}
+    Problem 4: The answer is 4. $\answer{4}$
+    \begin{question}
+        Problem 4 Subquestion 1: The answer is 4. $\answer{4}$
+        \begin{exercise}
+            Exercise 4 Subquestion 1 Subsubexercise 1: The answer is 4. $\answer{4}$
+        \end{exercise}
+    \end{question}
+    \begin{exercise}
+        Problem 4 Subexercise 2: The answer is 4. $\answer{4}$
+        \begin{exploration}
+            Problem 4 Subexercise 2 Subsubexploration 1: The answer is 4. $\answer{4}$
+        \end{exploration}
+    \end{exercise}
+\end{problem}
+
+
+\hrulefill
+
+
+\end{document}
