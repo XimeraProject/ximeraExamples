@@ -1,5 +1,5 @@
-%\documentclass{ximera}
-\title{Tables}
+\documentclass{ximera}
+\title{Tables: tblr}
 
 %\input{preamble.tex}% Only add a preamble file if it is actually necessary for the demo/test.
 \begin{document}
@@ -9,78 +9,31 @@
 
 \section{Basic Usage}
 
-ximera
 
-        With \verb|tabular| (and \verb|center|):
-        \begin{center}
-            \begin{tabular}{lr}
-                x & 1 \\
-                y & 2 \\
-                z & 1
-            \end{tabular}
-        \end{center}
-        
-        With \verb|tabular and @{} | (and \verb|center|):
-        \begin{center}
-            \begin{tabular}{@{}l@{ }r@{.}}
-             x & 1 \\
-             y & 2 \\
-             z & 1
-            \end{tabular}
-            \end{center}
-
-    With \verb|tabular and p{} | (and \verb|center|):
-        \begin{center}
-            \begin{tabular}{|p{1cm}|p{2cm}|p{3cm}|}
-             x & 1 & 2\\
-             y & 2 & 3\\
-             z & 1 & 4
-            \end{tabular}
-        \end{center}
-
-    With \verb|array|:
-        $$
-        \begin{array}{l|r}
-         x & 1 \\
-         \hline
-         y & 2 \\
-         z & 1
-        \end{array}
-        $$
-    With \verb|array and @{} and p{}|:
-        $$
-        \begin{array}{@{X }l@{|}p{2cm}|}
-         x & 1 \\
-         \hline
-         y & 2 \\
-         z & 1
-        \end{array}
-        $$
-
-% \begin{tblr}{colspec={XXXX}, row{1}=purple, rowhead=1}
-% Alpha
-% & Beta & Gamma
-% & Delta
-% \\
-% Epsilon & Zeta & Eta
-% & Theta
-% \\
-% Iota
-% & Kappa & Lambda & Mu
-% \\
-% Nu
-% & Xi
-% & Omicron & Pi
-% \\
-% Rho
-% & Sigma & Tau
-% & Upsilon \\
-% Phi
-% & Chi
-% & Psi
-% & Omega
-% \\
-% \end{tblr}        
+\begin{tblr}{colspec={XXXX}, row{1}=purple, rowhead=1}
+Alpha
+& Beta & Gamma
+& Delta
+\\
+Epsilon & Zeta & Eta
+& Theta
+\\
+Iota
+& Kappa & Lambda & Mu
+\\
+Nu
+& Xi
+& Omicron & Pi
+\\
+Rho
+& Sigma & Tau
+& Upsilon \\
+Phi
+& Chi
+& Psi
+& Omega
+\\
+\end{tblr}        
 
 \section{Intended Outcome of Test}
 
