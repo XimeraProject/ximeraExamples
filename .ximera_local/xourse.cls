@@ -111,32 +111,18 @@
 
 \ifonline 
 \newcommand\chapter[1]{%
-\ifvmode \IgnorePar\fi \EndP\HCode{<a class="activity card chapterstyle" data-options="#1">#1</a>}\IgnoreIndent%
+\ifvmode \IgnorePar\fi \EndP\HCode{<a class="activity card activity-chapter" href="brol" data-options="#1">#1</a>}\IgnoreIndent%
 }
 \else
-% \newcommand{\chapter}[1]{%
-%   \origsection{#1}%
-%   \section{#1}%
-%   \phantomsection%
-%   %\ifnumbers\addcontentsline{toc}{section}{XX\thetitlenumber~#1}\else\addcontentsline{toc}{section}{#1}\fi
-%   \phantomsection\addcontentsline{toc}{section}{\textbf{\thetitlenumber\hspace{1em}#1}}%
-%   }
-% Define \chapter command adapted from report.cls
-%\makeatletter
 \newcommand{\chapter}[1]{%
-  % \clearpage % Optional: comment this out if you don't want page breaks
-  % \thispagestyle{plain}%
-  %\global\@topnum\z@ % Prevent floats at top of page
   %\refstepcounter{section}%
   \addtocounter{titlenumber}{1}%
   \setcounter{section}{0}
   \setcounter{subsection}{0}
   \phantomsection\addcontentsline{toc}{section}{\textbf{\thetitlenumber\hspace{1em}#1}}%  
-  %\addcontentsline{toc}{section}{\protect\numberline{\the} \chaptername~\thechapter\quad}%
-  %\@makechapterhead
 }
 
-% Define how the chapter title looks
+% Define how the chapter title looks (NOT NEEDED?)
 \newcommand{\@makechapterhead}[1]{%
   \vspace*{20pt}%
   {\parindent \z@ \raggedright \normalfont
