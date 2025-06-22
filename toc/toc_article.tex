@@ -1,0 +1,101 @@
+\documentclass{article}
+
+\usepackage{titlesec}
+
+\usepackage{lipsum}
+
+\title{Basic Table of Contents (wim)}
+
+
+\setcounter{secnumdepth}{6}
+\setcounter{tocdepth}{4}
+
+\newcounter{chapter}
+\renewcommand\thechapter{\arabic{chapter}}
+
+\newcommand{\chaptername}{Chapter}
+
+% \makeatletter
+% \newcommand{\chapter}{%
+%   \clearpage % Optional: comment this out if you don't want page breaks
+%   \thispagestyle{plain}%
+%   \global\@topnum\z@ % Prevent floats at top of page
+%   \refstepcounter{chapter}%
+%   \addcontentsline{toc}{section}{\protect\numberline{\thechapter} \chaptername~\thechapter\quad}%
+%   \@makechapterhead
+% }
+
+\let\origsection\section
+\newcommand{\chapter}[1]{\origsection{#1}}
+
+% Define how the chapter title looks
+% \newcommand{\@makechapterhead}[1]{%
+%   \vspace*{20pt}%
+%   {\parindent \z@ \raggedright \normalfont
+%     \huge\bfseries \chaptername~\thechapter\par\nobreak
+%     \vskip 10pt
+%     \Huge #1\par\nobreak
+%     \vskip 20pt
+%   }%
+% }
+\makeatother
+
+\titleformat{\chapter}
+  {\normalfont\Large\bfseries} % same as section style
+  {\thechapter}                % the number
+  {1em}                        % spacing between number and title
+  {}                           % before-code
+\titlespacing*{\chapter}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\clearpage
+
+\section{A first section}
+\lipsum[1][1]
+\subsection{A first subsection}
+\lipsum[2][1]
+\subsection{A second subsection}
+\lipsum[3][1]
+\subsubsection{A first subsubsection}
+\lipsum[4][1]
+\paragraph{A first paragraph}
+\lipsum[5][1]
+\section{A second section}
+Moreover, \lipsum[1][1]
+
+\chapter{A first chapter}
+\section{A first section}
+\lipsum[1][1]
+\subsection{A first subsection}
+\lipsum[2][1]
+\subsection{A second subsection}
+\lipsum[3][1]
+\subsubsection{A first subsubsection}
+\lipsum[4][1]
+\paragraph{A first paragraph}
+\lipsum[5][1]
+\section{A second section}
+Moreover, \lipsum[1][1]
+
+
+
+\part{A first part}
+\chapter{A first chapter}
+\section{A first section}
+\lipsum[1][1]
+\subsection{A first subsection}
+\lipsum[2][1]
+\subsection{A second subsection}
+\lipsum[3][1]
+\subsubsection{A first subsubsection}
+\lipsum[4][1]
+\paragraph{A first paragraph}
+\lipsum[5][1]
+\section{A second section}
+Moreover, \lipsum[1][1]
+
+
+\end{document}
