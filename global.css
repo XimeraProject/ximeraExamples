@@ -297,3 +297,17 @@ e.g. use "P1", "Problem 1", "Prob 1", "Exciting Problem 1", etc.
 } */
 
 
+/* fix \begin{center} for tabular; to be done properly...) */
+div.center > .tabular {
+    /* margin: auto; */
+}
+
+/* try to make tabular not full-width by default ...  */
+div.tabular {
+    /* width: fit-content; */
+    /* max-width: max-content; */
+}
+
+table.tabular td {
+  /* padding: 0 15px; */
+}
