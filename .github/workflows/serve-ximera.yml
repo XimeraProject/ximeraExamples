@@ -47,14 +47,15 @@ jobs:
           # (The defaults will presumably make this step fail.)
           GPG_KEY: ${{ secrets.GPG_KEY }}
           GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
+          XAKE_VERSION: "latest"
           XIMERA_URL: ${{ vars.XIMERA_URL }}
           XIMERA_NAME: ${{ vars.XIMERA_NAME }}*${{ github.ref_name }}
-          XOURSES: "."  # "./testXourses"
+          XOURSES: "./testXourses"
           XM_COMPILE_SEQUENCE: "pdf,handout.pdf,html"
         run: |
           ls -alrt
           chmod +x xmScripts/xmlatex   # Overleaf sync might reset it :-()
-          # ./xmScripts/xmlatex veryclean testXourses.TODO   # TO BE REMOVED
+          ./xmScripts/xmlatex veryclean testXourses.TODO   # TO BE REMOVED
           ./xmScripts/xmlatex ghaction $XOURSES
           echo "✅ Published to $XIMERA_URL$XIMERA_NAME " >> $GITHUB_STEP_SUMMARY
 
@@ -105,6 +106,3 @@ jobs:
           ./xmScripts/xmlatex name         
           ./xmScripts/xmlatex serve -f
           echo "✅ Published to $XIMERA_URL$XIMERA_NAME " >> $GITHUB_STEP_SUMMARY
-
-
-
