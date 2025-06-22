@@ -1,12 +1,11 @@
-\documentclass{ximera}
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{tabularray}
+\UseTblrLibrary{booktabs} % Optional, for \toprule etc.
 
-
-
-\title{Tables: tblr}
+\title{Tables: tblr (with documentclass article)}
 
 \begin{document}
-\begin{abstract}
-\end{abstract}
 
 \maketitle
 
@@ -74,7 +73,7 @@ Diana      & Project Manager & 34 & Full time \\
 \end{tblr}
 \end{center}
 
-\subsection{A simple table with colspec X: }
+\subsection{A simple table with colspec X:} 
 
 \begin{tblr}{
   colspec = {X[l]X[c]X[r]},

@@ -1,5 +1,6 @@
 \documentclass{xourse}
 \usepackage{tabularray}
+\UseTblrLibrary{booktabs} % Optional, for \toprule etc.
 
 \title{Test: Tables}
 
@@ -7,6 +8,13 @@
 \maketitle
 
 \activity{../table/tableBase}
+% \begin{onlineOnly}
+%     \activity{../table/tableBase_css}     %% DOES NOT WORK: only xourse-level .css files
+% \end{onlineOnly}
 \activity{../table/tblr}
+
+\ifonline
+    \activity{../table/tblr_article}
+\fi
 
 \end{document}
