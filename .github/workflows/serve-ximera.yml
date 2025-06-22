@@ -55,7 +55,7 @@ jobs:
         run: |
           ls -alrt
           chmod +x xmScripts/xmlatex   # Overleaf sync might reset it :-()
-          ./xmScripts/xmlatex veryclean testXourses.TODO   # TO BE REMOVED
+          ./xmScripts/xmlatex veryclean   # TO BE REMOVED
           ./xmScripts/xmlatex ghaction $XOURSES
           echo "✅ Published to $XIMERA_URL$XIMERA_NAME " >> $GITHUB_STEP_SUMMARY
 
