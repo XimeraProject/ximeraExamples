@@ -6,19 +6,40 @@ refer to the Ximera manual, which explains things in more detail and in a more u
 # General Structure and Intent of this Repo
 
 This Repo (will) be structured as follows...
-In the top level there are three key folders, the masterTestFolder, the testGroupings folder, 
-and the testFiles folder.
+
+
+- masterTestFolder
+    - (DTXFileName)Test.tex files (e.g. problemTest.tex)
+- testFiles
+    - (command/Env)Base.tex files (e.g. problemBase.tex)
+    - (command/Env)(Additional Testing Feature).tex (e.g. problemNesting.tex or problemNumbering.tex)
+- testGroups
+    - (Group By Type) folder. (e.g. ''environments'' or ''authorTools'' folders)
+        - Each folder contains a group of test xourses relevant to that grouping. 
+- untestedDTX
+    - depreciated folder
+        - (dtxFileName)Test.tex files for dtx files that contain only content that 
+        will be removed in a future release of ximera (e.g. gradedTest.tex)
+    - hardCoded folder
+        - (dtxFileName)Test.tex files for the dtx files with no testable elements (e.g. banner.dtx)
+
+
+**testFiles Folder at a glance**
 
 The testFiles folder is the folder that contains all the actual test ximera document class files
 that are loaded and used for demo/testing. Files in this folder should adhere to a specific naming
 scheme, and by large should not need to be edited after they have been finalized as testing bed files.
 (More on this below).
 
+**masterTestFolder Folder at a glance**
+
 The masterTestFolder is the location of all the xourse files that represent tests for each of the
 possible (individual) areas for testing - e.g. ''problem'' type environments or ''maketitle'' command.
 Again, these all adhere to a specific naming scheme and should not need to be edited once they have
 been verified as valid testbed files until/unless more content is added to its category.
 (Again, more on this below).
+
+**testGroupings Folder at a glance**
 
 Finally, the testGroupings folder is likely where most of the testing will actually take place. This
 folder should contain a list of folders that represent ''types'' of content that may need to be verified
@@ -34,6 +55,7 @@ the files inside the testGroups will be symlinks to the relevant test xourse in 
 real test xourses will be the files in the master test folder - meaning there is only one file to update and keep
 track of, and any changes to that one file will automatically update all relevant tests in the test groupings.
 
+
 # Naming Schemes
 
 * Each test xourse is named after a dtx file, and every dtx file should have a test xourse named after it (with some exceptions, see below).
@@ -42,7 +64,7 @@ tends to involve only a few dtx files (usually just one or two), it is often eas
 everything that is implemented by the newly changed dtx code. This testing bed makes that easy to accomplish by merely
 pulling up the master test folder and loading the one or two test bed xourses that correspond to your changed dtx file.
 These in turn load all the relevant testFiles that correspond to the individual elements implemented by that dtx file
-- i.e. each command/environment (or reasonably obvious groupings, like all ``\newtheorem`` generated environments are
+i.e. each command/environment (or reasonably obvious groupings, like all ``\newtheorem`` generated environments are
 in the same place) has its own testing tile, making it relatively easy to investigate updated content, even inside a given dtx.
 Thus **Each test xourse should be named  (dtxFileName)Test.tex** e.g. ''abstractTest.tex'' for the ''abstract.dtx'' file.
 
@@ -71,6 +93,19 @@ numbering is handled, and a test for how nesting problems is handled. Thus there
 problemBase.tex, problemNesting.tex, and problemNumbering.tex - each is a ximera documentclass that is demoing/testing
 the basic implementation, nesting behavior, and numbering scheme respectivvely. These are in turn loaded by the
 ''problemTest.tex'' file, which is the xourse documentclass that loads the content generated in the problem.dtx file.
+
+# Non-Testable dtx Files Explained
+
+Each dtx file should have its own test xourse that loads the relevant test files. However, pending a reorganization
+of dtx files and their content, there are currently many dtx files that do not contain any testable commands or environments
+(for example, the banner.dtx file is just the ascii definition of the banner that displays in the console on page load).
+Nonetheless it is important to know that a given dtx file has been parsed and any necessary content have relevant test files.
+So we still make test files for non-testable dtx files (e.g. BannerTest.tex) but place that file in a special top-level folder
+called ''untestedDTX'' which contains two different types of non-tested files. There are depreciated dtx files - those dtx
+files whose contents will be removed in an upcoming ximera version and so tests aren't needed (these are separated into
+a 'depreciated' folder inside the untestedDTX folder) as well as the dtx files that do not contain anything that can/need
+be tested (like the banner.dtx) - test files for these are put in the ''hardCoded'' subfolder of the untestedDTX folder.
+
 
 # Public Publishing Locations
 
