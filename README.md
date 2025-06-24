@@ -10,11 +10,12 @@ refer to the Ximera manual, which explains things in more detail and in a more u
 - masterTestFolder
     - (DTXFileName)Test.tex files (e.g. problemTest.tex)
 - testFiles
-    - (command/Env)Base.tex files (e.g. problemBase.tex)
-    - (command/Env)(Additional Testing Feature).tex (e.g. problemNesting.tex or problemNumbering.tex)
+    - (Command/Env) folder; a folder for each testable command/enviroment/etc. (e.g. ''problem'' folder)
+        - base.tex file (basic usage implementation/info)
+        - (Additional Testing Feature).tex (e.g. nesting.tex or numbering.tex in the problem folder)
 - testGroups
     - (Group By Type) folder. (e.g. ''environments'' or ''authorTools'' folders)
-        - Each folder contains a group of test xourses relevant to that grouping. 
+        - Each folder contains a test xourse that loads the activities from all relevant folders in the testFiles folder. 
 - untestedDTX
     - depreciated folder
         - (dtxFileName)Test.tex files for dtx files that contain only content that 
@@ -26,7 +27,8 @@ refer to the Ximera manual, which explains things in more detail and in a more u
 * **testFiles Folder at a glance**
 The testFiles folder is the folder that contains all the actual test ximera document class files
 that are loaded and used for demo/testing. Files in this folder should adhere to a specific naming
-scheme, and by large should not need to be edited after they have been finalized as testing bed files.
+scheme, and should only need minor editing once they have been finalized as testing bed files
+although more files will be added as we do more development.
 (More on this below).
 
 * **masterTestFolder Folder at a glance**
@@ -37,8 +39,9 @@ been verified as valid testbed files until/unless more content is added to its c
 (Again, more on this below).
 
 * **testGroupings Folder at a glance**
-Finally, the testGroupings folder is likely where most of the testing will actually take place. This
-folder should contain a list of folders that represent ''types'' of content that may need to be verified
+Finally, the testGroupings folder will have a quick-ref/links/generated-Xourses that will allow
+us to test content by type, rather than dtx file. This folder should contain 
+a list of folders that represent ''types'' of content that may need to be verified
 or tested - e.g. ''environments'', ''answerables'' or ''authorship tools''. More folders may be added here
 as we determine elements that are commonly needed to test together/in tandem. Note that the intent here,
 is that the same test file/xourse may appear in multiple (indeed many) of these subfolders... since something
@@ -65,13 +68,16 @@ i.e. each command/environment (or reasonably obvious groupings, like all ``\newt
 in the same place) has its own testing tile, making it relatively easy to investigate updated content, even inside a given dtx.
 Thus **Each test xourse should be named  (dtxFileName)Test.tex** e.g. ''abstractTest.tex'' for the ''abstract.dtx'' file.
 
-* **Each test file is named after the relevant command/environment/etc that it is testing.**
-In most cases, this means it will be named the same as the dtx file (e.g. the ''abstract'' test file for the ''abstractTest''
-xourse). However, often there are a number of options, or other elements that need to be demo'ed/testable for a given 
-command/environment/etc. We don't want to have a single test file that contains all the various complexities of these
-things, as it becomes difficult to see what aspect ended up generating issues (if there are issues from a new update).
-Thus test files should have a ''Base'' version that is the minimal implementation of the tested item, and then various
-other files that demo/test the other relevant aspects.
+* **Each tested command/env/etc has a folder in the testFiles folder**
+Each command/environment/etc that has a test file will have a folder with that command/environment/etc name 
+(e.g. ''problem'' folder or '' link'' folder in the testFiles folder). In that folder will be a basic usage/test file
+called ''base.tex'' that tests/demos the most basic implementation of whatever is being tested.
+However, often there are a number of options, or other elements for whatever is being tested that also need a demo/test.
+We don't want to have a single test file that contains all the various complexities of these things,
+as it becomes difficult to see what aspect ended up generating issues (if there are issues from testing).
+Thus test files should have the ''base.tex'' file that is the minimal implementation of the tested item, and then various
+other files that demo/test the other relevant aspects, each named after whatever it tests (e.g. ''numbering'' or ''nesting''
+for demo/testing the numbering scheme and nesting behavior inside the problem subfolder in the testFiles folder.).
 
 * **When Preambles are Necessary**
 Some specific test files/xourses need to load specific options or alternative files as part of their
@@ -85,12 +91,22 @@ server name/code to the test file. For example, if OSU has intended behavior tha
 then there should be a ''hintsOSU'' or possibly a ''hintsBaseOSU'' as appropriate.
 
 * **Example of Intended Naming Scheme:** 
-To demonstrate the intended naming scheme, consider the problem-like environments. The tests need to have a base case that
+To demonstrate the intended naming scheme, consider the problem-like environments. The thing being tested is the ''problem''
+environment, so all tests go into a ''problem'' folder inside the testFiles folder. We need the base case that
 demo/tests the very bare implementation of the problem like environments - but it also requires a test for how problem
-numbering is handled, and a test for how nesting problems is handled. Thus there should be three test files;
-problemBase.tex, problemNesting.tex, and problemNumbering.tex - each is a ximera documentclass that is demoing/testing
-the basic implementation, nesting behavior, and numbering scheme respectivvely. These are in turn loaded by the
+numbering is handled, and a test for how nesting problems is handled. Thus there should be three test files inside the problem
+subfolder of the testFiles folder; problemBase.tex, problemNesting.tex, and problemNumbering.tex. 
+each is a ximera documentclass that is demoing/testing the basic implementation, nesting behavior, 
+and numbering scheme respectivvely. These are in turn loaded by the
 ''problemTest.tex'' file, which is the xourse documentclass that loads the content generated in the problem.dtx file.
+So just the ''problem'' related files would be in the structure as follows:
+- masterTestFolder
+    - problemTest.tex
+- testFiles
+    - problem
+        - base.tex file (basic usage implementation/info)
+        - nesting.tex (demo/test for nesting behavior)
+        - numbering.tex (demo/test for numbering scheme)
 
 # Non-Testable dtx Files Explained
 
