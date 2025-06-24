@@ -1,0 +1,36 @@
+\documentclass{xourse}
+
+\usepackage[dutch,french,brazil,english]{babel}
+\selectlanguage{english}
+
+\title{Tests: Localization}
+
+\begin{document}
+\begin{abstract}
+\end{abstract}
+\maketitle
+
+%\activity{testFiles/localization}
+\activity{../localization/basic}
+
+
+%
+% NOTE: the files dutch/basic etc load a local xmPreamble to set the language
+%       This is NOT done when inside a xourse,
+%       and the \selectlanguage (presumable) simulates the loacl xmPreamble.
+%
+\sectionstyle
+
+\selectlanguage{french}
+\activity{../localization/french/basic}
+\selectlanguage{dutch}
+\activity{../localization/dutch/basic}
+\selectlanguage{brazil}
+\activity{../localization/brazil/basic}
+
+\chapterstyle
+
+\selectlanguage{english}
+\activity{../localization/multilingual}
+
+\end{document}
