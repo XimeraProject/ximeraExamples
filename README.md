@@ -50,6 +50,8 @@ like the ``\answer`` command is likely to show up under a lot of different categ
 testing (e.g. ''student interactions'', ''page credit generating elements'', and ''javascript elements'' would
 all have the ``\answer`` command as a relevant test).
 
+**Important Note About Test Groupings**
+
 To ensure all tests stay up to date in the relevant testGroupings (and to avoid version mismatch and general confusion)
 the files inside the testGroups will be symlinks to the relevant test xourse in the masterTestFolder. So the only
 real test xourses will be the files in the master test folder - meaning there is only one file to update and keep
