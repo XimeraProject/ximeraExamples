@@ -1,0 +1,51 @@
+\documentclass{article}
+
+\usepackage{hyperref}  % optional, better caption formatting
+\usepackage{amsmath}
+\usepackage{lipsum}
+
+\title{Labels and refs (in documentclass article)}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+\label{sec:intro}
+
+Welcome to the demo. In \autoref{sec:math}, we will discuss some math.
+
+\section{Mathematics Example}
+\label{sec:math}
+
+Consider the Pythagorean theorem:
+
+\begin{equation}
+    a^2 + b^2 = c^2 \label{p1}
+\end{equation}
+\begin{equation}
+    a^2 + b^2 = c^2 \label{eq:p2}
+\end{equation}
+
+
+We can refer to the first one using \verb|\ref|: Equation~\ref{p1}, or with \verb|\eqref|: \eqref{p1}.
+
+We can refer to the first one using \verb|\ref|: Equation~$\ref{p1}$, or with \verb|\eqref|: $\eqref{p1}$.
+
+We can refer to the first one using \verb|\ref|: Equation~\ref{eq:p2}, or with \verb|\eqref|: \eqref{eq:p2}.
+
+We can refer to the first one using \verb|\ref|: Equation~$\ref{eq:p2}$, or with \verb|\eqref|: $\eqref{eq:p2}$.
+
+\lipsum[1]
+
+\lipsum[12]
+
+\lipsum[10]
+
+\lipsum[10]
+\lipsum[10]
+\lipsum[10]
+\lipsum[10]
+
+
+\end{document}
