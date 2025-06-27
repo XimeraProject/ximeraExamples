@@ -42,7 +42,7 @@ been verified as valid testbed files until/unless more content is added to its c
 Finally, the testGroupings folder should contain a list of folders that represent ''types'' of 
 content that may need to be verified or tested - e.g. ''environments'', ''answerables'' or ''authorship tools''. 
 More folders may be added here as we determine elements that are commonly needed to test together/in tandem. 
-Note that the intent here, is that the same test file may appear in multiple (indeed many) of these subfolders... 
+Note that the intent here, is that the same test file may be referenced in multiple (many!) of these subfolders... 
 since something like the ``\answer`` command is likely to show up under a lot of different categories of areas 
 that might need testing (e.g. ''student interactions'', ''page credit generating elements'', and 
 ''javascript elements'' would all have the ``\answer`` command as a relevant test).
@@ -55,7 +55,7 @@ test files. To submit a new test file, see the section on ``Creating a New Test 
 
 # Naming Schemes
 
-* **Each test xourse is named after a dtx file and every dtx file has a test xourse.**
+* **Each test xourse in the masterTestFolder is named after a dtx file.**
 Since all development work must be implemented via dtx file (as per CTAN standards) and most development work
 tends to involve only a few dtx files (usually just one or two), it is often easiest to test the new code by testing
 everything that is implemented by the newly changed dtx code. This testing bed makes that easy to accomplish by merely
@@ -106,24 +106,24 @@ So just the ''problem'' related files would be in the structure as follows:
         - numbering.tex (demo/test for numbering scheme)
 
 # Creating a New Test File
-If you have determined a meaningful test case that has no appropriate test file, you can do one of two things;
+If you have determined a meaningful test case that has no appropriate test file, you can do the following;
 1) You should post the issue on the github issues tab of the example repo (**NOT** the ximeraLatex repo!) with
 a detailed explanation of what you need to test - make sure to highlight exactly the things that need to be
 tested that are not currently testable using the existing test files. In other words, make sure to include:
-    a) What is currently not able to be tested using existing test files.
-    b) What specifically you are trying to test overall (in the case that the part that is `untestable` is 
+    - What is currently not able to be tested using existing test files.
+    - What specifically you are trying to test overall (in the case that the part that is `untestable` is 
     only a piece of what you are trying to test overall).
-    c) Why you are trying to test and/or what you are trying to change about Ximera that needs testing.
+    - Why you are trying to test and/or what you are trying to change about Ximera that needs testing.
 2) Next - if you are able, you should make a branch of the main examples repo, and write your new test file. 
 Once you have the new test file written (and tested) and think it is ready to be merged, submit a pull request 
 with an explanation of what and how you are going about testing the thing you are submitting a new file for,
 along with a reference to the github issue in the examples repo that you submitted from part 1. This will
 allow another developer to quickly and easily review the file for submission and then merge it.
-    a) As a general rule, a different developer (than the author of the new file) should review/merge 
+    - As a general rule, a different developer (than the author of the new file) should review/merge 
     a new test file for safety.
-    b) New test files should be verified to make sure they are necessary, suitably succinct in their testing,
+    - New test files should be verified to make sure they are necessary, suitably succinct in their testing,
     and conform to the various naming and design requirements listed in this readme.
-    c) Once the merge has been completed, whomever reviewed the test file and merged the new test file into
+    - Once the merge has been completed, whomever reviewed the test file and merged the new test file into
     the master test repo *must* be the one to close the github issue. This will help with quickly referencing
     who did what if there are any issues later on or if someone needs to verify something (helps minimize
     digging through the commit history).
