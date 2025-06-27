@@ -1,11 +1,15 @@
 \documentclass{ximera}
 
+\numberedProblemstrue
+
 \title{Labels and refs}
 
 \begin{document}
 \begin{abstract}
 \end{abstract}
 \maketitle
+\label{xim:labels}
+
 
 % {{\Huge \bfseries Last Updated: \today}} \\
 
@@ -55,6 +59,8 @@ Note that this does not make a lot of sens online.
 
 We refer to item~\ref{itm:first} in the list above.
 
+You can find these same links from another activity, see \hyperlink{xim:labelsFromOtherActivity}{the labels test activity}.
+
 \section{Figures and Tables}
 
 \subsection{A Demo Figure}
@@ -81,6 +87,31 @@ We refer to item~\ref{itm:first} in the list above.
   \captionof{table}{An example table}
   \label{tab:example}
 }
+
+ \begin{theorem} \label{thm:1}
+  
+  This is a theorem that refers to Equation~$\eqref{eq:pythagoras}$ and Figure~\ref{fig:demo}.
+
+  
+ \end{theorem}
+
+\begin{example} \label{ex:1}
+ First example  
+
+ This example refers to Example~\ref{ex:2} and Example~\ref{ex:3}.
+
+\end{example}
+\begin{example} \label{ex:2}
+ Second example  
+
+  This example refers to Example~\ref{ex:1} and Example~\ref{ex:3}.
+\end{example}
+\begin{example} \label{ex:3}
+ Third example  
+
+  This example refers to Example~\ref{ex:1} and Example~\ref{ex:2}.
+\end{example}
+
 
 \section{Custom Text Reference}
 

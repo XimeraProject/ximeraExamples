@@ -1,0 +1,33 @@
+\documentclass{ximera}
+
+\title{Links to other activities}
+
+\begin{document}
+\begin{abstract}
+\end{abstract}
+\maketitle
+\label{xim:labelsFromOtherActivity}
+
+\section{Introduction}
+\label{sec:intro} % Duplicate on purpose to test duplicate labels
+ 
+
+Here we link to the content of the \hyperlink{xim:labels}{labels test activity}.
+
+
+We can refer to the first equation \textbf{in mathmode} using \verb|\ref| : Equation~$\ref{eq:pythagoras}$ or with \verb|\eqref|: $\eqref{eq:pythagoras}$.
+
+We can refer to the second equation \textbf{in mathmode} using \verb|\ref| : Equation~$\text{\ref{eq:tag:pythagoras}}$ or with \verb|\eqref|: $\eqref{eq:tag:pythagoras}$.
+
+We can refer to the third one  \verb|\hyperlink|, thus \hyperlink{ht:pythagoras}{like this}.
+
+Note that in HTML \verb|\ref| and \verb|\eqref| without mathmode might jump to BELOW Equation~\ref{eq:pythagoras} or \eqref{eq:pythagoras}, and
+\verb|\ref| might need a \verb|\text| to avoid $\ref{eq:pythagoras}$.
+
+The first equation appears on page~\pageref{eq:pythagoras}, the second on page~\pageref{eq:tag:pythagoras}. 
+Note that this does not make a lot of sens online.
+
+We refer to item~\ref{itm:first} in the list above.
+
+\
+\end{document}
