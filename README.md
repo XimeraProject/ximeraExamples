@@ -42,7 +42,7 @@ been verified as valid testbed files until/unless more content is added to its c
 Finally, the testGroupings folder should contain a list of folders that represent ''types'' of 
 content that may need to be verified or tested - e.g. ''environments'', ''answerables'' or ''authorship tools''. 
 More folders may be added here as we determine elements that are commonly needed to test together/in tandem. 
-Note that the intent here, is that the same test file may appear in multiple (indeed many) of these subfolders... 
+Note that the intent here, is that the same test file may be referenced in multiple (many!) of these subfolders... 
 since something like the ``\answer`` command is likely to show up under a lot of different categories of areas 
 that might need testing (e.g. ''student interactions'', ''page credit generating elements'', and 
 ''javascript elements'' would all have the ``\answer`` command as a relevant test).
