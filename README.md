@@ -7,37 +7,40 @@ refer to the Ximera manual, which explains things in more detail and in a more u
 
 * **This Repo (will eventually be) structured as follows...**
 
-- masterTestFolder
+- depreciated (for content that is being removed in a future release, see README in folder)
     - (DTXFileName)Test.tex files (e.g. problemTest.tex)
 - testFiles
-    - (Command/Env) folder; a folder for each testable command/enviroment/etc. (e.g. ''problem'' folder)
-        - base.tex file (basic usage implementation/info)
-        - (Additional Testing Feature).tex (e.g. nesting.tex or numbering.tex in the problem folder)
-- testGroups
-    - (Group By Type) folder. (e.g. ''environments'' or ''authorTools'' folders)
-        - Each folder contains a test xourse that loads the relevant activities from the testFile folder. 
-- untestedDTX
-    - depreciated folder
-        - (dtxFileName)Test.tex files for dtx files that contain only content that 
-        will be removed in a future release of ximera (e.g. gradedTest.tex)
-    - hardCoded folder
-        - (dtxFileName)Test.tex files for the dtx files with no testable elements (e.g. banner.dtx)
-
+    -compositeTestFiles (for tests of interactions between different dtx file contents, see README in folder.)
+        -subfolder named to explain composite testing case.
+    -dtxTestFiles (for individual dtx file testbeds, see README in folder.)
+        - (Command/Env) folder; a folder for each testable command/enviroment/etc. (e.g. ''problem'' folder)
+            - base.tex file (basic usage implementation/info)
+            - (Additional Testing Feature).tex (e.g. nesting.tex or numbering.tex in the problem folder)
+- testXourses (xourse files to lode relevant test files, see README in folder)
+    - compositeTestXourses (xourses for testing interactions between different dtx files)
+    - dtxTestXourses (xourses for testing individual dtx file contents)
+        - (dtxFileName)Test.tex is the xourse that tests (dtxFileName) dtx file.
+        - Includes hard coded non-tested content so it is easy to verify all non-depreciated dtx has been parsed.
 
 * **testFiles Folder at a glance**
 The testFiles folder is the folder that contains all the actual test ximera document class files
-that are loaded and used for demo/testing. Files in this folder should adhere to a specific naming
-scheme, and should only need minor editing once they have been finalized as testing bed files
-although more files will be added as we do more development.
-(More on this below).
+that are loaded and used for demo/testing. There are two subfolders in this folder.
+1) The dtxTestFiles are the files that test individual dtx files to verify the integrity of all
+the elements within that specific dtx file.
+2) The compositeTestFiles subfolder is for files that test the integrity of elements that span
+and/or interact between different dtx files.
 
-* **masterTestFolder Folder at a glance**
-The masterTestFolder is the location of all the xourse files that represent tests for each of the
-possible (individual) areas for testing - e.g. ''problem'' type environments or ''maketitle'' command.
-Again, these all adhere to a specific naming scheme and should not need to be edited once they have
-been verified as valid testbed files until/unless more content is added to its category.
-(Again, more on this below).
+* **testXourses Folder at a glance**
+The testXourses is the location of all the xourse files. There are two subfolders;
+1) The first subfolder is the dtxTestXourses subfolder. It is a subfolder for xourses that are
+tests for each of the dtx files, these xourses should load all the relevant test files to verify
+the functionality of all the elements that are touched by that dtx file.
+2) The other subfolder is the compositeTestXourses folder, which are xourses that load all the relevant 
+tests to verify the integrity of how elements in different dtx files interact with each other. These
+should load each of the relevant test files in the corresponding compositeTestFiles subfolder
+of the testFiles folder.
 
+<!-- 
 * **testGroupings Folder at a glance**
 Finally, the testGroupings folder should contain a list of folders that represent ''types'' of 
 content that may need to be verified or tested - e.g. ''environments'', ''answerables'' or ''authorship tools''. 
@@ -50,25 +53,25 @@ that might need testing (e.g. ''student interactions'', ''page credit generating
 * **Important Note About Test Groupings**
 To ensure all tests stay up to date in the relevant testGroupings (and to avoid version mismatch and general confusion)
 the files inside the testGroups should only be xourses that load the test files from the testFiles folder, not new
-test files. To submit a new test file, see the section on ``Creating a New Test File``.
+test files. To submit a new test file, see the section on ``Creating a New Test File``. -->
 
 
 # Naming Schemes
 
-* **Each test xourse in the masterTestFolder is named after a dtx file.**
+* **Each test xourse in the testXourses/dtxTestXourses is named after a dtx file.**
 Since all development work must be implemented via dtx file (as per CTAN standards) and most development work
 tends to involve only a few dtx files (usually just one or two), it is often easiest to test the new code by testing
 everything that is implemented by the newly changed dtx code. This testing bed makes that easy to accomplish by merely
-pulling up the master test folder and loading the one or two test bed xourses that correspond to your changed dtx file.
+pulling up the relevant dtxTestXourse(s) and loading thetest bed xourse(s) that correspond to your changed dtx file.
 These in turn load all the relevant testFiles that correspond to the individual elements implemented by that dtx file
 i.e. each command/environment (or reasonably obvious groupings, like all ``\newtheorem`` generated environments are
 in the same place) has its own testing tile, making it relatively easy to investigate updated content, even inside a given dtx.
-Thus **Each test xourse should be named  (dtxFileName)Test.tex** e.g. ''abstractTest.tex'' for the ''abstract.dtx'' file.
+Thus **Each dtxTestXourse should be named  (dtxFileName)Test.tex** e.g. ''abstractTest.tex'' for the ''abstract.dtx'' file.
 
-* **Each tested command/env/etc has a folder in the testFiles folder**
-Each command/environment/etc that has a test file will have a folder with that command/environment/etc name 
-(e.g. ''problem'' folder or '' link'' folder in the testFiles folder). In that folder will be a basic usage/test file
-called ''base.tex'' that tests/demos the most basic implementation of whatever is being tested.
+* **Each tested command/env/etc has a file in the relevant (subfolder) of the dtxTestFiles Folder**
+Each command/environment/etc (referred to as ``element``) that is implemented in a dtx should have its own testFile 
+in that dtxTestFiles subfolder, named after the relevant element. This should demo/test the most basic form of the 
+element.
 However, often there are a number of options, or other elements for whatever is being tested that also need a demo/test.
 We don't want to have a single test file that contains all the various complexities of these things,
 as it becomes difficult to see what aspect ended up generating issues (if there are issues from testing).
@@ -97,7 +100,7 @@ each is a ximera documentclass that is demoing/testing the basic implementation,
 and numbering scheme respectivvely. These are in turn loaded by the
 ''problemTest.tex'' file, which is the xourse documentclass that loads the content generated in the problem.dtx file.
 So just the ''problem'' related files would be in the structure as follows:
-- masterTestFolder
+- testXourses
     - problemTest.tex
 - testFiles
     - problem
