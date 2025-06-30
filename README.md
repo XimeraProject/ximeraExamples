@@ -154,3 +154,13 @@ Note you can always get the TeX-code by appending .tex to the URL of an activity
 
 <!-- A more detailed description of how to use this repo for testing is in the [README_testing](README_testing.md) -->
 
+# Notes from talking with Wim
+
+1) Make a ``global testing files`` type subfolder in the testFiles folder for test files that are designed
+to test more global interactions - not things that are contianed within a single dtx file.
+For example, the label/ref interactions with certain environments like theorems or problems; or 
+complicated ToC implementation with nesting sections/subsections and chapterstyle/sectionstyle commands.
+
+
+
+
