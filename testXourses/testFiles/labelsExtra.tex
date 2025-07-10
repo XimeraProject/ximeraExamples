@@ -1,0 +1,51 @@
+\documentclass{ximera}
+
+% \dispNestfalse
+% \numberedProblemstrue
+
+\title{Labels an links extra}
+
+\begin{document}
+\begin{abstract}
+\end{abstract}
+\maketitle
+\label{xim:problemNumbersBase}
+
+
+ \begin{theorem} \label{thm:1}
+  
+  This is an interesting  theorem.  
+
+  \begin{equation}
+    \label{eq:thm1}
+    a^2 + b^2 = c^2
+  \end{equation}
+  
+ \end{theorem}
+
+\begin{example} \label{ex:1}
+ First example  
+
+ This example refers to Example~\xmref{ex:2} and Example~\xmref{ex:3}.
+
+ Note equation \xmref{eq:thm1}. (or in mathmode= $\xmref{eq:thm1}$)
+\end{example}
+
+\begin{example} \label{ex:2}
+ Second example  
+
+  This example refers to Example~\xmref{ex:1} and Example~\xmref{ex:3}.
+\end{example}
+
+\begin{example} \label{ex:3}
+ Third example  
+
+  This example refers to Example~\xmref{ex:1} and Example~\xmref{ex:2}.
+\end{example}
+
+\lipsum
+\lipsum
+\lipsum
+\lipsum
+
+\end{document}

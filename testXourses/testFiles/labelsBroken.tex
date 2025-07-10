@@ -1,0 +1,129 @@
+\documentclass{ximera}
+
+\usepackage{caption}  % optional, better caption formatting
+% \usepackage{float}
+
+\title{Labels and refs (Broken features)}
+
+\begin{document}
+\begin{abstract}
+\end{abstract}
+\maketitle
+
+% {{\Huge \bfseries Last Updated: \today}} \\
+
+%\section{Basic Demo}
+
+% \tableofcontents
+% \newpage
+
+\section{Introduction}
+\label{sec:intro}
+
+Welcome to the demo. In \autoref{sec:math}, we will discuss some math.
+We also refer to Figure~\ref{fig:demo} and Table~\ref{tab:example}.
+
+\section{Mathematics Example}
+\label{sec:math}
+
+Consider the Pythagorean theorem:
+
+\begin{equation}
+a^2 + b^2 = c^2
+\label{abc}
+\end{equation}
+\begin{equation}
+a^2 + b^2 = c^2
+\label{eq:pythagorasmath:after}
+\end{equation}
+
+\begin{equation}
+    \label{eq:pythagorasmath:before}
+a^2 + b^2 = c^2
+\end{equation}
+
+\begin{center}
+\hypertarget{eq:pythagoras:before}{(Pythagoras (target before equation))}
+$a^2 + b^2 = c^2$ 
+\end{center}
+
+\begin{center}
+    $a^2 + b^2 = c^2$ 
+    \hypertarget{eq:pythagoras:after}{(Pythagoras (target after equation ))}
+\end{center}
+
+Here is a numbered list:
+\begin{enumerate}
+  \item First item \label{itm:first}
+  \item Second item \label{itm:second}
+\end{enumerate}
+
+
+We can refer to it using \verb|\ref|: Equation~\ref{eq:pythagorasmath:before}, or with \verb|\eqref|: \eqref{eq:pythagorasmath:before}.
+
+We can refer to it using \verb|\ref|: Equation~\ref{eq:pythagorasmath:after}, or with \verb|\eqref|: \eqref{eq:pythagorasmath:after}.
+
+Or to the second one using \verb|\ref|: Equation~\ref{eq:pythagoras2}, or with \verb|\eqref|: \eqref{eq:pythagoras2}.
+
+Or to the second one using \verb|\hyperlink|: Equation~\hyperlink{eq:pythagoras:before}{Piet Agoras}.
+
+And to the third one using \verb|\hyperlink|: Equation~\hyperlink{eq:pythagoras:after}{Piet Agoras}.
+
+
+The first equation appears on page~\pageref{eq:pythagoras}, the second on page~\pageref{eq:pythagoras2}.
+
+We refer to item~\ref{itm:first} in the list above.
+
+\section{Figures and Tables}
+
+\subsection{A Demo Figure}
+\label{sec:fig}
+
+\begin{image}[0.3\textwidth]
+  \centering
+  \includegraphics[width=0.3\textwidth]{missionPatch.jpg} % Adjust the path to your image file
+\end{image}
+  \captionof{figure}{A demo image}
+  \label{fig:demo}
+
+\subsection{A Demo Table}
+
+{
+  \centering
+  \begin{tabular}{|c|c|}
+    \hline
+    A & B \\
+    \hline
+    1 & 2 \\
+    \hline
+  \end{tabular}
+  \captionof{table}{An example table}
+  \label{tab:example}
+}
+
+\section{Custom Text Reference}
+
+This document started in Section~\ref{sec:intro} and discussed math in Section~\nameref{sec:math}.
+
+
+\begin{remark}
+    \begin{itemize}
+        \item  Links should be GLOBALLY unique, so do not use the same label in different activities.
+        \item  In a PDF links behave differently depending on whether the target is in the PDF or not. 
+            Test carefully and thoroughly.
+    \end{itemize}
+\end{remark}
+
+
+\section{Intended Outcome of Test}
+
+
+\section{Start of Test/Demo Area}
+
+\begin{equation}
+a^2 + b^2 = c^2    \label{eq:pyth}
+\end{equation}
+
+\hrulefill
+
+\end{document}

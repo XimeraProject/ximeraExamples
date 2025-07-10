@@ -529,6 +529,7 @@ local function post_process_html(cmd)
             table.insert(result, line)
         end
       end
+      table.insert(result, "\\newcommand{\\xmref}[1]{\\ref{#1}}")  -- add \xmref to the list of newcommands
       return table.concat(result, "\n")
     end
 

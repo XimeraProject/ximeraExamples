@@ -1,0 +1,351 @@
+\documentclass{ximera}
+\title{Problem Environment Numbers}
+
+%\input{preambleProblem.tex}% Only add a preamble file if it is actually necessary for the demo/test.
+\begin{document}
+\begin{abstract}
+    A demo and test of basic problem-style environments.
+\end{abstract}
+\maketitle
+
+\section{Basic Usage}
+Problem numbers should iterate at the level that a new problem is being added. So, for top level problems, it should iterate as
+Problem 1, Problem 2, Problem 3, etc. Each sublevel is separated by a period, so the first subproblem to Problem 3 would be
+labeled as Problem 3.1 and the third subproblem to Problem 5.2 (the second subproblem to Problem 5) should be labeled Problem 5.2.3
+
+\section{Start of Test/Demo Area}
+
+% Helper macro to insert previous/next problem references
+\newcommand{\prevnext}[2]{%
+    \par\medskip
+    Previous problem is \ref{#1}, and the next one is \ref{#2}.
+    \medskip
+}
+
+% Example usage for the first set (with explicit labels)
+\begin{problem}\label{problem:1}
+    \begin{problem}\label{problem:1.1}
+        Problem 1: The answer is 4. $\answer{4}$ 
+        \begin{problem}\label{problem:1.1.1}
+            Problem 1 Subproblem 1: The answer is 4. $\answer{4}$ 
+            \prevnext{problem:1.1}{problem:1.1.2}
+        \end{problem} 
+        \begin{problem}\label{problem:1.1.2}
+            Problem 1 Subproblem 2: The answer is 4. $\answer{4}$ 
+            \prevnext{problem:1.1.1}{problem:2}
+        \end{problem} 
+        \prevnext{problem:1}{problem:1.1.1}
+    \end{problem} 
+    \prevnext{}{problem:1.1}
+\end{problem} 
+
+\begin{problem}\label{problem:2}
+    Problem 2: The answer is 4. $\answer{4}$
+    \begin{problem}\label{problem:2.1}
+        Problem 2 Subproblem 1: The answer is 4. $\answer{4}$
+        \begin{problem}\label{problem:2.1.1}
+            Problem 2 Subproblem 1 Subsubproblem 1: The answer is 4. $\answer{4}$
+            \prevnext{problem:2.1}{problem:2.1.2}
+        \end{problem} 
+        \begin{problem}\label{problem:2.1.2}
+            Problem 2 Subproblem 1 Subsubproblem 2: The answer is 4. $\answer{4}$
+            \prevnext{problem:2.1.1}{problem:2.2}
+        \end{problem} 
+        \prevnext{problem:2}{problem:2.1.1}
+    \end{problem} 
+    \begin{problem}\label{problem:2.2}
+        Problem 2 Subproblem 2: The answer is 4. $\answer{4}$
+        \prevnext{problem:2.1.2}{problem:3}
+    \end{problem} 
+    \prevnext{problem:1.1.2}{problem:2.1}
+\end{problem} 
+
+\begin{problem}\label{problem:3}
+    Problem 3: The answer is 4. $\answer{4}$
+    \begin{problem}\label{problem:3.1}
+        Problem 3 Subproblem 1: The answer is 4. $\answer{4}$
+        \begin{problem}\label{problem:3.1.1}
+            Problem 3 Subproblem 1 Subsubproblem 1: The answer is 4. $\answer{4}$
+            \prevnext{problem:3.1}{problem:3.2}
+        \end{problem} 
+        \prevnext{problem:3}{problem:3.1.1}
+    \end{problem}
+    \begin{problem}\label{problem:3.2}
+        Problem 3 Subproblem 2: The answer is 4. $\answer{4}$
+        \begin{problem}\label{problem:3.2.1}
+            Problem 3 Subproblem 2 Subsubproblem 1: The answer is 4. $\answer{4}$
+            \prevnext{problem:3.2}{problem:4}
+        \end{problem} 
+        \prevnext{problem:3.1.1}{problem:3.2.1}
+    \end{problem} 
+    \prevnext{problem:2.2}{problem:3.1}
+\end{problem} 
+
+\begin{problem}\label{problem:4}
+    Problem 4: The answer is 4. $\answer{4}$
+    \begin{question}
+        Problem 4 Subquestion 1: The answer is 4. $\answer{4}$
+        \begin{exercise}
+            Exercise 4 Subquestion 1 Subsubexercise 1: The answer is 4. $\answer{4}$
+            \prevnext{problem:4}{}
+        \end{exercise}
+    \end{question}
+    \begin{exercise}
+        Problem 4 Subexercise 2: The answer is 4. $\answer{4}$
+        \begin{exploration}
+            Problem 4 Subexercise 2 Subsubexploration 1: The answer is 4. $\answer{4}$
+            \prevnext{}{problem:5}
+        \end{exploration}
+    \end{exercise}
+    \prevnext{problem:3.2.1}{problem:5}
+\end{problem}
+
+\begin{problem}\label{problem:1}
+    \begin{problem}\label{problem:1.1}
+        Problem 1: The answer is 4. $\answer{4}$ 
+        \begin{problem}\label{problem:1.1.1}
+            Problem 1 Subproblem 1: The answer is 4. $\answer{4}$ 
+        \end{problem} 
+        \begin{problem}\label{problem:1.1.2}
+            Problem 1 Subproblem 2: The answer is 4. $\answer{4}$ 
+        \end{problem} 
+    \end{problem} 
+\end{problem} 
+
+\begin{problem}\label{problem:2}
+    Problem 2: The answer is 4. $\answer{4}$
+    \begin{problem}\label{problem:2.1}
+        Problem 2 Subproblem 1: The answer is 4. $\answer{4}$
+        \begin{problem}\label{problem:2.1.1}
+            Problem 2 Subproblem 1 Subsubproblem 1: The answer is 4. $\answer{4}$
+        \end{problem} 
+        \begin{problem}\label{problem:2.1.2}
+            Problem 2 Subproblem 1 Subsubproblem 2: The answer is 4. $\answer{4}$
+        \end{problem} 
+    \end{problem} 
+    \begin{problem}\label{problem:2.2}
+        Problem 2 Subproblem 2: The answer is 4. $\answer{4}$
+    \end{problem} 
+\end{problem} 
+
+\begin{problem}\label{problem:3}
+    Problem 3: The answer is 4. $\answer{4}$
+    \begin{problem}\label{problem:3.1}
+        Problem 3 Subproblem 1: The answer is 4. $\answer{4}$
+        \begin{problem}\label{problem:3.1.1}
+            Problem 3 Subproblem 1 Subsubproblem 1: The answer is 4. $\answer{4}$
+        \end{problem} 
+    \end{problem}
+    \begin{problem}\label{problem:3.2}
+        Problem 3 Subproblem 2: The answer is 4. $\answer{4}$
+        \begin{problem}\label{problem:3.2.1}
+            Problem 3 Subproblem 2 Subsubproblem 1: The answer is 4. $\answer{4}$
+        \end{problem} 
+    \end{problem} 
+\end{problem} 
+
+\begin{problem}\label{problem:4}
+    Problem 4: The answer is 4. $\answer{4}$
+    \begin{question}
+        Problem 4 Subquestion 1: The answer is 4. $\answer{4}$
+        \begin{exercise}
+            Exercise 4 Subquestion 1 Subsubexercise 1: The answer is 4. $\answer{4}$
+        \end{exercise}
+    \end{question}
+    \begin{exercise}
+        Problem 4 Subexercise 2: The answer is 4. $\answer{4}$
+        \begin{exploration}
+            Problem 4 Subexercise 2 Subsubexploration 1: The answer is 4. $\answer{4}$
+        \end{exploration}
+    \end{exercise}
+\end{problem}
+%
+\numberedProblemstrue
+
+{{\bfseries \large Second Set}}
+
+\begin{problem}\label{problem:5}
+    Problem 5: The answer is 4. $\answer{4}$
+    \begin{problem}\label{problem:5.1}
+        Problem 5 Subproblem 1: The answer is 4. $\answer{4}$
+    \end{problem} 
+    \begin{problem}\label{problem:5.2}
+        Problem 5 Subproblem 2: The answer is 4. $\answer{4}$
+    \end{problem} 
+\end{problem} 
+
+\begin{problem}\label{problem:6}
+    Problem 6: The answer is 4. $\answer{4}$
+    \begin{problem}\label{problem:6.1}
+        Problem 6 Subproblem 1: The answer is 4. $\answer{4}$
+        \begin{problem}\label{problem:6.1.1}
+            Problem 6 Subproblem 1 Subsubproblem 1: The answer is 4. $\answer{4}$
+        \end{problem} 
+        \begin{problem}\label{problem:6.1.2}
+            Problem 6 Subproblem 1 Subsubproblem 2: The answer is 4. $\answer{4}$
+        \end{problem} 
+    \end{problem} 
+    \begin{problem}\label{problem:6.2}
+        Problem 6 Subproblem 2: The answer is 4. $\answer{4}$
+    \end{problem} 
+\end{problem} 
+
+\begin{problem}\label{problem:7}
+    Problem 7: The answer is 4. $\answer{4}$
+    \begin{problem}\label{problem:7.1}
+        Problem 7 Subproblem 1: The answer is 4. $\answer{4}$
+        \begin{problem}\label{problem:7.1.1}
+            Problem 7 Subproblem 1 Subsubproblem 1: The answer is 4. $\answer{4}$
+        \end{problem} 
+    \end{problem}
+    \begin{problem}\label{problem:7.2}
+        Problem 7 Subproblem 2: The answer is 4. $\answer{4}$
+        \begin{problem}\label{problem:7.2.1}
+            Problem 7 Subproblem 2 Subsubproblem 1: The answer is 4. $\answer{4}$
+        \end{problem} 
+    \end{problem} 
+\end{problem} 
+
+\begin{problem}\label{problem:8}
+    Problem 8: The answer is 4. $\answer{4}$
+    \begin{question}
+        Problem 8 Subquestion 1: The answer is 4. $\answer{4}$
+        \begin{exercise}
+            Exercise 8 Subquestion 1 Subsubexercise 1: The answer is 4. $\answer{4}$
+        \end{exercise}
+    \end{question}
+    \begin{exercise}
+        Problem 8 Subexercise 2: The answer is 4. $\answer{4}$
+        \begin{exploration}
+            Problem 8 Subexercise 2 Subsubexploration 1: The answer is 4. $\answer{4}$
+        \end{exploration}
+    \end{exercise}
+\end{problem}
+\begin{problem}
+    \begin{problem}\label{problem:1}
+        Problem 1: The answer is 4. $\answer{4}$ 
+        \begin{problem}\label{problem:1.1}
+            Problem 1 Subproblem 1: The answer is 4. $\answer{4}$ 
+        \end{problem} 
+        \begin{problem}\label{problem:1.2}
+            Problem 1 Subproblem 2: The answer is 4. $\answer{4}$ 
+        \end{problem} 
+    \end{problem} 
+\end{problem} 
+
+\begin{problem}
+    Problem 2: The answer is 4. $\answer{4}$
+    \begin{problem}
+        Problem 2 Subproblem 1: The answer is 4. $\answer{4}$
+        \begin{problem}
+            Problem 2 Subproblem 1 Subsubproblem 1: The answer is 4. $\answer{4}$
+        \end{problem} 
+        \begin{problem}
+            Problem 2 Subproblem 1 Subsubproblem 2: The answer is 4. $\answer{4}$
+        \end{problem} 
+    \end{problem} 
+    \begin{problem}
+        Problem 2 Subproblem 2: The answer is 4. $\answer{4}$
+    \end{problem} 
+\end{problem} 
+
+\begin{problem}
+    Problem 3: The answer is 4. $\answer{4}$
+    \begin{problem}
+        Problem 3 Subproblem 1: The answer is 4. $\answer{4}$
+        \begin{problem}
+            Problem 3 Subproblem 1 Subsubproblem 1: The answer is 4. $\answer{4}$
+        \end{problem} 
+    \end{problem}
+    \begin{problem}
+        Problem 3 Subproblem 2: The answer is 4. $\answer{4}$
+        \begin{problem}
+            Problem 3 Subproblem 2 Subsubproblem 1: The answer is 4. $\answer{4}$
+        \end{problem} 
+    \end{problem} 
+\end{problem} 
+
+\begin{problem}
+    Problem 4: The answer is 4. $\answer{4}$
+    \begin{question}
+        Problem 4 Subquestion 1: The answer is 4. $\answer{4}$
+        \begin{exercise}
+            Exercise 4 Subquestion 1 Subsubexercise 1: The answer is 4. $\answer{4}$
+        \end{exercise}
+    \end{question}
+    \begin{exercise}
+        Problem 4 Subexercise 2: The answer is 4. $\answer{4}$
+        \begin{exploration}
+            Problem 4 Subexercise 2 Subsubexploration 1: The answer is 4. $\answer{4}$
+        \end{exploration}
+    \end{exercise}
+\end{problem}
+
+%
+\numberedProblemstrue
+
+{{\bfseries \large Second Set}}
+
+\begin{problem}
+    Problem 5: The answer is 4. $\answer{4}$
+    \begin{problem}
+        Problem 5 Subproblem 1: The answer is 4. $\answer{4}$
+    \end{problem} 
+    \begin{problem}
+        Problem 5 Subproblem 2: The answer is 4. $\answer{4}$
+    \end{problem} 
+\end{problem} 
+
+\begin{problem}
+    Problem 6: The answer is 4. $\answer{4}$
+    \begin{problem}
+        Problem 6 Subproblem 1: The answer is 4. $\answer{4}$
+        \begin{problem}
+            Problem 6 Subproblem 1 Subsubproblem 1: The answer is 4. $\answer{4}$
+        \end{problem} 
+        \begin{problem}
+            Problem 6 Subproblem 1 Subsubproblem 2: The answer is 4. $\answer{4}$
+        \end{problem} 
+    \end{problem} 
+    \begin{problem}
+        Problem 6 Subproblem 2: The answer is 4. $\answer{4}$
+    \end{problem} 
+\end{problem} 
+
+\begin{problem}
+    Problem 7: The answer is 4. $\answer{4}$
+    \begin{problem}
+        Problem 7 Subproblem 1: The answer is 4. $\answer{4}$
+        \begin{problem}
+            Problem 7 Subproblem 1 Subsubproblem 1: The answer is 4. $\answer{4}$
+        \end{problem} 
+    \end{problem}
+    \begin{problem}
+        Problem 7 Subproblem 2: The answer is 4. $\answer{4}$
+        \begin{problem}
+            Problem 7 Subproblem 2 Subsubproblem 1: The answer is 4. $\answer{4}$
+        \end{problem} 
+    \end{problem} 
+\end{problem} 
+
+\begin{problem}
+    Problem 8: The answer is 4. $\answer{4}$
+    \begin{question}
+        Problem 8 Subquestion 1: The answer is 4. $\answer{4}$
+        \begin{exercise}
+            Exercise 8 Subquestion 1 Subsubexercise 1: The answer is 4. $\answer{4}$
+        \end{exercise}
+    \end{question}
+    \begin{exercise}
+        Problem 8 Subexercise 2: The answer is 4. $\answer{4}$
+        \begin{exploration}
+            Problem 8 Subexercise 2 Subsubexploration 1: The answer is 4. $\answer{4}$
+        \end{exploration}
+    \end{exercise}
+\end{problem}
+
+
+\hrulefill
+
+
+\end{document}

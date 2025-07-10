@@ -1,6 +1,6 @@
 \documentclass{ximera}
 
-\numberedProblemstrue
+% \numberedProblemstrue
 
 \title{Labels and refs}
 
@@ -10,56 +10,80 @@
 \maketitle
 \label{xim:labels}
 
-
 % {{\Huge \bfseries Last Updated: \today}} \\
 
 %\section{Basic Demo}
 
-\section{Introduction}
-\label{sec:intro}
+\section{Basic Example}
+\label{sec:basic example}
+See \autoref{sec:xmref} for links to objects in this section.
 
-Welcome to the demo. In \autoref{sec:math}, we will discuss some math.
-We also refer to Figure~\ref{fig:demo} and Table~\ref{tab:example}.
-Test scrolling to the targets with some care, e.g. is rather small windows.
 
-\section{Mathematics Example}
-\label{sec:math}
-
-Consider the Pythagorean theorem in an \verb|equation| environment
+Pythagoras in a \verb|\begin{equation}| with \verb|\label{eq:pyth}| gives
 \begin{equation}
-  a^2 + b^2 = c^2   \label{eq:pythagoras}
+  a^2 + b^2 = c^2   \label{eq:pyth}
 \end{equation}
-and in a normal \verb|\[ ... \]| environment
+and in \verb|\[ ... \]| with \verb|\label{eq:pyth}| and with \verb|\tag{Pyth.}|:
 \[
-  a^2 + b^2 = c^2   \tag{Pythagoras} \label{eq:tag:pythagoras}
+  a^2 + b^2 = c^2   \tag{Pyth.} \label{tag:pyth}
 \]
 or just in a \verb|center| environment with a \verb|\hypertarget|
 \begin{center}
-  $a^2 + b^2 = c^2$  \hfill  \hypertarget{ht:pythagoras}{(Pythagoras (hypertarget))}
+ \hfill\qquad $a^2 + b^2 = c^2$  \qquad \hfill  \hypertarget{ht:pyth}{(Pyth. (hypertarget))}
 \end{center}
 
-And consider also this numbered list:
+Consider also this numbered list with \verb|\label{itm:first}| and \verb|\label{itm:second}|:
 \begin{enumerate}
   \item First item \label{itm:first}
   \item Second item \label{itm:second}
 \end{enumerate}
 
+\section{List with xmref}
+\label{sec:xmref}
 
-Then we can refer to the first equation \textbf{in mathmode} using \verb|\ref| : Equation~$\ref{eq:pythagoras}$ or with \verb|\eqref|: $\eqref{eq:pythagoras}$.
+In \autoref{sec:basic example} following labels were defined:
+to which we can refer with \verb|\xmref|:
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+Command & Result & Command with [text] & Result \\
+\hline
+\verb| \xmref{itm:first}|          & \xmref{itm:first}   & \verb| \xmref[first item]{itm:first}|    & \xmref[first item]{itm:first} \\
+\verb|$\xmref{eq:pyth}$|           &$\xmref{eq:pyth}$    & \verb|$\xmref[first eq.]{eq:pyth}$|      &$\xmref[first eq.]{eq:pyth}$ \\
+\verb| \xmref{eq:pyth} |           & \xmref{eq:pyth}     & \verb| \xmref[first eq.]{eq:pyth}|      & \xmref[first eq.]{eq:pyth} \\
+\verb| \xmref{tag:pyth}|           & \xmref{tag:pyths}   & \verb| \xmref[second eq.]{tag:pyth}|     & \xmref[second eq.]{tag:pyth} \\
+\verb| \xmref{ht:pyth}|            & \xmref{ht:pyth}     &                                          &  \\
+%\verb| \xmref{xim_labelsFromOtherActivity}| & \xmref{xim_labelsFromOtherActivity} & \verb|\xmref[a page with back-links]{xim_labelsFromOtherActivity}| & \xmref[a page with back-links]{xim_labelsFromOtherActivity} \\
+\verb| \xmref{https://ximera.org}| & \xmref{https://ximera.org} & \verb| \xmref[Ximera]{https://ximera.org}| & \xmref[Ximera]{https://ximera.org} \\
+\hline
+\end{tabular}
+\end{center}
 
-We can refer to the second equation \textbf{in mathmode} using \verb|\ref| : Equation~$\text{\ref{eq:tag:pythagoras}}$ or with \verb|\eqref|: $\eqref{eq:tag:pythagoras}$.
+\begin{itemize}
+  \item the first item in the list above, thus \xmref{itm_first}, 
+        or with custom text \xmref[first first]{itm_first},
+%   \item the second item in the list above, thus \xmref{itm_second},
+%   \item the first equation, thus \xmref{eq_pythagoras}, or with custom text \xmref[eq_pythagoras]{first equation},
+%   \item the second equation, thus \xmref{eq_tag_pythagoras}, or with custom text \xmref[eq_tag_pythagoras]{second equation},
+%   \item the third equation, thus \xmref{ht_pythagoras}.
+%   \item a remote ximera page \xmref{xim_labelsFromOtherActivity}.
+%   \item a remote ximera page with a label \xmref[a page with back-links]{xim_labelsFromOtherActivity}.
+%   \item a url \xmref{https://ximera.org}.
+  \item a url with a text \xmref[Ximera.org]{https://ximera.org}.
+\end{itemize}.
 
-We can refer to the third one  \verb|\hyperlink|, thus \hyperlink{ht:pythagoras}{like this}.
 
-Note that in HTML \verb|\ref| and \verb|\eqref| without mathmode might jump to BELOW Equation~\ref{eq:pythagoras} or \eqref{eq:pythagoras}, and
-\verb|\ref| might need a \verb|\text| to avoid $\ref{eq:pythagoras}$.
+Note that in HTML \verb|\ref| and \verb|\eqref| without mathmode might jump to BELOW Equation~\ref{eq_pythagoras} or \eqref{eq_pythagoras}, and
+\verb|\ref| might need a \verb|\text| to avoid $\ref{eq_pythagoras}$.
 
-The first equation appears on page~\pageref{eq:pythagoras}, the second on page~\pageref{eq:tag:pythagoras}. 
+The first equation appears on page~\pageref{eq_pythagoras}, the second on page~\pageref{eq_tag_pythagoras}. 
 Note that this does not make a lot of sense online.
 
-We refer to item~\ref{itm:first} in the list above.
+We refer to item~\ref{itm_first} in the list above.
 
-You can find these same links from another activity, see \hyperlink{xim:labelsFromOtherActivity}{the labels test activity}.
+You can find these same links from another activity, see \hyperlink{xim_labelsFromOtherActivity}{the labels test activity}.
+
+You can find these same links from another activity, see \hyperref[xim_labelsFromOtherActivity]{the labels test activity}.
 
 \section{Figures and Tables}
 
@@ -128,13 +152,10 @@ This document started in Section~\ref{sec:intro} and discussed math in Section~\
 \end{remark}
 
 
-\section{Intended Outcome of Test}
-
-
 \section{Start of Test/Demo Area}
 
 \begin{equation}
-a^2 + b^2 = c^2    \label{eq:pyth}
+a^2 + b^2 = c^2    \label{eq:pyth2}
 \end{equation}
 
 Facemus paginam abbastanzam longam, so that we can test the scrolling to the refs.

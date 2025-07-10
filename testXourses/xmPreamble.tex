@@ -1,2 +1,136 @@
 \usepackage{lipsum}
 \usepackage{caption}  % optional, better caption formatting (eg in labels.tex)
+
+
+% references: Ximera heeft adhoc logica	 om online labels te doen werken over verschillende files heen
+\ifdefined\HCode
+% Link to standard \labels, but give your own description
+% Usage:  Volg \hyperref[my_very_verbose_label]{deze link} voor wat tijdverlies
+%   (01/2020: Ximera-server aangepast om bij class reference-keeptext de link-text NIET te vervangen door de label-text !!!) 
+%
+%  Link to specific targets  (not tested ?)
+\renewcommand{\hypertarget}[1]  {\HCode{<a class="ximera-label" id="#1"></a>}}
+\renewcommand{\hyperlink  }[2]  {\HCode{<a class="reference reference-keeptext" href="\##1">}#2\HCode{</a>}}
+% \hyperref links to a label, but with an optional custom text
+\renewcommand{\hyperref   }[2][]{\HCode{<a class="reference reference-keeptext" href="\##1">}#2\HCode{</a>}}
+\fi
+
+
+\usepackage{xparse}
+\usepackage{hyperref}
+\usepackage{etoolbox}
+\usepackage{xstring}
+
+% Define the \xmref command
+\NewDocumentCommand{\xmref}{O{} m}{%
+  \begingroup
+  \def\keyarg{#2}%
+  \def\textarg{#1}%
+  \def\texthttp{\detokenize{https}}%
+  \edef\prefix{\detokenize{\keyarg}}%
+  % Decide what to do based on textarg and prefix
+  \if\relax\detokenize{#1}\relax
+    % No [tekst] given → \ref{key}
+    \IfBeginWith{\prefix}{\texthttp}{%
+        \url{\keyarg}%
+      }{%
+        \ref{\keyarg}%
+      }
+  \else
+    \IfBeginWith{\prefix}{http}{%
+      \href{\keyarg}{H \textarg}%
+    }{%
+      \IfBeginWith{\prefix}{https://}{%
+        \href{\keyarg}{HS \textarg}%
+      }{%
+        \IfBeginWith{\prefix}{./}{%
+          \href{\keyarg}{L \textarg}%
+        }{%
+          \hyperref[\keyarg]{O \textarg}%
+        }%
+      }%
+    }%
+  \fi
+  \endgroup
+}
+
+
+
+% \ExplSyntaxOn
+
+% % Main command: optional [tekst], required {key}
+% \NewDocumentCommand{\xmrefB}{O{} +m}
+%   {
+%     \xmref_command:nn { #1 } { #2 }
+%   }
+
+% \cs_new_protected:Nn \xmref_command:nn
+%   {
+%     \tl_set:Nn \l_tmpa_tl { #1 } % tekst
+%     \tl_set:Nn \l_tmpb_tl { #2 } % key (can contain underscores)
+
+%     \tl_if_blank:VTF \l_tmpa_tl
+%       {
+%         % No tekst → fallback to \ref
+%         \ref{ \l_tmpb_tl }
+%       }
+%       {
+%         % Tekst is given → check if key is a URL
+%         \tl_if_in:VnTF \l_tmpb_tl { http:// }
+%           { \href{ \l_tmpb_tl }{ \l_tmpa_tl } }
+%           {
+%             \tl_if_in:VnTF \l_tmpb_tl { https:// }
+%               { \href{ \l_tmpb_tl }{ \l_tmpa_tl } }
+%               {
+%                 \tl_if_in:VnTF \l_tmpb_tl { ./ }
+%                   { \href{ \l_tmpb_tl }{ \l_tmpa_tl } }
+%                   {
+%                     % Not a URL → assume internal label
+%                     \hyperref[ \l_tmpb_tl ]{ \l_tmpa_tl }
+%                   }
+%               }
+%           }
+%       }
+%   }
+
+% \ExplSyntaxOff
+
+
+
+% \ExplSyntaxOn
+
+% \NewDocumentCommand{\xmrefA}{O{}m}
+%   {
+%     \xmref_command:nn { #1 } { #2 }
+%   }
+
+% \cs_new_protected:Nn \xmref_command:nn
+%   {
+%     \tl_set:Nn \l_tmpa_tl { #1 } % tekst
+%     \tl_set:Nn \l_tmpb_tl { #2 } % key
+
+%     \tl_if_blank:VTF \l_tmpa_tl
+%       {
+%         % No tekst → fallback to \ref
+%         \ref{ \l_tmpb_tl }
+%       }
+%       {
+%         % Tekst is given → check if key is a URL
+%         \tl_if_in:VnTF \l_tmpb_tl { http:// }
+%           { \href{ \l_tmpb_tl }{ \l_tmpa_tl } }
+%           {
+%             \tl_if_in:VnTF \l_tmpb_tl { https:// }
+%               { \href{ \l_tmpb_tl }{ \l_tmpa_tl } }
+%               {
+%                 \tl_if_in:VnTF \l_tmpb_tl { ./ }
+%                   { \href{ \l_tmpb_tl }{ \l_tmpa_tl } }
+%                   {
+%                     % Not a URL → assume internal label
+%                     \hyperref[ \l_tmpb_tl ]{ \l_tmpa_tl }
+%                   }
+%               }
+%           }
+%       }
+%   }
+
+% \ExplSyntaxOff

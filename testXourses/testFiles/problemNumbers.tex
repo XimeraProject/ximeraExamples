@@ -1,0 +1,177 @@
+\documentclass{ximera}
+
+\dispNestfalse
+\numberedProblemstrue
+
+\title{Problem Environment Numbering}
+
+%\input{preambleProblem.tex}% Only add a preamble file if it is actually necessary for the demo/test.
+\begin{document}
+\begin{abstract}
+    A demo and test of basic problem-style environments.
+\end{abstract}
+\maketitle
+
+\section{Basic Usage}
+Problem numbers should iterate at the level that a new problem is being added. So, for top level problems, it should iterate as
+Problem 1, Problem 2, Problem 3, etc. Each sublevel is separated by a period, so the first subproblem to Problem 3 would be
+labeled as Problem 3.1 and the third subproblem to Problem 5.2 (the second subproblem to Problem 5) should be labeled Problem 5.2.3
+
+% Helper macro inlined for previous/next problem references
+
+% Example usage for the first set (with explicit labels)
+
+\numberedProblemstrue
+\subsection{Numbered problems}
+
+\begin{exercise}\label{exercise:1} a
+
+        \begin{problem}\label{problem:1.1}
+            Problem 1 Subproblem 1: The answer is 4. $\answer{4}$ 
+            \par\medskip
+            Next problem is \ref{problem:1.2}.
+            \medskip
+        \end{problem} 
+        \begin{problem}\label{problem:1.2}
+            Problem 1 Subproblem 2: The answer is 4. $\answer{4}$ 
+            \par\medskip
+            Previous problem is \ref{problem:1.1}.
+            \medskip
+        \end{problem} 
+    The next problem is \ref{exercise:2}.
+    \medskip
+\end{exercise} 
+
+\begin{exercise}\label{exercise:2}
+    Problem 2: The answer is 4. $\answer{4}$
+    \begin{problem}\label{problem:2.1}
+        Problem 2 Subproblem 1: The answer is 4. $\answer{4}$
+    \end{problem} 
+    \begin{problem}\label{problem:2.2}
+        Problem 2 Subproblem 2: The answer is 4. $\answer{4}$
+        
+        Previous problem is \ref{problem:2.2}, and the next exercise is \ref{exercise:3}.
+        \begin{problem}\label{problem:2.2.1}
+            Problem 2 Subproblem 2 Subsubproblem 1: The answer is 4. $\answer{4}$
+            \par\medskip
+            Previous problem is \ref{problem:2.2}, and the next one is \ref{exercise:3}.
+            \medskip
+        \end{problem}
+    \end{problem} 
+    \par\medskip
+    Previous exercise is \ref{exercise:1}, and the next one is \ref{exercise:2}.
+    \medskip
+\end{exercise} 
+
+\begin{exercise}\label{exercise:3}
+    Problem 3: Enter 4 to see the subproblems: $\answer{4}$
+    \begin{problem}\label{problem:3.1}
+        Problem 3 Subproblem 1: The answer is 4. $\answer{4}$
+        \begin{problem}\label{problem:3.1.1}
+            Problem 3 Subproblem 1 Subsubproblem 1: The answer is 4. $\answer{4}$
+            \par\medskip
+            Previous problem is \ref{problem:3.1}, and the next one is \ref{problem:3.2}.
+            \medskip
+        \end{problem} 
+        \par\medskip
+        Previous problem is \ref{exercise:3}, and the next one is \ref{problem:3.1.1}.
+        \medskip
+    \end{problem}
+    \begin{problem}\label{problem:3.2}
+        Problem 3 Subproblem 2: The answer is 4. $\answer{4}$
+        \begin{problem}\label{problem:3.2.1}
+            Problem 3 Subproblem 2 Subsubproblem 1: The answer is 4. $\answer{4}$
+            \par\medskip
+            Previous problem is \ref{problem:3.2}, and the next one is \ref{exercise:4}.
+            \medskip
+        \end{problem} 
+        \par\medskip
+        Previous problem is \ref{problem:3.1.1}, and the next one is \ref{problem:3.2.1}.
+        \medskip
+    \end{problem} 
+    \par\medskip
+    Previous problem is \ref{problem:2.2}, and the next one is \ref{problem:3.1}.
+    \medskip
+\end{exercise} 
+
+\begin{exercise}\label{exercise:4}
+    Problem 4: The answer is 4. $\answer{4}$
+    \begin{question}
+        Problem 4 Subquestion 1: The answer is 4. $\answer{4}$
+        \begin{exercise}
+            Exercise 4 Subquestion 1 Subsubexercise 1: The answer is 4. $\answer{4}$
+            \par\medskip
+            Previous problem is \ref{exercise:4}, and the next one is .
+            \medskip
+        \end{exercise}
+    \end{question}
+    \begin{exercise}
+        Problem 4 Subexercise 2: The answer is 4. $\answer{4}$
+        \begin{exploration}
+            Problem 4 Subexercise 2 Subsubexploration 1: The answer is 4. $\answer{4}$
+            \par\medskip
+            Previous problem is , and the next one is \ref{problem:5}.
+            \medskip
+        \end{exploration}
+    \end{exercise}
+    \par\medskip
+    Previous problem is \ref{exercise:3.2.1}, and the next one is \ref{problem:5}.
+    \medskip
+\end{exercise}
+
+\numberedProblemsfalse
+\subsection{One unnumbered problems} 
+
+
+\begin{problem}\label{problem:5}
+    Problem 5: The answer is 4. $\answer{4}$
+    \begin{problem}\label{problem:5.1}
+        Problem 5 Subproblem 1: The answer is 4. $\answer{4}$
+    \end{problem} 
+    \begin{problem}\label{problem:5.2}
+        Problem 5 Subproblem 2: The answer is 4. $\answer{4}$
+    \end{problem} 
+\end{problem} 
+
+\numberedProblemstrue
+\subsection{Two more numbered problems} 
+
+\begin{problem}\label{problem:6}
+    Problem 6: The answer is 4. $\answer{4}$
+    \begin{problem}\label{problem:6.1}
+        Problem 6 Subproblem 1: The answer is 4. $\answer{4}$
+        \begin{problem}\label{problem:6.1.1}
+            Problem 6 Subproblem 1 Subsubproblem 1: The answer is 4. $\answer{4}$
+        \end{problem} 
+        \begin{problem}\label{problem:6.1.2}
+            Problem 6 Subproblem 1 Subsubproblem 2: The answer is 4. $\answer{4}$
+        \end{problem} 
+    \end{problem} 
+    \begin{problem}\label{problem:6.2}
+        Problem 6 Subproblem 2: The answer is 4. $\answer{4}$
+    \end{problem} 
+\end{problem} 
+
+
+\begin{problem}\label{problem:8}
+    Problem 8: The answer is 4. $\answer{4}$
+    \begin{question}
+        Problem 8 Subquestion 1: The answer is 4. $\answer{4}$
+        \begin{exercise}
+            Exercise 8 Subquestion 1 Subsubexercise 1: The answer is 4. $\answer{4}$
+        \end{exercise}
+    \end{question}
+    \begin{exercise}
+        Problem 8 Subexercise 2: The answer is 4. $\answer{4}$
+        \begin{exploration}
+            Problem 8 Subexercise 2 Subsubexploration 1: The answer is 4. $\answer{4}$
+        \end{exploration}
+    \end{exercise}
+\end{problem}
+
+
+
+\hrulefill
+
+
+\end{document}
