@@ -21,34 +21,59 @@
 \usepackage{etoolbox}
 \usepackage{xstring}
 
+\ExplSyntaxOn
+
+
+\cs_generate_variant:Nn \regex_match:nnTF {nV}
+
+\NewDocumentCommand \ifIsUrl { m m m }
+  {
+    % 1) grab & fully expand the input into a temp token list
+    \str_set:Nx \l_tmpa_str { #1 }
+    % 2) do the regex‐match on that fully expanded string
+    \regex_match:nVTF
+      { ^(?:http|\./|\.\./).* }    % pattern: start→http OR ./ OR ../    
+      { \l_tmpa_str }
+      { \IfValueTF{#2}{#2}{#3} }   % true branch (optional true‐code)
+      { #3 }                       % false branch
+  }
+
+\ExplSyntaxOff
+
+
+% % Define a function that tests the three prefixes in one regex
+% \cs_new:Npn \check_prefix:nTF #1#2#3 {
+%   \regex_match:nnTF { ^(?:http|\./|\.\.\/) } % <-- match http or ./ or ../ at start
+%     {#1}  % string to match
+%     {#2}  % true branch
+%     {#3}  % false branch
+% }
+
+% % A user‐level wrapper
+% \NewDocumentCommand \ifIsUrl { m m m } {
+%   \check_prefix:nTF { #1 } { #2 } { #3 }
+% }
+
+\ExplSyntaxOff
+
 % Define the \xmref command
 \NewDocumentCommand{\xmref}{O{} m}{%
   \begingroup
-  \def\keyarg{#2}%
-  \def\textarg{#1}%
-  \def\texthttp{\detokenize{https}}%
-  \edef\prefix{\detokenize{\keyarg}}%
+  \edef\textarg{#1}%
+  \edef\keyarg{#2}%
   % Decide what to do based on textarg and prefix
   \if\relax\detokenize{#1}\relax
     % No [tekst] given → \ref{key}
-    \IfBeginWith{\prefix}{\texthttp}{%
-        \url{\keyarg}%
+    \ifIsUrl{\keyarg}{%
+        URL \url{#2}%
       }{%
-        \ref{\keyarg}%
+        REF \ref{#2}%
       }
   \else
-    \IfBeginWith{\prefix}{http}{%
-      \href{\keyarg}{H \textarg}%
+    \ifIsUrl{\keyarg}{%
+      HREF \href{\keyarg}{\textarg}%
     }{%
-      \IfBeginWith{\prefix}{https://}{%
-        \href{\keyarg}{HS \textarg}%
-      }{%
-        \IfBeginWith{\prefix}{./}{%
-          \href{\keyarg}{L \textarg}%
-        }{%
-          \hyperref[\keyarg]{O \textarg}%
-        }%
-      }%
+      HYPR \hyperref[\keyarg]{\textarg}%
     }%
   \fi
   \endgroup

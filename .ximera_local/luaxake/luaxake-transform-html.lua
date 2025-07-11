@@ -485,6 +485,10 @@ local function post_process_html(cmd)
   log:debug("Remove blanks in '\\begin {' if present")
   for _, mjax in ipairs(dom:query_selector(".mathjax-inline, .mathjax-block, .mathjax-env")) do
     local mtext = mjax:get_text()
+    mtext = mtext:gsub("\\label%s*{", "\\label{")
+    mtext = mtext:gsub("\\tag%s*{", "\\tag{")
+    mtext = mtext:gsub("\\xmref%s*{", "\\xmref{")
+    mtext = mtext:gsub("\\xmref%s*[[]", "\\xmref[")
     mtext = mtext:gsub("\\begin%s*{", "\\begin{")
 
     mtext = mtext:gsub("\\end%s*{", "\\end{")
@@ -529,7 +533,7 @@ local function post_process_html(cmd)
             table.insert(result, line)
         end
       end
-      table.insert(result, "\\newcommand{\\xmref}[1]{\\ref{#1}}")  -- add \xmref to the list of newcommands
+      table.insert(result, "\\newcommand{\\xmref}[2][]{\\ref{#2}}")  -- add \xmref to the list of newcommands
       return table.concat(result, "\n")
     end
 
