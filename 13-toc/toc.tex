@@ -1,0 +1,66 @@
+\documentclass[numbers]{xourse}
+
+\author{Bart Snapp}
+
+\title{Basic Table of Contents}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{1}
+
+\begin{document}
+\begin{abstract}
+    This document is an example of a basic table of contents.
+\end{abstract}
+\maketitle
+
+
+
+\activity{basicActivity}
+\activity{basicActivity}
+\activity{basicActivity}
+
+
+
+
+
+
+
+
+
+%% Make a new command for this \xmPartAsChapter
+\newcommand{\xourseChapter}[1]{
+    \ifonlineTF
+        {\part{#1}}    % Online an 'empty' \chapter does not exist ...?
+        {\chapterstyle\def\thechaptertitle{#1}\title{#1}\begin{abstract}\end{abstract}\maketitle}
+}
+
+
+\xourseChapter{Some chapter defined as a part} %% Part needs to be redefined in xmPreamble
+\sectionstyle
+\activity{sectionLevelActivity}
+\activity{sectionLevelActivity}
+\activity{sectionLevelActivity}
+
+\xourseChapter{The next chapter defined as a part}
+\sectionstyle
+\activity{sectionLevelActivity}
+\activity{sectionLevelActivity}
+\activity{sectionLevelActivity}
+
+
+
+
+\chapterstyle
+\activity{chapterLevelActivity}
+\sectionstyle
+\activity{sectionLevelActivity}
+\activity{sectionLevelActivity}
+
+
+\chapterstyle
+\activity{chapterLevelActivity}
+\sectionstyle
+\activity{sectionLevelActivity}
+\activity{sectionLevelActivity}
+
+\end{document}
