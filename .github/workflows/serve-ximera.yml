@@ -49,9 +49,9 @@ jobs:
           GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
           XIMERA_URL: ${{ vars.XIMERA_URL }}
           XIMERA_NAME: ${{ vars.XIMERA_NAME }}*${{ github.ref_name }}
-          XOURSES: "29-a11y-table/Tables_Testing.tex"  # "./testXourses"
-          XM_COMPILE_SEQUENCE: "pdf"
-          # XM_COMPILE_SEQUENCE: "pdf,handout.pdf,html"
+          XOURSES: "29-a11y-table/xourse.tex"  # "./testXourses"
+          # XM_COMPILE_SEQUENCE: "pdf"
+          XM_COMPILE_SEQUENCE: "pdf,handout.pdf,html"
         run: |
           ls -alrt
           chmod +x xmScripts/xmlatex   # Overleaf sync might reset it :-()
