@@ -23,6 +23,11 @@ Pythagoras in a \verb|\begin{equation}| with \verb|\label{eq:pyth}| gives
 \begin{equation}
   a^2 + b^2 = c^2   \label{eq:pyth}
 \end{equation}
+and in \verb|\begin{equation}| with \verb|\label{tag:pyth1}| and with \verb|\tag{Pyth. 1}|:
+\begin{equation}
+  a^2 + b^2 = c^2   \label{tag:pyth1} \tag{Pyth. 1} 
+\end{equation}
+
 and in \verb|\[ ... \]| with \verb|\label{tag:pyth2}| and with \verb|\tag{Pyth. 2}|:
 \[
   a^2 + b^2 = c^2   \label{tag:pyth2} \tag{Pyth. 2}
@@ -31,22 +36,10 @@ and in \verb|\[ ... \]| with \verb|\label{tag_pyth3}| and with \verb|\tag{Pyth. 
 \[
   a^2 + b^2 = c^2   \label{tag_pyth3} \tag{Pyth. 3} 
 \]
-and in \verb|\begin{equation}| with \verb|\label{tag:pyth4}| and with \verb|\tag{Pyth. 4}|:
-\begin{equation}
-  a^2 + b^2 = c^2   \label{tag:pyth4} \tag{Pyth. 4} 
-\end{equation}
-and in \verb|\[ ... \]| with \verb|\label{tag:pyth}| and with NO \verb|\tag|:
-\[
-  a^2 + b^2 = c^2  \label{tag:pyth}
-\]
-and in \verb|\begin{equation}| with \verb|\label{eq:pythE}| and again NO \verb|\tag|:
+and again in \verb|\begin{equation}| with \verb|\label{eq:pythE}| and NO \verb|\tag|:
 \begin{equation}
   a^2 + b^2 = c^2  \label{eq:pythE} 
 \end{equation}
-or just in a \verb|center| environment with a \verb|\hypertarget|
-\begin{center}
- \hfill\qquad $a^2 + b^2 = c^2$  \qquad \hfill  \hypertarget{ht:pyth}{(Pyth. (hypertarget))}
-\end{center}
 
 Consider also this numbered list with \verb|\label{itm:first}| and \verb|\label{itm:second}|:
 \begin{enumerate}
@@ -67,23 +60,44 @@ Command & Result & Command with [text] & Result \\
 \verb| \xmref{itm:first}|          & \xmref{itm:first}   & \verb| \xmref[1st item]{itm:first}|      & \xmref[1st item]{itm:first} \\
 \verb|$\xmref{eq:pyth}$|           &$\xmref{eq:pyth}$    & \verb|$\xmref[1st eq.]{eq:pyth}$|        &$\xmref[1st eq.]{eq:pyth}$ \\
 \verb| \xmref{eq:pyth} |           & \xmref{eq:pyth}     & \verb| \xmref[1st eq.]{eq:pyth}|         & \xmref[1st eq.]{eq:pyth} \\
-\verb| \xmref{tag:pyth2}|          & \xmref{tag:pyth2}   & \verb| \xmref[2nd eq.]{tag:pyth2}|       & \xmref[2nd eq.]{tag:pyth2} \\
-\verb| \xmref{tag_pyth3}|          & \xmref{tag_pyth3}   & \verb| \xmref[3rd eq.]{tag_pyth3}|       & \xmref[3rd eq.]{tag_pyth3} \\
-\verb| \xmref{tag:pyth4}|          & \xmref{tag:pyth4}   & \verb| \xmref[4th eq.]{tag:pyth4}|       & \xmref[4th eq.]{tag:pyth4} \\
-\verb| \xmref{tag:pyth}|           & \xmref{tag:pyth}    & \verb| \xmref[5th eq.]{tag:pyth}|        & \xmref[5th eq.]{tag:pyth} \\
-\verb| \xmref{eq:pythE}|           & \xmref{eq:pythE}    & \verb| \xmref[6th eq.]{eq:pythE}|        & \xmref[6th eq.]{eq:pythE} \\
-\verb| \xmref{ht:pyth}|            & \xmref{ht:pyth}     &                                          &  \\
+\hline
+\verb| \xmref{tag:pyth1}|          & \xmref{tag:pyth1}   & \verb| \xmref[2nd eq.]{tag:pyth1}|       & \xmref[2nd eq.]{tag:pyth1} \\
+\verb|$\xmref{tag:pyth1}$|         &$\xmref{tag:pyth1}$  & \verb|$\xmref[2nd eq.]{tag:pyth1}$|      &$\xmref[2nd eq.]{tag:pyth1}$\\
+\hline
+%\verb| \xmref{tag:pyth2}|          & \xmref{tag:pyth2}   & \verb| \xmref[3rd eq.]{tag:pyth2}|       & \xmref[3rd eq.]{tag:pyth2} \\
+\verb| \xmref{tag_pyth3}|          & \xmref{tag_pyth3}   & \verb| \xmref[4th eq.]{tag_pyth3}|       & \xmref[4th eq.]{tag_pyth3} \\
+\hline
+\verb| \xmref{eq:pythE}|           & \xmref{eq:pythE}    & \verb| \xmref[5th eq.]{eq:pythE}|        & \xmref[5th eq.]{eq:pythE} \\
+\verb|$\xmref{eq:pythE}$|          &$\xmref{eq:pythE}$   & \verb|$\xmref[5th eq.]{eq:pythE}$|       &$\xmref[5th eq.]{eq:pythE}$ \\
+\hline
 %\verb| \xmref{xim_labelsFromOtherActivity}| & \xmref{xim_labelsFromOtherActivity} & \verb|\xmref[a page with back-links]{xim_labelsFromOtherActivity}| & \xmref[a page with back-links]{xim_labelsFromOtherActivity} \\
 \verb| \xmref{https://ximera.org}| & \xmref{https://ximera.org} & \verb| \xmref[Ximera]{https://ximera.org}| & \xmref[Ximera]{https://ximera.org} \\
 \verb| \xmref{./local}|            & \xmref{./local}     & \verb| \xmref[Local]{./local}|           & \xmref[Local]{./local} \\
 \verb| \xmref{../prev}|            & \xmref{../prev}     & \verb| \xmref[Prev]{../prev}|            & \xmref[Prev]{../prev} \\
 \hline
+\end{tabular}
+\end{center}
+
+
+With \verb|\ref| one gets 
+
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+Command & Result & Command with [text] & Result \\
+\hline
 \verb|$\ref{eq:pyth}$|             &$\ref{eq:pyth}$     \\
 \verb| \ref{eq:pyth} |             & \ref{eq:pyth}      \\
+\hline
+\verb|$\ref{tag:pyth1}$|           &$\ref{tag:pyth1}$     \\
+\verb| \ref{tag:pyth1} |           & \ref{tag:pyth1}      \\
+\hline
 \verb|$\ref{tag:pyth2}$|           &$\ref{tag:pyth2}$     \\
 \verb| \ref{tag:pyth2} |           & \ref{tag:pyth2}      \\
+\hline
 \verb|$\ref{tag_pyth3}$|           &$\ref{tag_pyth3}$     \\
 \verb| \ref{tag_pyth3} |           & \ref{tag_pyth3}      \\
+\hline
 \end{tabular}
 \end{center}
 
@@ -109,9 +123,9 @@ Note that this does not make a lot of sense online.
 
 We refer to item~\ref{itm:first} in the list above.
 
-You can find these same links from another activity with \verb|\hyperlink|, see \hyperlink{xim_labelsFromOtherActivity}{the labels test activity}.
+You can find these same links from another activity with \verb|\hyperlink|, see \hyperlink{xim:labelsFromOtherActivity}{the labels test activity}.
 
-You can find these same links from another activity with \verb|\hyperlink|, see \hyperref[xim_labelsFromOtherActivity]{the labels test activity}.
+You can find these same links from another activity with \verb|\hyperref|, see \hyperref[xim:labelsFromOtherActivity]{the labels test activity}.
 
 \section{Figures and Tables}
 

@@ -1,0 +1,201 @@
+\documentclass[landscape]{ximera}
+
+% \numberedProblemstrue
+
+\title{Labels and refs (Advanced features)}
+
+\begin{document}
+\begin{abstract}
+\end{abstract}
+\maketitle
+\label{xim:labelsAdvanced}
+
+% {{\Huge \bfseries Last Updated: \today}} \\
+
+%\section{Basic Demo}
+
+\section{Basic Example}
+\label{ADVsec:basic example}
+See \autoref{ADVsec:xmref} for links to objects in this section.
+
+
+Pythagoras in a \verb|\begin{equation}| with \verb|\label{ADVeq:pyth}| gives
+\begin{equation}
+  a^2 + b^2 = c^2   \label{ADVeq:pyth}
+\end{equation}
+and in \verb|\[ ... \]| with \verb|\label{ADVtag:pyth2}| and with \verb|\tag{Pyth. 2}|:
+\[
+  a^2 + b^2 = c^2   \label{ADVtag:pyth2} \tag{Pyth. 2}
+\]
+and in \verb|\[ ... \]| with \verb|\label{ADVtag_pyth3}| and with \verb|\tag{Pyth. 3}|:
+\[
+  a^2 + b^2 = c^2   \label{ADVtag_pyth3} \tag{Pyth. 3} 
+\]
+and in \verb|\begin{equation}| with \verb|\label{ADVtag:pyth4}| and with \verb|\tag{Pyth. 4}|:
+\begin{equation}
+  a^2 + b^2 = c^2   \label{ADVtag:pyth4} \tag{Pyth. 4} 
+\end{equation}
+and in \verb|\[ ... \]| with \verb|\label{ADVtag:pyth}| and with NO \verb|\tag|:
+\[
+  a^2 + b^2 = c^2  \label{ADVtag:pyth}
+\]
+and in \verb|\begin{equation}| with \verb|\label{ADVeq:pythE}| and again NO \verb|\tag|:
+\begin{equation}
+  a^2 + b^2 = c^2  \label{ADVeq:pythE} 
+\end{equation}
+or just in a \verb|center| environment with a \verb|\hypertarget|
+\begin{center}
+ \hfill\qquad $a^2 + b^2 = c^2$  \qquad \hfill  \hypertarget{ht:pyth}{(Pyth. (hypertarget))}
+\end{center}
+
+Consider also this numbered list with \verb|\label{ADVitm:first}| and \verb|\label{ADVitm:second}|:
+\begin{enumerate}
+  \item First item \label{ADVitm:first}
+  \item Second item \label{ADVitm:second}
+\end{enumerate}
+
+\section{List with xmref}
+\label{ADVsec:xmref}
+
+In \autoref{ADVsec:basic example} following labels were defined:
+to which we can refer with \verb|\xmref|:
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+Command & Result & Command with [text] & Result \\
+\hline
+\verb| \xmref{ADVitm:first}|          & \xmref{ADVitm:first}   & \verb| \xmref[1st item]{itm:first}|      & \xmref[1st item]{itm:first} \\
+\verb|$\xmref{ADVeq:pyth}$|           &$\xmref{ADVeq:pyth}$    & \verb|$\xmref[1st eq.]{eq:pyth}$|        &$\xmref[1st eq.]{eq:pyth}$ \\
+\verb| \xmref{ADVeq:pyth} |           & \xmref{ADVeq:pyth}     & \verb| \xmref[1st eq.]{eq:pyth}|         & \xmref[1st eq.]{eq:pyth} \\
+\verb| \xmref{ADVtag:pyth2}|          & \xmref{ADVtag:pyth2}   & \verb| \xmref[2nd eq.]{tag:pyth2}|       & \xmref[2nd eq.]{tag:pyth2} \\
+\verb| \xmref{ADVtag_pyth3}|          & \xmref{ADVtag_pyth3}   & \verb| \xmref[3rd eq.]{tag_pyth3}|       & \xmref[3rd eq.]{tag_pyth3} \\
+\verb| \xmref{ADVtag:pyth4}|          & \xmref{ADVtag:pyth4}   & \verb| \xmref[4th eq.]{tag:pyth4}|       & \xmref[4th eq.]{tag:pyth4} \\
+\verb| \xmref{ADVtag:pyth}|           & \xmref{ADVtag:pyth}    & \verb| \xmref[5th eq.]{tag:pyth}|        & \xmref[5th eq.]{tag:pyth} \\
+\verb| \xmref{ADVeq:pythE}|           & \xmref{ADVeq:pythE}    & \verb| \xmref[6th eq.]{eq:pythE}|        & \xmref[6th eq.]{eq:pythE} \\
+\verb| \xmref{ADVht:pyth}|            & \xmref{ADVht:pyth}     &                                          &  \\
+%\verb| \xmref{ADVxim_labelsFromOtherActivity}| & \xmref{ADVxim_labelsFromOtherActivity} & \verb|\xmref[a page with back-links]{xim_labelsFromOtherActivity}| & \xmref[a page with back-links]{xim_labelsFromOtherActivity} \\
+\verb| \xmref{ADVhttps://ximera.org}| & \xmref{ADVhttps://ximera.org} & \verb| \xmref[Ximera]{https://ximera.org}| & \xmref[Ximera]{https://ximera.org} \\
+\verb| \xmref{ADV./local}|            & \xmref{ADV./local}     & \verb| \xmref[Local]{./local}|           & \xmref[Local]{./local} \\
+\verb| \xmref{ADV../prev}|            & \xmref{ADV../prev}     & \verb| \xmref[Prev]{../prev}|            & \xmref[Prev]{../prev} \\
+\hline
+\verb|$\ref{ADVeq:pyth}$|             &$\ref{ADVeq:pyth}$     \\
+\verb| \ref{ADVeq:pyth} |             & \ref{ADVeq:pyth}      \\
+\verb|$\ref{ADVtag:pyth2}$|           &$\ref{ADVtag:pyth2}$     \\
+\verb| \ref{ADVtag:pyth2} |           & \ref{ADVtag:pyth2}      \\
+\verb|$\ref{ADVtag_pyth3}$|           &$\ref{ADVtag_pyth3}$     \\
+\verb| \ref{ADVtag_pyth3} |           & \ref{ADVtag_pyth3}      \\
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+  \item the first item in the list above, thus \xmref{ADVitm_first}, 
+        or with custom text \xmref[first first]{itm_first},
+%   \item the second item in the list above, thus \xmref{ADVitm_second},
+%   \item the first equation, thus \xmref{ADVeq_pythagoras}, or with custom text \xmref[eq_pythagoras]{first equation},
+%   \item the second equation, thus \xmref{ADVeq_tag_pythagoras}, or with custom text \xmref[eq_tag_pythagoras]{second equation},
+%   \item the third equation, thus \xmref{ADVht_pythagoras}.
+%   \item a remote ximera page \xmref{ADVxim_labelsFromOtherActivity}.
+%   \item a remote ximera page with a label \xmref[a page with back-links]{xim_labelsFromOtherActivity}.
+%   \item a url \xmref{ADVhttps://ximera.org}.
+  \item a url with a text \xmref[Ximera.org]{https://ximera.org}.
+\end{itemize}.
+
+
+Note that in HTML \verb|\ref| and \verb|\eqref| without mathmode might jump to BELOW Equation~\ref{ADVeq:pyth} or \eqref{ADVeq:pyth}, and
+\verb|\ref| might need a \verb|\text| to get $\text{\ref{ADVeq:pyth}}$ and avoid $\ref{ADVeq:pyth}$.
+
+The first equation appears on page~\pageref{ADVeq:pyth}, the second on page~\pageref{ADVtag:pyth2}. 
+Note that this does not make a lot of sense online.
+
+We refer to item~\ref{ADVitm:first} in the list above.
+
+You can find these same links from another activity with \verb|\hyperlink|, see \hyperlink{xim:labelsFromOtherActivity}{the labels test activity}.
+
+You can find these same links from another activity with \verb|\hyperref|, see \hyperref[xim:labelsFromOtherActivity]{the labels test activity}.
+
+\section{Figures and Tables}
+
+\subsection{A Demo Figure}
+\label{ADVsec:fig}
+
+\begin{image}[0.3\textwidth]
+  \centering
+  \includegraphics[width=0.3\textwidth]{missionPatch.jpg} % Adjust the path to your image file
+\end{image}
+  \captionof{figure}{A demo image}
+  \label{ADVfig:demo}
+
+\subsection{A Demo Table}
+
+{
+  \centering
+  \begin{tabular}{|c|c|}
+    \hline
+    A & B \\
+    \hline
+    1 & 2 \\
+    \hline
+  \end{tabular}
+  \captionof{table}{An example table}
+  \label{ADVtab:example}
+}
+
+ \begin{theorem} \label{ADVthm:1}
+  
+  This is a theorem that refers to Equation~$\eqref{ADVeq:pyth}$ and Figure~\ref{ADVfig:demo}.
+
+  
+ \end{theorem}
+
+\begin{example} \label{ADVex:1}
+ First example  
+
+ This example refers to Example~\ref{ADVex:2} and Example~\ref{ADVex:3}.
+
+\end{example}
+\begin{example} \label{ADVex:2}
+ Second example  
+
+  This example refers to Example~\ref{ADVex:1} and Example~\ref{ADVex:3}.
+\end{example}
+\begin{example} \label{ADVex:3}
+ Third example  
+
+  This example refers to Example~\ref{ADVex:1} and Example~\ref{ADVex:2}.
+\end{example}
+
+
+\section{Custom Text Reference}
+
+This document started in Section~\ref{ADVsec:intro} and discussed math in Section~\nameref{sec:math}.
+
+
+\begin{remark}
+
+    \begin{itemize}
+        \item  Links should be GLOBALLY unique, so do not use the same label in different activities.
+        \item  In a PDF links behave differently depending on whether the target is in the PDF or not. 
+            Test carefully and thoroughly.
+    \end{itemize}
+\end{remark}
+
+
+\section{Start of Test/Demo Area}
+
+\begin{equation}
+a^2 + b^2 = c^2    \label{ADVeq:pyth2}
+\end{equation}
+
+Facemus paginam abbastanzam longam, so that we can test the scrolling to the refs.
+
+\lipsum[1]
+
+\lipsum[2]
+
+\lipsum[3]
+
+\lipsum[4]
+
+\hrulefill
+
+\end{document}
