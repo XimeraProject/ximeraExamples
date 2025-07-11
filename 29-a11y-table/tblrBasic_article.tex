@@ -1,0 +1,92 @@
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{tabularray}
+\UseTblrLibrary{booktabs} % Optional, for \toprule etc.
+
+\title{Tables: tblr (with 'article')}
+
+\begin{document}
+
+\maketitle
+
+\section{Basic Usage}
+
+\subsection{A simple table with colspec lcr, textwidth: }
+
+\begin{center}
+\begin{tblr}{
+  colspec = {lcr},
+  rowhead=1,
+}
+%\toprule    %% THIS CAUSES COMPILATION TO HANG
+%\hline      %% THIS CAUSES COMPILATION TO HANG 
+Left aligned & Centered & Right aligned \\
+% \midrule
+Some text & More text & Final text \\
+Math $x^2$ & \textbf{Bold text} & \textit{Italic text} \\
+%\bottomrule
+\end{tblr}
+\end{center}
+
+\subsection{Another table: }
+
+\begin{center}
+\begin{tblr}{
+  width=\linewidth,
+  rowhead=1,
+  colspec = {
+    X[t,l,wd=3cm]     % max 3.cm
+    Q[t,c]            % fixed
+    X[t,r,wd=3cm]     % max 3cm
+    X[t,l]            % stretchable
+  },
+  row{1} = {font=\bfseries},
+  column{2} = {font=\itshape},  % Italic text in 2nd column
+  rowsep = 6pt,
+%   hlines, %% THIS CAUSES COMPILATION TO HANG
+%   vlines, %% THIS CAUSES COMPILATION TO HANG
+}
+Top aligned, left aligned        & Top aligned, centered (italic)   & Top aligned, right aligned & Top-left regular \\
+\SetCell[r=2]{t,l}Multirow: top-left aligned & \SetCell[r=2]{t,c}Multirow: top-centered (italic) & \SetCell[c=2]{t,l}Multicolumn: top-left aligned over 2 cols & \\
+Bottom aligned, left aligned     & Center aligned (italic)          & Right aligned               & Bottom-left regular \\
+\end{tblr}
+\end{center}
+
+\subsection{One more table:} 
+
+\begin{center}
+\begin{tblr}{
+  colspec = {Q[l] Q[c] Q[r] Q[l]}, % Q = flexible column, with alignment
+  rowhead = 1,
+  row{1} = {font=\bfseries},       % make header bold
+  column{2} = {font=\itshape},     % italicize second column
+  column{3} = {halign=center},     % center-align 3rd column
+  rowsep = 4pt,
+%   hlines,
+%   vlines,
+}
+Name       & Role           & Age & Remarks \\
+Alice      & Developer      & 30  & Works remotely \\
+Bob        & Designer       & 27  & \SetCell[r=2]{c}On leave \\
+Charlie    & \SetCell[c=2]{l}Intern (UI + UX) &     & \\
+Diana      & Project Manager & 34 & Full time \\
+\end{tblr}
+\end{center}
+
+\subsection{A simple table with colspec X:} 
+
+\begin{tblr}{
+  colspec = {X[l]X[c]X[r]},
+%  rowhead=1,
+%  width = \textwidth
+}
+%\toprule    %% THIS CAUSES COMPILATION TO HANG
+%\hline      %% THIS CAUSES COMPILATION TO HANG 
+Left aligned & Centered & Right aligned \\
+% \midrule
+Some text & More text & Final text \\
+%\bottomrule
+\end{tblr}
+
+
+\end{document}

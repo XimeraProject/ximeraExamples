@@ -1,0 +1,21 @@
+\documentclass{xourse}
+\UseTblrLibrary{booktabs} % Optional, for \toprule etc.
+
+\title{Test: Tables}
+
+\begin{document}
+\maketitle
+
+\activity{./tabularBasic}
+\begin{onlineOnly}
+    \activity{./tabularBasic_article}
+\end{onlineOnly}
+% \begin{onlineOnly}
+%     \activity{../table/tableBase_css}     %% DOES NOT WORK: only xourse-level .css files
+% \end{onlineOnly}
+\activity{./tblrBasic}
+\ifonline
+    \activity{./tblrBasic_article}
+\fi
+
+\end{document}

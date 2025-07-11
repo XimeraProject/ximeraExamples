@@ -1,0 +1,58 @@
+\documentclass{ximera}
+\title{Tabular and array}
+
+\begin{document}
+\begin{abstract}
+\end{abstract}
+\maketitle
+
+\section{Basic Usage}
+
+
+        With \verb|tabular| (and \verb|center|):
+        \begin{center}
+            \begin{tabular}{lr}
+                x & 1 \\
+                y & 2 \\
+                z & 1
+            \end{tabular}
+        \end{center}
+        
+        With \verb|tabular and @{} | (and \verb|center|):
+        \begin{center}
+            \begin{tabular}{@{}l@{ }r@{.}}
+             x & 1 \\
+             y & 2 \\
+             z & 1
+            \end{tabular}
+            \end{center}
+
+    With \verb|tabular and p{} | (and \verb|center|):
+        \begin{center}
+            \begin{tabular}{|p{1cm}|p{2cm}|p{3cm}|}
+             x & 1 & 2\\
+             y & 2 & 3\\
+             z & 1 & 4
+            \end{tabular}
+        \end{center}
+
+    With \verb|array|:
+        $$
+        \begin{array}{l|r}
+         x & 1 \\
+         \hline
+         y & 2 \\
+         z & 1
+        \end{array}
+        $$
+    With \verb|array and @{} and p{}|:
+        $$
+        \begin{array}{@{X }l@{|}p{2cm}|}
+         x & 1 \\
+         \hline
+         y & 2 \\
+         z & 1
+        \end{array}
+        $$
+        
+    \end{document}
