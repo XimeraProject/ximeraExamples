@@ -1,0 +1,64 @@
+\documentclass{ximera}
+
+\usepackage{tabularray}
+%% must load tabularray first 
+\usepackage{TailorSwiftBotPublic}
+
+\usepackage{xcolor}
+
+\begin{document}
+
+Here is a table with two headers:
+
+\begin{center}
+\begin{tblr}{
+  colspec = {Q[l]Q[c]Q[c]}, 
+  rowhead=1, 
+  xmcolhead=1
+}
+%\toprule    %% THIS CAUSES COMPILATION TO HANG
+%\hline      %% THIS CAUSES COMPILATION TO HANG
+ & Grammy Wins & Grammy Nominations \\
+% \midrule
+Fearless & 4 & 8 \\
+1989 & 3 & 7 \\
+%\bottomrule
+\end{tblr}
+\end{center}
+
+Here is a table with only a row header:
+\begin{center}
+\begin{tblr}{
+  colspec = {Q[l]Q[l]Q[l]}, 
+  rowhead=1, 
+}
+%\toprule    %% THIS CAUSES COMPILATION TO HANG
+%\hline      %% THIS CAUSES COMPILATION TO HANG
+ Album & Release Date & Lead Single \\
+% \midrule
+Midnights & October 21, 2022   & Anti--Hero \\
+The Tortured Poets Department & April 19, 2024 & Fortnight \\
+%\bottomrule
+\end{tblr}
+\end{center}
+
+Here is a table with only a column header:
+
+\begin{center}
+\begin{tblr}{
+  colspec = {Q[l]Q[l]Q[l]}, 
+  xmcolhead=1, 
+}
+%\toprule    %% THIS CAUSES COMPILATION TO HANG
+%\hline      %% THIS CAUSES COMPILATION TO HANG
+ Album & 1989 & Folklore \\
+% \midrule
+Release Date & October 27, 2014   & Anti--Hero \\
+Lead Single & July 24, 2020 & Cardigan \\
+%\bottomrule
+\end{tblr}
+\end{center}
+
+\end{document}
+
+

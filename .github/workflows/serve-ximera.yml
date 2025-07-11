@@ -49,13 +49,13 @@ jobs:
           GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
           XIMERA_URL: ${{ vars.XIMERA_URL }}
           XIMERA_NAME: ${{ vars.XIMERA_NAME }}*${{ github.ref_name }}
-          XOURSES: "."  # "./testXourses"
-          XM_COMPILE_SEQUENCE: "pdf,handout.pdf,html"
+          XOURSES: "29-a11y-table/Tables_Testing.tex"  # "./testXourses"
+          XM_COMPILE_SEQUENCE: "pdf"
+          # XM_COMPILE_SEQUENCE: "pdf,handout.pdf,html"
         run: |
           ls -alrt
           chmod +x xmScripts/xmlatex   # Overleaf sync might reset it :-()
-          # ./xmScripts/xmlatex veryclean testXourses.TODO   # TO BE REMOVED
-          ./xmScripts/xmlatex ghaction -j 8 $XOURSES
+          ./xmScripts/xmlatex ghaction -j 6 --compile pdf $XOURSES
           echo "✅ Published to $XIMERA_URL$XIMERA_NAME " >> $GITHUB_STEP_SUMMARY
 
       - name: Setup ximera serve cache (only .git)
@@ -93,7 +93,7 @@ jobs:
           XIMERA_NAME: ${{ vars.XIMERA_NAME }}
         run: |
           ./xmScripts/xmlatex name         
-          ./xmScripts/xmlatex serve -f
+          ./xmScripts/xmlatex serve -f 
           echo "✅ Published to $XIMERA_URL$XIMERA_NAME " >> $GITHUB_STEP_SUMMARY
       - name: Serve to ximera.osu.edu
         env:

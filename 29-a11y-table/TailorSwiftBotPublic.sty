@@ -1,0 +1,42 @@
+%%% % -*- coding: utf-8 -*-
+%%% ----------------------------------------------------------------------------
+%%% Caption     : Make your math WCAG2.1AA compliant
+%%% Author      : Jeffrey Kuan <jkuan@tailorswiftbots.com>
+%%% Collaborator: 
+%%% CTAN Page   : 
+%%% Repository  : 
+%%% License     : 
+%%% ----------------------------------------------------------------------------
+
+%%% --------------------------------------------------------
+%%> \section{}
+%%% --------------------------------------------------------
+
+%% \DeclareRelease and \DeclareCurrentRelease are added in LaTeX 2018-04-01
+\NeedsTeXFormat{LaTeX2e}[2018-04-01]
+\providecommand\DeclareRelease[3]{}
+\providecommand\DeclareCurrentRelease[2]{}
+%\DeclareRelease{}{}{}
+\DeclareCurrentRelease{}{2025-07-10}
+
+\ProvidesExplPackage{TailorSwiftBotPublic}{2025-07-10}{2025}
+  {Make your math WCAG2.1AA compliant}
+
+\__tblr_keys_define:nn { table/inner }
+  {
+    xmcolhead .code:n = \__tblr_keys_gput:nn { xmcolhead } {#1},
+  }
+
+\int_new:N \lTblrColHeadInt
+
+\cs_new_protected:Npn \__tblr_build_col_head_foot:
+  {
+    %% \lTblrColHeadInt can not be empty, so we append '+ 0'.
+    \int_set:Nn \lTblrColHeadInt
+      { \__tblr_prop_item:ne { inner } { xmcolhead } + 0 }
+    \int_compare:nNnTF { \lTblrColHeadInt } > { 0 }
+      {
+        \__tblr_build_one_table:nnNN {1} { \lTblrColHeadInt }
+          \c_true_bool \c_true_bool
+      }
+  }
