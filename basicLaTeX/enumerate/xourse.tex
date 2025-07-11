@@ -1,0 +1,20 @@
+\documentclass{xourse}
+
+\title{Tests: enumerate/itemize}
+
+
+\begin{document}
+\maketitle
+
+\activity{./enumerate}
+
+% HACK: this input only works 'by accident', ie because there was none before
+%  Moreover, the ximera.cfg in test_cfg is NOT used
+% THUS: consult the individual PDF of the activity !!!
+\pdfOnly{
+    \input{test_cfg/enumerate_preamble.tex}
+}
+
+\activity{./test_cfg/enumerate}
+
+\end{document}
