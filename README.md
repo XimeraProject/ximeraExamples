@@ -3,42 +3,75 @@ It also contains minimal examples and syntax for the Ximera commands, environmen
 However, for a much in-depth treatment of Ximera commands, environments, etc you should
 refer to the Ximera manual, which explains things in more detail and in a more user friendly way.
 
+## Vocabulary:
+**In this repo we use the following terminology**
+1) ``elements`` refers to LaTeX commands, environments, macros, etc that are defined in a specific dtx file.
+    e.g. the ``problem``, ``question``, ``exploration``, and ``exercise`` are all environments
+    defined in the problem.dtx file. These would collectively be called ``elements of problem.dtx``.
+2) ``touched`` refers to commands, environments, macros, etc that are: defined, redefined, or otherwise
+    changed in a specific dtx file. For example, the command outcomes dtx file has a number of styling
+    commands and hooks that are likely to be used in other dtx files for default styling. Wherever these
+    commands/hooks are (re)defined in the dtx content other than the outcomes.dtx, we would say that
+    the outcome commands are ``touched`` by that dtx file (e.g. in options due to class options).
+
 # General Structure and Intent of this Repo
 
-* **This Repo (will eventually be) structured as follows...**
+## Quick Structure Outline
 
-- depreciated (for content that is being removed in a future release, see README in folder)
-    - (DTXFileName)Test.tex files (e.g. problemTest.tex)
-- testFiles
-    -compositeTestFiles (for tests of interactions between different dtx file contents, see README in folder.)
-        -subfolder named to explain composite testing case.
-    -dtxTestFiles (for individual dtx file testbeds, see README in folder.)
-        - (Command/Env) folder; a folder for each testable command/enviroment/etc. (e.g. ''problem'' folder)
-            - base.tex file (basic usage implementation/info)
-            - (Additional Testing Feature).tex (e.g. nesting.tex or numbering.tex in the problem folder)
-- testXourses (xourse files to lode relevant test files, see README in folder)
-    - compositeTestXourses (xourses for testing interactions between different dtx files)
-    - dtxTestXourses (xourses for testing individual dtx file contents)
-        - (dtxFileName)Test.tex is the xourse that tests (dtxFileName) dtx file.
-        - Includes hard coded non-tested content so it is easy to verify all non-depreciated dtx has been parsed.
+- .devcontainer folder (For development - if you don't know what this does, then don't touch this).
+    - ``docker-compose.yml`` (Contains the images for ximeraLatex and local server version choices).
+- .github, .vscode, and xmScripts folders (To make codespaces work as intended, don't touch these).
+- compositeTests (for tests of interactions between different dtx file contents, see README in folder.)
+    - (composite Test) Folder (folder named for composite testing case).
+        - ``(composite Test)Xourse.tex`` (xourse for the composite test - may also load tests from dtxTests folder).
+        - ``variousdtxTests.tex`` (test files for the composite test - should be named for the individual elements of test when possible e.g. ``refToProblemLabel.tex`` and/or ``refToTheoremLabel.tex``)
+- dtxTests
+    - Depreciated (for content that is being removed in a future release, see README in folder)
+    - Hardcoded (for content that is not testable, like macros. Included so we can easily verify all dtx files are accounted for.)
+    - (DTXFileName) Folder
+        - ``(DTXFileName).tex file`` (e.g. problem.tex) which contains the most basic tests for the dtx file content.
+        - ``(Additional Testing Feature).tex`` (e.g. ``nesting.tex`` or ``numbering.tex`` in the "problem folder").
+        - ``(dtxFileName)Test.tex`` is the xourse that tests (dtxFileName) dtx file.
+- savedArchive (Contains old test files/content not in current use).
+    - Templates (Contains templates for adding new files).
+- xmPictures
+- xmScripts (For development - if you don't know what this does, then don't touch this).
+    - config.txt (For changing target url, name, port, etc. For development/testing).
+- global.css (The css code loaded in addition to the server base css).
 
-* **testFiles Folder at a glance**
-The testFiles folder is the folder that contains all the actual test ximera document class files
-that are loaded and used for demo/testing. There are two subfolders in this folder.
-1) The dtxTestFiles are the files that test individual dtx files to verify the integrity of all
-the elements within that specific dtx file.
-2) The compositeTestFiles subfolder is for files that test the integrity of elements that span
-and/or interact between different dtx files.
+## Important Folders At A Glance
 
-* **testXourses Folder at a glance**
-The testXourses is the location of all the xourse files. There are two subfolders;
-1) The first subfolder is the dtxTestXourses subfolder. It is a subfolder for xourses that are
-tests for each of the dtx files, these xourses should load all the relevant test files to verify
-the functionality of all the elements that are touched by that dtx file.
-2) The other subfolder is the compositeTestXourses folder, which are xourses that load all the relevant 
-tests to verify the integrity of how elements in different dtx files interact with each other. These
-should load each of the relevant test files in the corresponding compositeTestFiles subfolder
-of the testFiles folder.
+### dtxTests Folder
+The dtxTests folder contains a subfolder for every dtx file in the ximera package 
+(some may be inside the Hardcoded or Depreciated subfolders)
+Each subfolder contains a tex file with the same name as the dtx folder.
+This is the basic test for all of the default uses of the elements, so
+``problem.tex`` contains all the basic use cases that are tested for the problem environment.
+and it should be located inside the "problem" subfolder of the dtxTest folder.
+
+Any other tex files inside a subfolder of the dtxTests folder are tests for
+additional use cases for elements being tested. Most commonly this would be tests
+of things like optional arguments, nesting (environments, mathmode, etc), and/or different types of
+input inside the tested element.
+
+Finally, each subfolder should have a tex file named after the dtx file being tested, appended
+with ``Xourse``, e.g. the problem subfolder would have a file named ``problemXourse.tex`` which
+is the xourse documentclass file that loads all the relevant test files for that dtx file.
+
+### compositeTests Folder at a glance
+The compositeTests folder contains files and xourses that tests to verify how elements 
+in different dtx files interact with each other. 
+Each composite test set should be in a subfolder of the compiteTests folder, where that
+subfolder has a name that reflects the nature of what the composite test is testing,
+e.g. a composite test for how sagemath commands interacts with various environments could be named
+something like ``sageInteraction`` or ``sageInEnvironments``. 
+Files in a given composite subfolder should also be named to reflect the specific test, e.g.
+for the sageInteraction example could have files like ``sageInProblemEnv`` and/or
+``sageInTheoremEnv`` files that are testing those specific interactions. 
+
+Also in each compositeTest subfolder, there should be a file named after the folder itself
+appended with ``Xourse`` which is the xourse file for that composite test, e.g. for our
+previous example there should be a file called ``sageInteractionXourse.tex``.
 
 <!-- 
 * **testGroupings Folder at a glance**
@@ -52,63 +85,66 @@ that might need testing (e.g. ''student interactions'', ''page credit generating
 
 * **Important Note About Test Groupings**
 To ensure all tests stay up to date in the relevant testGroupings (and to avoid version mismatch and general confusion)
-the files inside the testGroups should only be xourses that load the test files from the testFiles folder, not new
+the files inside the testGroups should only be xourses that load the test files from the dtxTests folder, not new
 test files. To submit a new test file, see the section on ``Creating a New Test File``. -->
 
 
 # Naming Schemes
 
-* **Each test xourse in the testXourses/dtxTestXourses is named after a dtx file.**
+## Each test xourse is named after a dtx file.
 Since all development work must be implemented via dtx file (as per CTAN standards) and most development work
 tends to involve only a few dtx files (usually just one or two), it is often easiest to test the new code by testing
 everything that is implemented by the newly changed dtx code. This testing bed makes that easy to accomplish by merely
-pulling up the relevant dtxTestXourse(s) and loading thetest bed xourse(s) that correspond to your changed dtx file.
-These in turn load all the relevant testFiles that correspond to the individual elements implemented by that dtx file
-i.e. each command/environment (or reasonably obvious groupings, like all ``\newtheorem`` generated environments are
-in the same place) has its own testing tile, making it relatively easy to investigate updated content, even inside a given dtx.
-Thus **Each dtxTestXourse should be named  (dtxFileName)Test.tex** e.g. ''abstractTest.tex'' for the ''abstract.dtx'' file.
+pulling up the relevant dtxTestXourse(s) and loading the test bed xourse(s) that correspond to your changed dtx file.
+These in turn load all the relevant test files that correspond to the individual elements implemented by that dtx file.
 
-* **Each tested command/env/etc has a file in the relevant (subfolder) of the dtxTestFiles Folder**
-Each command/environment/etc (referred to as ``element``) that is implemented in a dtx should have its own testFile 
-in that dtxTestFiles subfolder, named after the relevant element. This should demo/test the most basic form of the 
-element.
-However, often there are a number of options, or other elements for whatever is being tested that also need a demo/test.
+## Each tested element has a file in the relevant (subfolder) of the dtxTests Folder
+Each element that is implemented in a dtx should have its own test file in that dtxTests subfolder, 
+named after the relevant element. This should test the most basic form of the element.
+
+However, often there are a number of options, or other elements for whatever is being tested that also need a test.
 We don't want to have a single test file that contains all the various complexities of these things,
-as it becomes difficult to see what aspect ended up generating issues (if there are issues from testing).
-Thus test files should have the ''base.tex'' file that is the minimal implementation of the tested item, and then various
-other files that demo/test the other relevant aspects, each named after whatever it tests (e.g. ''numbering'' or ''nesting''
-for demo/testing the numbering scheme and nesting behavior inside the problem subfolder in the testFiles folder.).
+as it becomes difficult to see what aspect ended up generating issues (if/when there are issues from testing).
+Thus test files should have a basic use test file that is the minimal implementation of the tested item, 
+(named for the element, e.g. ''problem.tex'' would be the name for the basic test for the problem environment).
 
-* **When Preambles are Necessary**
+For relevant options, combinations, or other necessary testing conditions, various other files should be included
+in the subfolder that test these other relevant aspects, each named after whatever it tests (e.g. ''numbering'' or 
+''nesting'' for testing the numbering scheme and nesting behavior inside the problem subfolder in the dtxTests folder
+respectively).
+
+## When Preambles are Necessary
 Some specific test files/xourses need to load specific options or alternative files as part of their
 testing (e.g. the graphics testing file needs to input graphics, and set graphics paths in the preamble). When this is
 necessary, **do note use the xmpreamble** for the test repo - instead you should make a preamble with the relevant test
-file (or xourse as appropriate) name, appended with ''preamble'' - e.g. ''imagePreamble.tex'' is the preamble file
+file (or xourse as appropriate) name, appended with ''Preamble'' - e.g. ''imagePreamble.tex'' is the preamble file
 for the image.tex test file.
 Similarly, some specific elements have (intended) different behavior depending on server source (e.g. UF, OSU, KL, etc).
 In this case, you should add another test file with the intended behavior specific to the server source, and append the
 server name/code to the test file. For example, if OSU has intended behavior that differs from ximera base for hints,
-then there should be a ''hintsOSU'' or possibly a ''hintsBaseOSU'' as appropriate.
+then there should be a ''hintsOSU.tex'' with tests for these differences along with documentation of expected behavior.
 
-* **Example of Intended Naming Scheme:** 
+## Example of Intended Naming Scheme
 To demonstrate the intended naming scheme, consider the problem-like environments. The thing being tested is the ''problem''
-environment, so all tests go into a ''problem'' folder inside the testFiles folder. We need the base case that
-demo/tests the very bare implementation of the problem like environments - but it also requires a test for how problem
-numbering is handled, and a test for how nesting problems is handled. Thus there should be three test files inside the problem
-subfolder of the testFiles folder; problemBase.tex, problemNesting.tex, and problemNumbering.tex. 
-each is a ximera documentclass that is demoing/testing the basic implementation, nesting behavior, 
-and numbering scheme respectivvely. These are in turn loaded by the
-''problemTest.tex'' file, which is the xourse documentclass that loads the content generated in the problem.dtx file.
-So just the ''problem'' related files would be in the structure as follows:
-- testXourses
-    - problemTest.tex
-- testFiles
+environment, so all tests go into a ''problem'' folder inside the dtxTests folder. We need the base case that
+tests the very bare implementation of the problem like environments - but it also requires a test for how problem
+numbering is handled, and a test for how nesting problems is handled. Thus there should be (at least) three test files 
+inside the problem subfolder of the dtxTests folder: ``problem.tex``, ``nesting.tex``, and ``numbering.tex``.
+each is a ximera documentclass that is testing the basic implementation, nesting behavior, and numbering scheme respectively.
+These are in turn loaded by the ``problemTest.tex`` file, which is the xourse documentclass file that loads the test files for
+everything generated in the problem.dtx file.
+
+So just the ``problem` related files would be in the structure as follows:
+- dtxTests
     - problem
         - base.tex file (basic usage implementation/info)
-        - nesting.tex (demo/test for nesting behavior)
-        - numbering.tex (demo/test for numbering scheme)
+        - nesting.tex (test for nesting behavior)
+        - numbering.tex (test for numbering scheme)
+        - problemTest.tex (xourse file that loads the above files for testing)
 
 # Creating a New Test File
+[Wim had a good idea for this, but I don't remember the details well enough - will ask him to edit this part.]
+<!--
 If you have determined a meaningful test case that has no appropriate test file, you can do the following;
 1) You should post the issue on the github issues tab of the example repo (**NOT** the ximeraLatex repo!) with
 a detailed explanation of what you need to test - make sure to highlight exactly the things that need to be
@@ -130,6 +166,7 @@ allow another developer to quickly and easily review the file for submission and
     the master test repo *must* be the one to close the github issue. This will help with quickly referencing
     who did what if there are any issues later on or if someone needs to verify something (helps minimize
     digging through the commit history).
+-->
 
 # Non-Testable dtx Files Explained
 
@@ -137,11 +174,10 @@ Each dtx file should have its own test xourse that loads the relevant test files
 of dtx files and their content, there are currently many dtx files that do not contain any testable commands or environments
 (for example, the banner.dtx file is just the ascii definition of the banner that displays in the console on page load).
 Nonetheless it is important to know that a given dtx file has been parsed and any necessary content have relevant test files.
-So we still make test files for non-testable dtx files (e.g. BannerTest.tex) but place that file in a special top-level folder
-called ''untestedDTX'' which contains two different types of non-tested files. There are depreciated dtx files - those dtx
-files whose contents will be removed in an upcoming ximera version and so tests aren't needed (these are separated into
-a 'depreciated' folder inside the untestedDTX folder) as well as the dtx files that do not contain anything that can/need
-be tested (like the banner.dtx) - test files for these are put in the ''hardCoded'' subfolder of the untestedDTX folder.
+So we still have ''test files'' for non-testable dtx files (e.g. ``bannerTest.tex``) but place that file in a special subfolder
+called ``Hardcoded`` which contains dtx files that do not contain anything that can/need be tested (like the banner.dtx).
+Moreover, there are also depreciated dtx files - those dtx files whose contents will be removed in an upcoming ximera version 
+and they do not require testing. These are separated into a ``Depreciated`` subfolder inside the dtxTests folder.
 
 
 # Public Publishing Locations
@@ -151,19 +187,9 @@ for authors, but can be used by anyone - it is publically available after all. Y
 
  * at [KU Leuven](https://set-p-dsb-zomercursus-latest.cloud-ext.icts.kuleuven.be/ximeraexamples/coreXimeraFeatures/environments/theoremEnvironments).
  * at [OSU](https://ximera.osu.edu/ximeraexamples).
-
+ * at [UF](https://test.xronos.clas.ufl.edu/ximeraExamples) (Link still pending - dummy link entered)
 Note you can always get the TeX-code by appending .tex to the URL of an activity.
 
 
 <!-- A more detailed description of how to use this repo for testing is in the [README_testing](README_testing.md) -->
-
-# Notes from talking with Wim
-
-1) Make a ``global testing files`` type subfolder in the testFiles folder for test files that are designed
-to test more global interactions - not things that are contianed within a single dtx file.
-For example, the label/ref interactions with certain environments like theorems or problems; or 
-complicated ToC implementation with nesting sections/subsections and chapterstyle/sectionstyle commands.
-
-
-
 
