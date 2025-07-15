@@ -135,7 +135,7 @@ everything generated in the problem.dtx file.
 So just the ``problem` related files would be in the structure as follows:
 - dtxTests
     - problem
-        - base.tex file (basic usage implementation/info)
+        - problem.tex file (basic usage implementation/info)
         - nesting.tex (test for nesting behavior)
         - numbering.tex (test for numbering scheme)
         - problemTest.tex (xourse file that loads the above files for testing)
