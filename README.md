@@ -1,4 +1,7 @@
-This Repo contains the test documents for Ximera development. 
+# Current Status: Alpha
+This repo is still being built and rebuilt as we develop a solid testing bed for Ximera.
+
+This repo contains the test documents for Ximera development. 
 It also contains minimal examples and syntax for the Ximera commands, environments, etc. 
 However, for a much in-depth treatment of Ximera commands, environments, etc you should
 refer to the [Ximera User Manual](https://github.com/XimeraProject/ximeraManuals/releases), which explains things in more detail and in a more user friendly way.
