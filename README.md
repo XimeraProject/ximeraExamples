@@ -1,7 +1,7 @@
-This Repo contains the master testbed for Ximera development. 
+This Repo contains the test documents for Ximera development. 
 It also contains minimal examples and syntax for the Ximera commands, environments, etc. 
 However, for a much in-depth treatment of Ximera commands, environments, etc you should
-refer to the Ximera manual, which explains things in more detail and in a more user friendly way.
+refer to the [Ximera User Manual](https://github.com/XimeraProject/ximeraManuals/releases), which explains things in more detail and in a more user friendly way.
 
 ## Vocabulary:
 **In this repo we use the following terminology**
@@ -92,9 +92,7 @@ test files. To submit a new test file, see the section on ``Creating a New Test 
 # Naming Schemes
 
 ## Each test xourse is named after a dtx file.
-Since all development work must be implemented via dtx file (as per CTAN standards) and most development work
-tends to involve only a few dtx files (usually just one or two), it is often easiest to test the new code by testing
-everything that is implemented by the newly changed dtx code. This testing bed makes that easy to accomplish by merely
+Since  development work is implemented via dtx file, we can test new code by
 pulling up the relevant dtxTestXourse(s) and loading the test bed xourse(s) that correspond to your changed dtx file.
 These in turn load all the relevant test files that correspond to the individual elements implemented by that dtx file.
 
@@ -137,7 +135,7 @@ everything generated in the problem.dtx file.
 So just the ``problem` related files would be in the structure as follows:
 - dtxTests
     - problem
-        - base.tex file (basic usage implementation/info)
+        - problem.tex file (basic usage implementation/info)
         - nesting.tex (test for nesting behavior)
         - numbering.tex (test for numbering scheme)
         - problemTest.tex (xourse file that loads the above files for testing)
