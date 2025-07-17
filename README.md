@@ -1,13 +1,23 @@
-# Current Status: Alpha
+Current Status: **Alpha**. 
 This repo is still being built and rebuilt as we develop a solid testing bed for Ximera.
 
-This repo contains the test documents for Ximera development. 
-It also contains minimal examples and syntax for the Ximera commands, environments, etc. 
-However, for a much in-depth treatment of Ximera commands, environments, etc you should
-refer to the [Ximera User Manual](https://github.com/XimeraProject/ximeraManuals/releases), which explains things in more detail and in a more user friendly way.
+# Purpose/content
+This repo contains tests for Ximera development, 
+and thus also contains basic, advanced and border usecases for the Ximera commands, environments, etc. 
+
+For a user friendly overview of Ximera  refer to the [Ximera User Manual](https://github.com/XimeraProject/ximeraManuals/releases).
+
+
+The content of  this repo is published at:
+
+ * [KU Leuven](https://set-p-dsb-zomercursus-latest.cloud-ext.icts.kuleuven.be/ximeraexamples/coreXimeraFeatures/environments/theoremEnvironments).
+ * [OSU](https://ximera.osu.edu/ximeraexamples).
+ * [UF](https://test.xronos.clas.ufl.edu/ximeraExamples) (Link still pending - dummy link entered)
+Note you can always get the TeX-code by appending .tex to the URL of an activity.
+
 
 ## Vocabulary:
-**In this repo we use the following terminology**
+**This repo uses the following terminology**
 1) ``elements`` refers to LaTeX commands, environments, macros, etc that are defined in a specific dtx file.
     e.g. the ``problem``, ``question``, ``exploration``, and ``exercise`` are all environments
     defined in the problem.dtx file. These would collectively be called ``elements of problem.dtx``.
@@ -17,36 +27,36 @@ refer to the [Ximera User Manual](https://github.com/XimeraProject/ximeraManuals
     commands/hooks are (re)defined in the dtx content other than the outcomes.dtx, we would say that
     the outcome commands are ``touched`` by that dtx file (e.g. in options due to class options).
 
-# General Structure and Intent of this Repo
-
 ## Quick Structure Outline
 
-- .devcontainer folder (For development - if you don't know what this does, then don't touch this).
-    - ``docker-compose.yml`` (Contains the images for ximeraLatex and local server version choices).
-- .github, .vscode, and xmScripts folders (To make codespaces work as intended, don't touch these).
-- compositeTests (for tests of interactions between different dtx file contents, see README in folder.)
-    - (composite Test) Folder (folder named for composite testing case).
-        - ``(composite Test)Xourse.tex`` (xourse for the composite test - may also load tests from dtxTests folder).
-        - ``variousdtxTests.tex`` (test files for the composite test - should be named for the individual elements of test when possible e.g. ``refToProblemLabel.tex`` and/or ``refToTheoremLabel.tex``)
-- dtxTests
-    - Depreciated (for content that is being removed in a future release, see README in folder)
-    - Hardcoded (for content that is not testable, like macros. Included so we can easily verify all dtx files are accounted for.)
-    - (DTXFileName) Folder
+- `dtxTests` for tests-per-Ximera-dtx-source-file, with subfolders
+    - `Deprecated` for content that is being removed in a future release, see README in folder
+    - `Hardcoded` for content that is not testable, like macros. Included so we can easily verify all dtx files are accounted for.
+    - `(DTXFileName)` subfolder for each `(DTXFileName).dtx`, with
         - ``(DTXFileName).tex file`` (e.g. problem.tex) which contains the most basic tests for the dtx file content.
-        - ``(Additional Testing Feature).tex`` (e.g. ``nesting.tex`` or ``numbering.tex`` in the "problem folder").
+        - ``(Additional Testing Feature).tex`` (e.g. ``nesting.tex`` or ``numbering.tex`` in the `problem` folder).
         - ``(dtxFileName)Test.tex`` is the xourse that tests (dtxFileName) dtx file.
-- savedArchive (Contains old test files/content not in current use).
-    - Templates (Contains templates for adding new files).
-- xmPictures
-- xmScripts (For development - if you don't know what this does, then don't touch this).
-    - config.txt (For changing target url, name, port, etc. For development/testing).
-- global.css (The css code loaded in addition to the server base css).
+- `compositeTests`  folder for tests of interactions between different dtx file contents, see README in folder.
+    - `(composite Test)` folder named for composite testing case.
+        - ``(composite Test)Xourse.tex`` (xourse for the composite test - may also load tests from dtxTests folder).
+        - ``variousdtxTests.tex`` (test files for the composite test - should be named for the individual elements of test when possible e.g. ``refToProblemLabel.tex`` and/or ``refToTheoremLabel.tex``)        
+- `savedArchive` contains old test files/content not in current use.
+    - `Templates` contains templates for adding new files.
 
-## Important Folders At A Glance
+The repo also has following base Ximera folders and files:
+- `.devcontainer` folder for devcontain er/Codespace setup, with
+    - ``docker-compose.yml`` for the images of ximeraLatex and local server version.
+- `.github` for Github Actions, 
+- `.vscode` for VS Code settings
+- `xmPictures` for included pictures
+- `xmScripts` for the xmlatex build setup
+    - `config.txt` for target url, name, port, etc. For development/testing.
+- `global.css` for extra online CSS styling (in addition to the server base css).
 
-### dtxTests Folder
-The dtxTests folder contains a subfolder for every dtx file in the ximera package 
-(some may be inside the Hardcoded or Depreciated subfolders)
+
+### dtxTests Folder at a glance
+The `dtxTests` folder contains a subfolder for every dtx file in the ximera package 
+(some may be inside the Hardcoded or Deprecated subfolders)
 Each subfolder contains a tex file with the same name as the dtx folder.
 This is the basic test for all of the default uses of the elements, so
 ``problem.tex`` contains all the basic use cases that are tested for the problem environment.
@@ -57,14 +67,12 @@ additional use cases for elements being tested. Most commonly this would be test
 of things like optional arguments, nesting (environments, mathmode, etc), and/or different types of
 input inside the tested element.
 
-Finally, each subfolder should have a tex file named after the dtx file being tested, appended
-with ``Xourse``, e.g. the problem subfolder would have a file named ``problemXourse.tex`` which
-is the xourse documentclass file that loads all the relevant test files for that dtx file.
+Finally, each subfolder should have a `xourse.tex` file that loads all the relevant test files for that dtx file.
 
 ### compositeTests Folder at a glance
-The compositeTests folder contains files and xourses that tests to verify how elements 
+The compositeTests folder contains files and xourses to verify how elements 
 in different dtx files interact with each other. 
-Each composite test set should be in a subfolder of the compiteTests folder, where that
+Each composite test set should be in a subfolder of the compositeTests folder, where that
 subfolder has a name that reflects the nature of what the composite test is testing,
 e.g. a composite test for how sagemath commands interacts with various environments could be named
 something like ``sageInteraction`` or ``sageInEnvironments``. 
@@ -114,10 +122,10 @@ in the subfolder that test these other relevant aspects, each named after whatev
 ''nesting'' for testing the numbering scheme and nesting behavior inside the problem subfolder in the dtxTests folder
 respectively).
 
-## When Preambles are Necessary
+## Use of Preambles
 Some specific test files/xourses need to load specific options or alternative files as part of their
 testing (e.g. the graphics testing file needs to input graphics, and set graphics paths in the preamble). When this is
-necessary, **do note use the xmpreamble** for the test repo - instead you should make a preamble with the relevant test
+necessary, **do note change the xmPreamble** of the test repo - instead you should make a preamble with the relevant test
 file (or xourse as appropriate) name, appended with ''Preamble'' - e.g. ''imagePreamble.tex'' is the preamble file
 for the image.tex test file.
 Similarly, some specific elements have (intended) different behavior depending on server source (e.g. UF, OSU, KL, etc).
@@ -179,17 +187,6 @@ So we still have ''test files'' for non-testable dtx files (e.g. ``bannerTest.te
 called ``Hardcoded`` which contains dtx files that do not contain anything that can/need be tested (like the banner.dtx).
 Moreover, there are also depreciated dtx files - those dtx files whose contents will be removed in an upcoming ximera version 
 and they do not require testing. These are separated into a ``Depreciated`` subfolder inside the dtxTests folder.
-
-
-# Public Publishing Locations
-
-Content from this repo is published publically for others to see, and link to. This is mostly as a quick-ref demo resource
-for authors, but can be used by anyone - it is publically available after all. You can find these servers here:
-
- * at [KU Leuven](https://set-p-dsb-zomercursus-latest.cloud-ext.icts.kuleuven.be/ximeraexamples/coreXimeraFeatures/environments/theoremEnvironments).
- * at [OSU](https://ximera.osu.edu/ximeraexamples).
- * at [UF](https://test.xronos.clas.ufl.edu/ximeraExamples) (Link still pending - dummy link entered)
-Note you can always get the TeX-code by appending .tex to the URL of an activity.
 
 
 <!-- A more detailed description of how to use this repo for testing is in the [README_testing](README_testing.md) -->
