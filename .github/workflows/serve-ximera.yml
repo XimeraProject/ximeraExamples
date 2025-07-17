@@ -105,6 +105,16 @@ jobs:
           ./xmScripts/xmlatex name         
           ./xmScripts/xmlatex serve -f
           echo "✅ Published to $XIMERA_URL$XIMERA_NAME " >> $GITHUB_STEP_SUMMARY
+      - name: Serve to test.xronos.clas.ufl.edu
+        env:
+          GPG_KEY: ${{ secrets.GPG_KEY }}
+          GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
+          XIMERA_URL: "https://test.xronos.clas.ufl.edu/"
+          XIMERA_NAME: ${{ vars.XIMERA_NAME }}
+        run: |
+          ./xmScripts/xmlatex name         
+          ./xmScripts/xmlatex serve -f
+          echo "✅ Published to $XIMERA_URL$XIMERA_NAME " >> $GITHUB_STEP_SUMMARY
 
 
 
