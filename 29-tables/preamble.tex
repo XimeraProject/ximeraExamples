@@ -1,0 +1,76 @@
+
+\usepackage{tabularray}
+
+\ExplSyntaxOn
+
+\__tblr_keys_define:nn { table/inner }
+  {
+    xmcolhead .code:n = \__tblr_keys_gput:nn { xmcolhead } {#1},
+  }
+
+\int_new:N \lTblrxmColHeadInt
+\int_new:N \lTblrxmColDiffInt
+\int_new:N \lTblrxmRowDiffInt
+% \int_new:N \lTblrxmCellRowSpanInt
+\int_new:N \lTblrxmColGroupCheck
+\int_new:N \ColSpanEx
+\tl_new:N \ColSpanEx_tl
+
+\int_new:N \lTblrTestingInt
+\prop_new:N \l__tblr_testing_prop
+
+\cs_new:Npn \prop_get_to_int:NnN #1 #2 #3
+  {
+    \int_set:Nn #3 { \prop_item:Nn #1 { #2 } }
+  }  
+
+\cs_new_protected:Npn \__tblr_build_col_head_foot:
+  {
+    %% \lTblrColHeadInt can not be empty, so we append '+ 0'.
+    \int_set:Nn \lTblrxmColHeadInt
+      { \__tblr_prop_item:ne { inner } { xmcolhead } + 0 }
+    \int_compare:nNnTF { \lTblrxmColHeadInt } > { 0 }
+      {
+        \__tblr_build_one_table:nnNN {1} { \lTblrxmColHeadInt }
+          \c_true_bool \c_true_bool
+      }
+  }
+
+%% #1: data name; #2: data index 1; #3: data index 2; #4: key
+\cs_new:Npn \__tblr_data_test_item:nnnn #1 #2 #3 #4
+  {
+      \intarray_item:cn { g__tblr_#1_ \int_use:N \gTblrLevelInt _intarray }
+        { \__tblr_data_key_to_int:nnnn {#1} {#2} {#3} {#4} }
+      
+  }
+
+\__tblr_keys_define:nn { table/inner }
+  {
+    caption .code:n = \__tblr_keys_gput:nn { caption } {#1},
+    summary .code:n = \__tblr_keys_gput:nn { summary } {#1}
+  }
+
+
+\tl_new:N \l__tblr_caption_tl
+\str_new:N \l__tblr_caption_str
+
+\tl_new:N \l__tblr_summary_tl
+\str_new:N \l__tblr_summary_str
+
+\cs_new:Npn \l__tblr_write_caption: #1
+{
+   \tl_set:Nn \l__tblr_caption_tl
+      { \__tblr_prop_item:ne { inner } { caption }  }
+   \str_set:Ne \l__tblr_caption_str
+      { \tl_to_str:e \l__tblr_caption_tl }
+    \tl_set:Nn \l__tblr_summary_tl
+      { \__tblr_prop_item:ne { inner } { summary }  }
+   \str_set:Ne \l__tblr_summary_str
+      { \tl_to_str:e \l__tblr_summary_tl }
+}
+
+\int_new:N \l__tlbr_number_cols_int
+
+\tl_new:N \l__tblr_colgroup_tl 
+
+\ExplSyntaxOff

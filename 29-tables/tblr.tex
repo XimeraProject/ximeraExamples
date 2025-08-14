@@ -1,0 +1,73 @@
+\documentclass{ximera}
+
+%% must load tabularray first 
+%\usepackage{TailorSwiftBotPublic}
+\input{preamble.tex}
+% \usepackage{xcolor}
+
+\begin{document}
+\begin{abstract}\end{abstract}
+
+\title{Tabularray tables}
+\maketitle
+
+\begin{tblr}{
+  colspec = {lcc}
+}
+          & Col 1 & Col 2  \\
+ Row 1    & 11    & 12     \\
+ Row 2    & 21    & 22      \\
+\end{tblr}
+
+
+\begin{center}
+\begin{tblr}[
+    caption = {No Headers}
+]{
+  colspec = {lcc}
+}
+          & Col 1 & Col 2  \\
+ Row 1    & 11    & 12     \\
+ Row 2    & 21    & 22 
+\end{tblr}
+
+
+\begin{tblr}[
+    caption = {Row Header}
+]{
+  colspec = {lcc}, 
+  rowhead=1,
+}
+          & Col 1 & Col 2  \\
+ Row 1    & 11    & 12     \\
+ Row 2    & 21    & 22 
+\end{tblr}
+
+\begin{tblr}[
+    caption = {Col Header}
+]{
+  colspec = {lcc}, 
+  xmcolhead=1,
+}
+          & Col 1 & Col 2  \\
+ Row 1    & 11    & 12     \\
+ Row 2    & 21    & 22 
+\end{tblr}
+
+\begin{tblr}[
+    caption = {Row and Col Header}
+]{
+  colspec = {lcc}, 
+  rowhead=1,
+  xmcolhead=1,
+}
+          & Col 1 & Col 2  \\
+ Row 1    & 11    & 12     \\
+ Row 2    & 21    & 22 
+\end{tblr}
+
+\end{center}
+
+\end{document}
+
+
