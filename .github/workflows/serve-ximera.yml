@@ -50,7 +50,7 @@ jobs:
           XIMERA_URL: ${{ vars.XIMERA_URL }}
           XIMERA_NAME: ${{ vars.XIMERA_NAME }}*${{ github.ref_name }}
           XOURSES: "29-tables"  # "./testXourses"
-          XAKE_VERSION: "v2.7.2"  
+          # XAKE_VERSION: "v2.7.2"  
           XM_COMPILE_SEQUENCE: "pdf,handout.pdf,html"
         run: |
           ls -alrt
