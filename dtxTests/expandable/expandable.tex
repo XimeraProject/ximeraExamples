@@ -21,25 +21,51 @@ There should be two html segments below.
 The first one should have \texttt{A first example of an expandable environment.} followed by 
 a collapsed box with an arrow to the right that allows you to expand it and show: 
 \begin{quote}
-This is the content of the expandable environment. It can contain text, images, or any other LaTeX content.
+This is the content of the expandable environment. It can contain text, images, or any other \LaTeX\ content.
 \end{quote}
 
 Below that should have \texttt{Another example of an expandable environment, now a remark.} followed by 
 a collapsed box with an arrow to the right that allows you to expand it and show: 
 \begin{quote}
-This is the content of the expandable environment. It can contain text, images, or any other LaTeX content.
+This is the content of the expandable environment. It can contain text, images, or any other \LaTeX\ content.
 \end{quote}
 
 
 \section{Start of Test/Demo Area}
 
 \begin{expandable}{example}{A first example of an expandable environment.}
-This is the content of the expandable environment. It can contain text, images, or any other LaTeX content.
+This is the content of the expandable environment. It can contain text, images, or any other \LaTeX\ content.
 \end{expandable}
 
 \begin{expandable}{remark}{Another example of an expandable environment, now a remark.}
-This is the content of the expandable environment. It can contain text, images, or any other LaTeX content.
+This is the content of the expandable environment. It can contain text, images, or any other \LaTeX\ content.
 \end{expandable}
+
+\begin{expandable}{example}{A first example of an expandable environment.}
+    This is the content of the expandable environment. It can contain text, images, or any other \LaTeX\ content.
+\end{expandable}
+
+
+
+\begin{expandable}{}{}
+    $
+    A^{2k} = \left[ \begin{array}{rc|rr}
+    1 & -2k & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    \hline
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+    \end{array} \right]$ for $k = 0, 1, 2, \dots$
+    
+    $A^{2k + 1} = A^{2k}A = \left[ \begin{array}{rc|rr}
+    1 & -(2k + 1) & 2 & -1 \\
+    0 & 1 & 0 & 0 \\
+    \hline
+    0 & 0 & -1 & 1 \\
+    0 & 0 & 0 & 1
+    \end{array} \right]$ for $k = 0, 1, 2, \dots$
+\end{expandable}
+
 
 
 
