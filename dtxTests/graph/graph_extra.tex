@@ -1,0 +1,115 @@
+\documentclass{ximera}
+\title{Extra graph test}
+
+
+\begin{document}
+\begin{abstract}
+    Tests/Demo for the graph command.
+\end{abstract}
+\maketitle
+
+\pgfplotsset{
+ xmplot/.style={
+  xlabel={$x$},  % x-axis label
+  ylabel={$y$},  % y-axis label	
+	axis lines=middle,
+	axis equal image,
+	axis line style={->},
+   },
+   panel/style={}    % To make \graph accept the 'panel' option for desmos !!
+}
+
+
+\ExplSyntaxOn
+
+% Helper function to process each item
+%%% The 'multi'-part, with f(x),g(x,f(x), does NOT yet work )
+\cs_new_protected:Nn \__multiplot_process:n {
+  % Check if the item contains slashes (legend and/or options separator)
+  \seq_set_split:Nnn \l_tmpa_seq { / } { #1 }
+  \int_case:nn { \seq_count:N \l_tmpa_seq } {
+    { 1 } {
+      % No legend, no options: just plot function
+      \addplot[thick,smooth] { #1 };
+    }
+    { 2 } {
+      % Has legend: plot function and add legend entry
+      \seq_pop_left:NN \l_tmpa_seq \l_tmpa_tl  % function
+      \seq_pop_left:NN \l_tmpa_seq \l_tmpb_tl  % legend
+      \addplot[thick,smooth] { \l_tmpa_tl };
+      % Only add legend if not empty
+      %\tl_if_empty:NF \l_tmpb_tl {
+        \addlegendentry{\l_tmpb_tl}
+      %}
+    }
+    { 3 } {
+      % Has legend and options: plot function with custom options
+      \seq_pop_left:NN \l_tmpa_seq \l_tmpa_tl  % function
+      \seq_pop_left:NN \l_tmpa_seq \l_tmpb_tl  % legend
+      \seq_pop_left:NN \l_tmpa_seq \l_tmpc_tl  % options
+      \addplot[\l_tmpc_tl] { \l_tmpa_tl };
+      % Only add legend if not empty
+      \tl_if_empty:NF \l_tmpb_tl {
+        \addlegendentry{\l_tmpb_tl}
+        }
+    }
+  }
+}
+
+
+\cs_new_protected:Nn \xmultiplot:n {
+  \clist_map_inline:nn { #1 } {
+    \__multiplot_process:n { ##1 }
+  }
+}
+
+\NewDocumentCommand \xmmultiplot { m } { \xmultiplot:n {#1} }
+
+\ExplSyntaxOff
+
+\pdfOnly{
+
+\renewcommand{\graph}[2][]{\tikz{\begin{axis}[xmplot,#1] \xmmultiplot{#2}; \end{axis}}}
+
+}
+
+% \ifdefined\HCode
+% \newcommand{\xmgraph}[2][]{$\graph{#2}$}
+% \fi
+
+\pgfplotsset{
+ xmplot/.append style={
+  domain=-2:2,
+   },
+ }
+
+
+\begin{image}[\textwidth]
+\graph{x^2 + 2}
+\quad
+\graph[ticks=none]{x^2 + 2}
+\quad
+\graph[ticks=none,blue, ultra thick]{x^2 + 2}
+\quad
+\graph[ticks=none]{x^2 + 2//thick}
+\end{image}
+
+\begin{image}[\textwidth]
+\graph{x^2 + 2}
+\quad
+\graph{x^2 + 2/$f(x)$}
+\quad
+\graph{x^2 + 2/$f(x)$/red}
+\quad
+\graph{x^2 + 2/$y=x^2$/blue}
+
+\end{image}
+
+\[
+\graph[thick,ymax=10,domain=-1:4]{x^2 - 3*x + 2}
+\]
+
+
+
+
+\end{document}
