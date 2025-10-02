@@ -1,0 +1,385 @@
+\documentclass{ximera}
+\title{Extra graph test}
+
+
+\begin{document}
+\begin{abstract}
+    Tests/Demo for the graph command.
+\end{abstract}
+\maketitle
+
+%% Default \begin{tikzpicture} options
+\tikzset{
+ xmGraphTikz/.style={},
+ panel/.style={},
+%  xmDesmosWidth/.code 2 args={\def\xmDesmosWidth{#2}}, % sets a macro when applied
+%  xmDesmosWidth/.default=600,    % pixels
+%  xmDesmosHeight/.code 2 args={\def\xmDesmosHeight{#2}}, % sets a macro when applied
+%  xmDesmosHeight/.default=300,    % pixels
+ }
+
+ %% Default \begin{axis} options
+\pgfplotsset{
+ xmGraphPlotAxis/.style={
+  xlabel={$x$},  % x-axis label
+  ylabel={$y$},  % y-axis label	
+	axis lines=middle,
+	axis equal image,
+	axis line style={->},
+%   panel,
+ },
+  panel/.code={\def\xmGraphShowPanel{true}}, % sets a macro when applied
+  % xmGraphShowDesmos/.code={\def\xmGraphShowDesmos{true}}, % sets a macro when applied
+  % % xmGraphShowDesmos/.default={true}, 
+  % xmGraphNoDesmos/.code={\let\xmGraphShowDesmos\undefined}, 
+  % % xmGraphShowDesmos,
+  xmGraphShowCommand/.code={\def\xmGraphShowCommand{true}}, % sets a macro when applied
+  % xmGraphShowTikZ/.code={\def\xmGraphShowTikZ{true}}, % sets a macro when applied
+  % xmGraphNoTikZ/.code={\let\xmGraphShowTikZ\undDefInEd}, % sets a macro when applied
+  xmDesmosWidth/.store in=\xmDesmosWidth,
+  xmDesmosWidth/.default=600px,
+  xmDesmosHeight/.store in=\xmDesmosHeight,
+  xmDesmosHeight/.default=300px,
+}
+
+% \pgfkeys{
+%   /pgfplots/xmGraphShowDesmos/.store in=\xmGraphShowDesmos,
+%   /pgfplots/xmGraphShowDesmos/.initial=false,   % initial default
+%   /pgfplots/xmGraphShowDesmos/.default=true,    % if used as 'xmGraphShowDesmos' -> true
+%   /pgfplots/xmGraphNoDesmos/.code={% explicit "off"
+%      \pgfkeyssetvalue{/pgfplots/xmGraphShowDesmos}{false}%
+%   },
+% }
+
+\def\xmGraphShowDesmos{true}  % default NOT inside the style: DOES NOT WORK
+
+% \pgfplotsset{
+%   % plot-level style
+%   xmGraphPlot/.style={
+%     /pgfplots/.cd, % <- ensures keys are interpreted as pgfplots keys
+%     domain=-2:2,
+%     samples=50,
+%     thick,
+%   },
+%   % axis-level style
+%   xmGraphPlotAxis/.style={
+%     /pgfplots/.cd,
+%     xmin=-2.3, xmax=2.3,
+%     ymin=-1, ymax=4,
+%     axis equal image,
+%     axis lines=middle,
+%     axis line style=->,
+%   }
+% }
+
+\ExplSyntaxOn
+
+% Helper function to process each item
+%%% The 'multi'-part, with f(x),g(x,f(x), does NOT yet work )
+\cs_new_protected:Nn \__multiplot_get_function:n {
+  % Check if the item contains slashes (legend and/or options separator)
+  % IN 2025 ? \seq_set_split_with_nested:nnnN { / } { | | } { #1 } \l_tmpa_seq
+  \seq_set_split:Nnn \l_tmpa_seq { // } { #1 }
+  \int_case:nn { \seq_count:N \l_tmpa_seq } {
+    { 1 } {
+      % No legend, no options: just plot function
+         #1
+    }
+    { 2 } {
+      \seq_pop_left:NN \l_tmpa_seq \l_tmpa_tl  % function
+      \l_tmpa_tl
+    }
+    { 3 } {
+      \seq_pop_left:NN \l_tmpa_seq \l_tmpa_tl  % function
+      \l_tmpa_tl
+    }
+  }
+}
+
+\cs_new_protected:Nn \__multiplot_process:nn {
+  % Check if the item contains slashes (legend and/or options separator)
+  % IN 2025 ? \seq_set_split_with_nested:nnnN { / } { | | } { #1 } \l_tmpa_seq
+  \seq_set_split:Nnn \l_tmpa_seq { // } { #2 }
+  \int_case:nn { \seq_count:N \l_tmpa_seq } {
+    { 1 } {
+      % No legend, no options: just plot function
+      \addplot[xmGraphPlot, #1] { #2 };
+    }
+    { 2 } {
+      % Has legend: plot function and add legend entry
+      \seq_pop_left:NN \l_tmpa_seq \l_tmpa_tl  % function
+      \seq_pop_left:NN \l_tmpa_seq \l_tmpb_tl  % legend
+      \addplot[xmGraphPlot, #1] { \l_tmpa_tl };
+      % Only add legend if not empty
+      %\tl_if_empty:NF \l_tmpb_tl {
+        \addlegendentry{\l_tmpb_tl}
+      %}
+    }
+    { 3 } {
+      % Has legend and options: plot function with custom options
+      \seq_pop_left:NN \l_tmpa_seq \l_tmpa_tl  % function
+      \seq_pop_left:NN \l_tmpa_seq \l_tmpb_tl  % legend
+      \seq_pop_left:NN \l_tmpa_seq \l_tmpc_tl  % options
+      \addplot[xmGraphPlot, #1,  \l_tmpc_tl] { \l_tmpa_tl };
+      % Only add legend if not empty
+      \tl_if_empty:NF \l_tmpb_tl {
+        \addlegendentry{\l_tmpb_tl}
+        }
+    }
+  }
+}
+
+\cs_new_protected:Nn \xmultiplot:nn {
+  \clist_map_inline:nn { #2 } {
+    \__multiplot_process:nn { #1 } { ##1 }
+  }
+}
+
+\NewDocumentCommand \xmGraphPlot { o m } { \xmultiplot:nn {#1} {#2} }
+\NewDocumentCommand \xmGraphGetFunction { m } { \__multiplot_get_function:n {#1} }
+\ProvideDocumentCommand \xmGraphLegend { m } {}
+\ProvideDocumentCommand \xmGraphExtra { m } {}
+
+\ExplSyntaxOff
+
+\newcommand\GetKeyFromStyle[2]{%
+  \pgfkeys{/pgfplots/.cd,#1}%
+  \pgfkeysvalueof{/pgfplots/#2}%
+}
+
+\newcommand\GetPGFplotsKeyFromStyle[2]{%
+  % #1 = style name
+  % #2 = key name
+  % Save current value (to restore if undefined)
+  \pgfkeys{/pgfplots/.cd,#1}%
+  \pgfkeys{/pgfplots/#1} % executes the style code
+
+  \typeout{KEY #2 in #1}
+
+  % Try global key first
+  \pgfkeysifdefined{/pgfplots/#2}{%
+    \pgfkeysvalueof{/pgfplots/#2}%
+    \typeout{KEY found: #2 in #1: \pgfkeysvalueof{/pgfplots/#2}}
+  }{%
+    % Try axis key
+    \pgfkeysifdefined{/pgfplots/axis/#2}{%
+      \pgfkeysvalueof{/pgfplots/axis/#2}%
+      \typeout{KEY found in axis: #2 in #1: \pgfkeysvalueof{/pgfplots/axis/#2}}
+    }{%
+        % Try dummy option
+        \pgfkeysifdefined{/mydymmyoption/#2}{%
+        \pgfkeysvalueof{/mydymmyoption/#2}%
+        \typeout{KEY found dummyoption: #2 in #1: \pgfkeysvalueof{/mydymmyoption/#2}}
+        }
+        {
+        % Key not found → return empty
+        \typeout{KEY not found: #2 in #1}
+        }%
+    }%
+  }
+}
+
+\makeatletter
+\renewcommand\GetPGFplotsKeyFromStyle[2]{%
+  % #1 = style name
+  % #2 = key name
+  \pgfkeys{/pgfplots/.cd,#1}% activate style
+  %\typeout{KEY #2 in #1}
+  \pgfkeysifdefined{/pgfplots/#2}{%
+    \pgfkeysvalueof{/pgfplots/#2}%
+   % \typeout{KEY found: #2 in #1: \pgfkeysvalueof{/pgfplots/#2}}
+  }{%
+    \pgfkeysifdefined{/pgfplots/axis/#2}{%
+      \pgfkeysvalueof{/pgfplots/axis/#2}%
+      %\typeout{KEY axis found: #2 in #1: \pgfkeysvalueof{/pgfplots/#2}}
+    }{%
+    %\pgfkeysifdefined{/pgfplots/.@cmd/#2}{TRUE}{FALSE}%
+      % undefined → return empty
+    }%
+  }%
+}
+\makeatother
+
+\makeatletter
+% #1 = macro to store value
+% #2 = style name
+% #3 = key name
+\newcommand\GetPGFplotsKeyFromStyleToMacro[3]{%
+  %\begingroup
+    \def#1{}% initialize macro to empty
+    \pgfkeys{/pgfplots/.cd,#2}% activate the style
+    % Try normal key
+    \pgfkeysifdefined{/pgfplots/#3}{%
+      \pgfkeysgetvalue{/pgfplots/#3}{#1}%
+    }{%
+      % Try axis key
+      \pgfkeysifdefined{/pgfplots/axis/#3}{%
+        \pgfkeysgetvalue{/pgfplots/axis/#3}{#1}%
+      }{%
+        % Key not found → leave empty
+        \def#1{}%
+      }%
+    }%
+  %\endgroup
+}
+
+\makeatother
+
+\renewcommand{\graph}[2][]{
+  \begingroup
+  \ifdefined\xmGraphShowDesmos    % generic tikz-options confuse the pgfkeys ...
+  %\typeout{SETTING tmpstyle (\xmGraphShowDesmos\  for #1)}
+\pgfplotsset{   %% The #1 will process the additional options, so that \xmGraphShowTikZ works !!!
+  tmpstyle/.style={
+    /pgfplots/xmGraphPlot,        % apply plot keys
+    /pgfplots/xmGraphPlotAxis,    % apply axis keys
+ %   /pgfplots/.cd,                % ensure any extra keys are interpreted in pgfplots
+    #1                            % allow overrides
+  }
+}
+  \pgfkeys{/pgfplots/.cd,#1}% activate style
+\else
+  %\typeout{SKIPPING tmpstyle for #1}
+\fi
+
+\ifdefined\HCode
+  \HCode{<div class="xmdesmos">}
+\else
+  \def\xmGraphShowTikZ{true}  %% ALWAYS show TikZ in PDF !!!
+\fi
+
+  \ifdefined\xmGraphShowCommand
+  \ifdefined\HCode
+   % \HCode{<h1> Command: \string\graph[#1]{#2}  </h1> }
+  \else
+   %  {\Large\bf With options #1 }
+  \fi
+  \fi
+
+
+
+\ifdefined\HCode\ifdefined\xmGraphShowDesmos
+% \pgfplotsset{
+%   xxxxtmpstyle/.style = { 
+%     /pgfplots/.append style={xmGraphPlot}  % apply xmGraphPlot in axis context
+%     /pgfplots/axis/.append style={xmGraphPlotAxis}  % apply xmGraphPlot in axis context
+%     /pgfplots/axis/.append style={#1}  % apply xmGraphPlot in axis context
+% },
+%  }
+
+
+
+% \GetPGFplotsKeyFromStyleToMacro{\myval}{tmpstyle}{axis equal image}
+% axis equal image = \myval % prints "-2:2"
+
+% \GetPGFplotsKeyFromStyleToMacro{\myval}{tmpstyle}{xlabel}
+% xlabel = \myval % prints "-2:2"
+% xlabel = \HCode{\myval} % prints "-2:2"
+
+%\typeout{AXIS KEY: \GetPGFplotsKeyFromStyle{tmpstyle}{axis equal image}}
+% AXIS : \GetPGFplotsKeyFromStyle{tmpstyle}{axis equal image}
+% PANEL : \GetPGFplotsKeyFromStyle{tmpstyle}{panel}
+% XLABEL : \GetPGFplotsKeyFromStyle{tmpstyle}{xlabel}
+
+ \HCode{<div class="desmos-placeholder" data-options="}
+    %%% still an issue with $x$ vs x   (Desmos prints the $'s !)
+    % \GetPGFplotsKeyFromStyleToMacro{\myval}{tmpstyle}{xlabel}
+    % xlabel=\HCode{\myval},
+    % \GetPGFplotsKeyFromStyleToMacro{\myval}{tmpstyle}{ylabel}
+    % ylabel=\HCode{\myval},
+    % ylabel=\HCode{\GetPGFplotsKeyFromStyle{tmpstyle}{ylabel}},
+    xmax=\GetPGFplotsKeyFromStyle{tmpstyle}{xmax},
+    xmin=\GetPGFplotsKeyFromStyle{tmpstyle}{xmin},
+    ymin=\GetPGFplotsKeyFromStyle{tmpstyle}{ymin},
+    ymax=\GetPGFplotsKeyFromStyle{tmpstyle}{ymax},
+    \ifdefined\xmGraphShowPanel    panel=true, \fi
+    \ifdefined\xmDesmosWidth       xmDesmosWidth=\xmDesmosWidth, \fi
+    \ifdefined\xmDesmosHeight      xmDesmosHeight=\xmDesmosHeight, \fi
+    \if\relax\detokenize\expandafter{\GetPGFplotsKeyFromStyle{tmpstyle}{axis equal image}}\relax
+      axis equal image=true,
+    \fi
+ \HCode{" data-graph='}\detokenize{#2}\HCode{'"></div>}%
+\fi\fi%
+\ifdefined\xmGraphShowTikZ%
+  \begin{tikzpicture}[xmGraphTikz]
+  \begin{axis}[xmGraphPlotAxis,#1] 
+    \xmGraphPlot[]{#2} 
+    % \xmGraphPlot[#1]{#2} 
+    \xmGraphLegend{}
+    \xmGraphExtra{}
+  \end{axis}
+  \end{tikzpicture}
+\fi
+
+\endgroup
+}
+
+\ExplSyntaxOn
+\bool_set_true:N \l__trace_errors_bool
+\ExplSyntaxOff
+
+\NewDocumentCommand{\xmgraph}{ O{} m }
+{
+  % #1 = optional key-value options
+  % #2 = the math expression (can include \frac, \sqrt, etc.)
+  
+  % Store argument verbatim
+  \tl_set:Nn \l_tmpa_tl {#2}
+
+  % Expand token list at use, safely passing to \graph
+  \exp_args:No \graph [#1] {\l_tmpa_tl}
+}
+
+\ExplSyntaxOff
+
+% \newcommand{\xmgraph}[2][]{$\graph{#2}$}
+\pgfplotsset{
+ xmGraphPlot/.append style={
+  domain=-2:2,
+ },
+  % Axis-only keys go in a separate style
+  xmGraphPlotAxis/.append style={
+    xmin=-2.3,
+    xmax=2.3,
+    ymin=-1, ymax=4,
+    % xmDesmosWidth=500px,
+    % xmDesmosHeight=500px,
+    % ymin, ymax, tick settings etc.
+  }   
+ }
+
+
+%  xmax=\GetPGFplotsKeyFromStyle{xmGraphPlot}{xmax}
+
+%  xmax=\GetPGFplotsKeyFromStyle{xmGraphPlotAxis}{xmax}
+%  \graph{x^2/2//function//blue}
+
+
+\def\xmGraphShowCommand{true}
+
+  \graph[xmin=-7, xmax=5, ymin=-5, ymax=5]{\frac{4}{x+2},x=-2}
+
+
+  \pgfplotsset{
+ xmGraphPlot/.append style={
+  domain=-2:2,
+ },
+  % Axis-only keys go in a separate style
+  xmGraphPlotAxis/.append style={
+    xmin=-2.3,
+    xmax=2.3,
+    ymin=-1, ymax=4,
+    xmDesmosWidth =200px,
+    xmDesmosHeight=200px,
+    % ymin, ymax, tick settings etc.
+  }   
+ }
+
+ \graph[panel,xmin=-2.5, xmax=2.5,ymin=-0.5,ymax=8]{\frac{1}{x^2}}
+
+  \graph[panel]{1/x^2, 1/x^4, 1/x^6, (1,1), (-1,1),x=2}
+ 
+ 
+  \graph[panel,xmin=-2.5, xmax=2.5,ymin=-0.5,ymax=8]{\frac{1}{x^2}, \frac{1}{x^4}, \frac{1}{x^6}, (1,1), (-1,1)}
+ 
+ \end{document}
