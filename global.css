@@ -297,3 +297,46 @@ e.g. use "P1", "Problem 1", "Prob 1", "Exciting Problem 1", etc.
 } */
 
 
+
+
+ .desmos-placeholder {
+    max-width: 100%;
+    overflow: scroll;
+    display: inline-block;
+    vertical-align: middle;
+	resize: both;
+}
+ 
+.xmdesmos img{
+    max-width: 100%;
+    overflow: scroll;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+.img-container {
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+}
+
+.img-container img {
+  display: block;
+  max-width: 300px;
+  border: 1px solid #ccc;
+}
+
+.img-container button.hide-btn,
+.img-container button.show-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 12px;
+  padding: 2px 6px;
+  cursor: pointer;
+}
+
+.img-container button.show-btn {
+  display: none;
+}
