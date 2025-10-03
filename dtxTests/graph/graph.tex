@@ -1,7 +1,9 @@
 \documentclass{ximera}
-\title{graph Base Usage (OLD api)}
 
-%\input{preamble.tex}% Only add a preamble file if it is actually necessary for the demo/test.
+\input{preamble_graph.tex}
+
+\title{graph Base Usage}
+
 \begin{document}
 \begin{abstract}
     Tests/Demo for the graph command.
@@ -11,16 +13,55 @@
 \section{Basic Usage}
 The \verb|\graph| command takes in a function, and provides a Desmos graph of that function online.
 
-\textbf{Note:} You do need to be in mathmode.
+\textbf{Note:} There are currently TWO implementations, depending on \verb|\graph| being in mathmode or not.
+Probably only the non-mathmode version will be supported in future Ximera versions.
 
 \section{Intended Outcome of Test}
-Below should be the graph of $x^2 - 3x + 2$.
+Below should be the graph of $x^2/2$.
 
 \section{Start of Test/Demo Area}
 
-\[ 
-\graph{x^2 - 3x + 2}
-\]
+%\[ 
+%\graph{x^2 - 3x + 2}
+%\]
+
+
+% % \newcommand{\xmgraph}[2][]{$\graph{#2}$}
+% \pgfplotsset{
+%  xmGraphPlot/.append style={
+%   domain=-2:2,
+%  },
+%   % Axis-only keys go in a separate style
+%   xmGraphPlotAxis/.append style={
+%     xmin=-2.3,
+%     xmax=2.3,
+%     ymin=-1, ymax=4,
+%     % xmDesmosWidth=500px,
+%     % xmDesmosHeight=500px,
+%     % ymin, ymax, tick settings etc.
+%   }   
+%  }
+
+
+%  xmax=\GetPGFplotsKeyFromStyle{xmGraphPlot}{xmax}
+
+%  xmax=\GetPGFplotsKeyFromStyle{xmGraphPlotAxis}{xmax}
+%  \graph{x^2/2//function//blue}
+
+
+% \def\xmGraphShowCommand{true}
+
+\subsection{New version, NO mathmode}
+
+\graph{x^2/2}
+
+\subsection{OLD version, in mathmode}
+ \[
+ \graph{x^2/2}
+ \]
+
+\subsection{New version, with width=300}
+\graph[xmDesmosWidth=300]{x^2/2}
 
 \hrulefill
 
