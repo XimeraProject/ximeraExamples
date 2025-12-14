@@ -1,0 +1,33 @@
+\documentclass{ximera}
+\title{Test: Sage Environments}
+
+%\input{preamble.tex}% Only add a preamble file if it is actually necessary for the demo/test.
+\begin{document}
+\begin{abstract}
+    This is a demo/test of the sagesilent environment
+\end{abstract}
+\maketitle
+
+{{\Huge \bfseries Last Updated: \today}} \\
+
+
+\section{Basic Usage}
+The sagesilent environment is for writing sage code that is processed externally (at a sage server) 
+so that it can be called later in the document via commands like \verb|\sage|
+
+\textbf{NOTE:} This is currently not functional, as the default server currently does not run sage in this deployment iteration.
+
+\section{Intended Outcome of Test}
+Below should be \verb|x = 5| where the ``5'' is generated via sage.
+
+
+\section{Start of Test/Demo Area}
+\begin{sagesilent}
+ex = 5
+\end{sagesilent}
+$x = \sage{ex}$
+
+\hrulefill
+
+
+\end{document}
