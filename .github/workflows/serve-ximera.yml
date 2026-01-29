@@ -5,6 +5,15 @@ on:
     # tags:
     #   - 'v*'  # Trigger the workflow when a new tag starting with 'v' is pushed   
 
+env:
+    # These variables can/should be set at repository level
+    # If not set, defaults from xmScripts/config.txt or xmlatex will be used 
+    # (The defaults will presumably make publishing fail.)
+    GPG_KEY: ${{ secrets.GPG_KEY }}
+    GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
+    # The XIMERA_xxx variables can be overwritten infra !!!
+    XIMERA_URL: "https://xerxes.ximera.org/"
+    XIMERA_NAME: "ximeraexamples"    
 jobs:
   build-ximera:
     name: Build and preview Ximera Courses
@@ -14,16 +23,6 @@ jobs:
       actions: read
       contents: read
       packages: write
-    
-    env:
-      # These variables can/should be set at repository level
-      # If not set, defaults from xmScripts/config.txt or xmlatex will be used 
-      # (The defaults will presumably make publishing fail.)
-      GPG_KEY: ${{ secrets.GPG_KEY }}
-      GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
-      # The XIMERA_xxx variables can be overwritten infra !!!
-      XIMERA_URL: "https://xerxes.ximera.org/"
-      XIMERA_NAME: "ximeraexamples"
 
     steps:
       - name: Checkout code
