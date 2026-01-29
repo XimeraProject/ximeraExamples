@@ -22,7 +22,7 @@ jobs:
       GPG_KEY: ${{ secrets.GPG_KEY }}
       GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
       # The XIMERA_xxx variables can be overwritten infra !!!
-      XIMERA_URL: "xerxes.ximera.org/"
+      XIMERA_URL: "https://xerxes.ximera.org/"
       XIMERA_NAME: "ximeraexamples"
 
     steps:
