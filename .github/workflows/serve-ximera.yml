@@ -48,9 +48,10 @@ jobs:
           GPG_KEY: ${{ secrets.GPG_KEY }}
           GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
           XIMERA_URL: ${{ vars.XIMERA_URL }}
-          XIMERA_NAME: ${{ vars.XIMERA_NAME }}*${{ github.ref_name }}
+          XIMERA_NAME: ${{ vars.XIMERA_NAME }}*wwimm
+          # XIMERA_NAME: ${{ vars.XIMERA_NAME }}*${{ github.ref_name }}
           # XOURSES: "."  # "./testXourses"
-          XOURSES: "dtxTests/image"  # "./testXourses"
+          XOURSES: "dtxTests/image dtxTests/sage*"  # "./testXourses"
           XAKE_VERSION: "latest"
           XM_COMPILE_SEQUENCE: "pdf,handout.pdf,html"
         run: |
