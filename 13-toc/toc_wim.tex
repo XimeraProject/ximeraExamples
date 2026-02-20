@@ -1,0 +1,80 @@
+\documentclass[numbers]{xourse}
+
+\usepackage{titlesec}
+
+\author{Bart Snapp}
+
+\usepackage{lipsum}
+
+\title{Basic Table of Contents (wim)}
+
+\setcounter{secnumdepth}{6}
+\setcounter{tocdepth}{1}
+
+\begin{document}
+\begin{abstract}
+\end{abstract}
+\maketitle
+
+% % Second TOC; DOES NOT WORK
+% \clearpage
+% \begingroup
+%   \setcounter{tocdepth}{6}
+%   \renewcommand{\contentsname}{Appendix Contents}
+%   \makeatletter
+%   \patchcmd{\@mkboth}{\ttl@savemark}{\relax}{}{}
+%   \makeatother
+%   \tableofcontents
+% \endgroup
+
+% TOCDEPTH = \arabic{tocdepth} xxx yzz
+
+
+%% Mabe a new command for this \xmPartAsChapter
+\pdfOnly{\renewcommand{\part}[1]{\chapterstyle\def\thechaptertitle{#1}\title{#1}\begin{abstract}\end{abstract}\maketitle}}
+
+% \part{The first part}
+\chapterstyle
+\activity{basicActivity}
+\activity{basicActivity}
+% \sectionstyle
+% \activity{basicActivity}
+% \activity{basicActivity}
+
+% \activity{basicActivity}
+
+
+\part{Some chapter defined as a part} %% Part needs to be redefined in xmPreamble
+\sectionstyle
+\activity{sectionLevelActivity}
+\activity{sectionLevelActivity}
+% \activity{sectionLevelActivity}
+
+\part{The next chapter defined as a part}
+\sectionstyle
+\activity{sectionLevelActivity}
+\activity{sectionLevelActivity}
+% \activity{sectionLevelActivity}
+
+
+\chapterstyle
+\activity{chapterLevelActivity}
+\sectionstyle
+\activity{sectionLevelActivity}
+\activity{sectionLevelActivity}
+
+
+\chapterstyle
+\activity{chapterLevelActivity}
+\sectionstyle
+\activity{sectionLevelActivity}
+\activity{sectionLevelActivity}
+
+\part{And now for basicActivity as a section}
+\chapterstyle
+\activity{basicActivity}
+\sectionstyle
+\activity{basicActivity}
+
+
+\end{document}
