@@ -52,16 +52,18 @@ jobs:
       - name: Build and publish Ximera courses 
         env:
           XIMERA_NAME: ximeraexamples*${{ github.ref_name }}
-          XOURSES: "."  # "./testXourses"
+          # XOURSES: "."  # "./testXourses"
+          XOURSES: "dtxTests/theorems/xourse.tex"  # "./testXourses"
           # XOURSES: "dtxTests/image dtxTests/sage*"  # "./testXourses"
           # XOURSES: "dtxTests"  # "./testXourses"
           XAKE_VERSION: "latest"
           XM_COMPILE_SEQUENCE: "pdf,handout.pdf,html"
         run: |
           ls -alrt
+          env
           chmod +x xmScripts/xmlatex   # Overleaf sync might reset it :-()
           # ./xmScripts/xmlatex veryclean dtxTests/image   # TO BE REMOVED
-          ./xmScripts/xmlatex ghaction -j 8 $XOURSES
+          ./xmScripts/xmlatex -d ghaction -j 8 $XOURSES
           echo "✅ Published to $XIMERA_URL$XIMERA_NAME " >> $GITHUB_STEP_SUMMARY
 
       - name: Setup ximera serve cache (only .git)
