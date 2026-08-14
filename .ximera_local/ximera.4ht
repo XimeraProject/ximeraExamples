@@ -108,59 +108,6 @@
 }}{}
 \ConfigureEnv{#1}{\stepcounter{identification}\ifvmode \IgnorePar\fi \EndP\HCode{<div class="theorem-like problem-environment #1" id="problem\arabic{identification}" titletext=" \GetTranslation{#1}">}}{\ifvmode\IgnorePar\fi\EndP\HCode{</div>}\IgnoreIndent}{}{}%
 }
-
-
-      \ConfigureTheoremEnv{theorem}
-
-      \ConfigureTheoremEnv{algorithm}
-
-      \ConfigureTheoremEnv{axiom}
-
-      \ConfigureTheoremEnv{claim}
-
-      \ConfigureTheoremEnv{conclusion}
-
-      \ConfigureTheoremEnv{condition}
-
-      \ConfigureTheoremEnv{conjecture}
-
-      \ConfigureTheoremEnv{corollary}
-
-      \ConfigureTheoremEnv{criterion}
-
-      \ConfigureTheoremEnv{definition}
-
-      \ConfigureTheoremEnv{example}
-
-      \ConfigureTheoremEnv{explanation}
-
-      \ConfigureTheoremEnv{fact}
-
-      \ConfigureTheoremEnv{lemma}
-
-      \ConfigureTheoremEnv{formula}
-
-      \ConfigureTheoremEnv{idea}
-
-      \ConfigureTheoremEnv{notation}
-
-      \ConfigureTheoremEnv{model}
-
-      \ConfigureTheoremEnv{observation}
-
-      \ConfigureTheoremEnv{proposition}
-
-      \ConfigureTheoremEnv{paradox}
-
-      \ConfigureTheoremEnv{procedure}
-
-      \ConfigureTheoremEnv{remark}
-
-      \ConfigureTheoremEnv{summary}
-
-      \ConfigureTheoremEnv{template}
-
-      \ConfigureTheoremEnv{warning}
       % Mmm, (why) do we want/need this ...?
       \ConfigureTheoremEnv{proof}
 \ConfigureEnv{proof}{\ifvmode\IgnorePar\fi\EndP\HCode{<div class="proof">}

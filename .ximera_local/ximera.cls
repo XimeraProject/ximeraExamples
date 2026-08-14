@@ -277,60 +277,572 @@
 \everymath{\displaystyle}
 \let\prelim\lim
 \renewcommand{\lim}{\displaystyle\prelim}
+
+\ifdefined\ifxmtheoremenvtcolorbox
+  % Already defined, presumably to set it to false
+\else
+  \expandafter\newif\csname ifxmtheoremenvtcolorbox\endcsname
+  \xmtheoremenvtcolorboxtrue
+\fi
+
+\ifxmtheoremenvtcolorbox
+    \usepackage{tcolorbox}
+    \tcbuselibrary{breakable,skins}
+    \tcbuselibrary{theorems}
+
+    \tcbset{default-style/.style={
+              boxrule     = 0pt,
+              boxsep      = 0pt,
+              enhanced jigsaw,
+              sharp corners,
+              before skip = 10pt,
+              after skip  = 10pt,
+              breakable,
+      }
+    }
+
+    \colorlet{theory}{green}
+    \colorlet{example}{blue}
+    \colorlet{remark}{yellow}
+\fi
+
+\ExplSyntaxOn
+
+
+\bool_new:N \l_xmtheorem_print_bool
+\bool_new:N \l_xmtheorem_numbered_bool
+\bool_new:N \l_xmtheorem_expandable_bool
+\bool_new:N \l_xmtheorem_foldable_bool
+\bool_new:N \l_xmtheorem_expanded_bool
+\tl_new:N   \l_xmtheorem_title_tl
+\tl_new:N   \l_xmtheorem_expandedstate_tl
+
+\prop_new:N \g_xmtheorem_defaults_prop
+
+\keys_define:nn { xmtheorem }
+  {
+    numbered .bool_set:N = \l_xmtheorem_numbered_bool,
+    numbered .default:n = true,
+
+    nonumbered .meta:n = { numbered=false },
+
+    print .bool_set:N = \l_xmtheorem_print_bool,
+    print .default:n = true,
+
+    noprint .meta:n = { print=false },
+
+    expandable .bool_set:N = \l_xmtheorem_expandable_bool,
+    expandable .default:n = true,
+
+    foldable .meta:n = { expandable=true, expanded=true },
+    foldable .default:n = false,
+
+    noexpandable .meta:n = { expandable=false },
+
+    expanded .code:n =
+      { \tl_set:Nn \l_xmtheorem_expandedstate_tl { open='' } },
+    expanded .default:n = false,
+
+    title .tl_set:N = \l_xmtheorem_title_tl,
+
+    % Everything that isn't explicitly defined above is considered a title
+    % (and the last wins...!)
+    unknown .code:n = { \tl_set:NV \l_xmtheorem_title_tl \l_keys_key_tl }
+  }
+
+
+\tl_new:N \g_xmtheorem_global_defaults_tl
+
+\tl_gset:Nn \g_xmtheorem_global_defaults_tl
+  {
+    print=true,
+    expandable=false,
+    numbered=true
+  }
+
+
+\NewDocumentCommand{\XmTheoremDefaults}{m m}
+  {
+    \prop_gput:Nnn \g_xmtheorem_defaults_prop {#1} {#2}
+  }
+
+  % Temporary variables/settings
+\newif\ifxmcurrentexpandable
+\newif\ifxmcurrentprint
+
+\tl_new:N \l__xm_title_tl
+
+\def\xmcurrenttitle{}
+
+
+\cs_new_protected:Npn \xmtheorem_parse:nn #1 #2
+  {
+    % reset from global defaults
+    \keys_set:nV { xmtheorem }
+          \g_xmtheorem_global_defaults_tl
+
+    % reset title
+    \tl_clear:N \l_xmtheorem_title_tl
+
+    % environment-specific defaults
+    \prop_get:NnNT \g_xmtheorem_defaults_prop {#1} \l_tmpa_tl
+      {
+        \keys_set:nV { xmtheorem } \l_tmpa_tl
+      }
+
+    % local options override everything
+    \clist_map_inline:nn {#2}
+      {
+            % We testen op $ en \ omdat titels vaak macro's of wiskunde bevatten.
+            \regex_match:nnTF { \$ | \\ } {##1}
+              {
+                \tl_set:Nn \l_xmtheorem_title_tl {##1}
+              }
+              {
+                % Geen wiskunde of macro's? Dan mag l3keys controleren of het een
+                % waarde-loze sleutel is (zoals 'numbered'), met je 'unknown' fallback.
+                \keys_set:nn { xmtheorem } { ##1 }
+              }
+      }
+
+      % set non-expl3 variables for actual use in LaTeX
+      \bool_if:NTF \l_xmtheorem_print_bool
+        { \xmcurrentprinttrue }
+        { \xmcurrentprintfalse }
+
+      \bool_if:NTF \l_xmtheorem_expandable_bool
+        { \xmcurrentexpandabletrue }
+        { \xmcurrentexpandablefalse }
+
+      %% \xdef would cause tex to HANG when title contains eg \textit !!
+      \tl_if_empty:NTF \l_xmtheorem_title_tl
+          { \gdef\xmcurrenttitle{} } %  for \ifdefempty infra
+          { \gdef\xmcurrenttitle{\tl_use:N \l_xmtheorem_title_tl} }
+      \xdef\xmcurrentexpandedstate{\tl_use:N \l_xmtheorem_expandedstate_tl}
+  }
+
+\NewDocumentCommand{\xmParseTheoremOptions}{m m}
+{
+   \xmtheorem_parse:nn {#1} {#2}
+  %  \bool_if:NTF \l_xmtheorem_print_bool {PRINT} {NOPRINT}
+  %  \bool_if:NTF \l_xmtheorem_expandable_bool {EXPAND} {NOEXPAND}
+  %  TITLE=\xmcurrenttitle.
+}
+
+\NewDocumentCommand{\initcap}{m}
+  {
+    \text_titlecase_first:n {#1}
+  }
+
+
+\prop_new:N \g_xmtheorem_style_prop
+
+
+\tl_new:N \g_xmtheorem_style_default_base_tl
+\tl_new:N \g_xmtheorem_style_default_backgroundpct_tl
+\tl_new:N \g_xmtheorem_style_default_borderpct_tl
+
+\tl_gset:Nn \g_xmtheorem_style_default_base_tl          { gray }
+\tl_gset:Nn \g_xmtheorem_style_default_backgroundpct_tl { 5 }
+\tl_gset:Nn \g_xmtheorem_style_default_borderpct_tl     { 45 }
+
+
+\tl_new:N \l_xmtheorem_style_base_tl
+\tl_new:N \l_xmtheorem_style_backgroundpct_tl
+\tl_new:N \l_xmtheorem_style_borderpct_tl
+
+
+\keys_define:nn { xmtheoremenv/config }
+  {
+    color_base          .tl_set:N = \l_xmtheorem_style_base_tl,
+    color_backgroundpct .tl_set:N = \l_xmtheorem_style_backgroundpct_tl,
+    color_borderpct     .tl_set:N = \l_xmtheorem_style_borderpct_tl,
+  }
+
+
+\NewDocumentCommand{\xmSetTheoremStyle}{mm}
+  {
+    % start from defaults
+    \tl_set_eq:NN
+      \l_xmtheorem_style_base_tl
+      \g_xmtheorem_style_default_base_tl
+
+    \tl_set_eq:NN
+      \l_xmtheorem_style_backgroundpct_tl
+      \g_xmtheorem_style_default_backgroundpct_tl
+
+    \tl_set_eq:NN
+      \l_xmtheorem_style_borderpct_tl
+      \g_xmtheorem_style_default_borderpct_tl
+
+    % apply user keys
+    \keys_set:nn { xmtheoremenv/config } { #2 }
+
+    % store
+    \prop_gput:NnV
+      \g_xmtheorem_style_prop
+      { #1/base }
+      \l_xmtheorem_style_base_tl
+
+    \prop_gput:NnV
+      \g_xmtheorem_style_prop
+      { #1/backgroundpct }
+      \l_xmtheorem_style_backgroundpct_tl
+
+    \prop_gput:NnV
+      \g_xmtheorem_style_prop
+      { #1/borderpct }
+      \l_xmtheorem_style_borderpct_tl
+  }
+
+\NewDocumentCommand{\xmSetDefaultTheoremStyle}{m}
+  {
+    \keys_set:nn { xmtheoremenv/config } { #1 }
+
+    \tl_gset_eq:NN
+      \g_xmtheorem_style_default_base_tl
+      \l_xmtheorem_style_base_tl
+
+    \tl_gset_eq:NN
+      \g_xmtheorem_style_default_backgroundpct_tl
+      \l_xmtheorem_style_backgroundpct_tl
+
+    \tl_gset_eq:NN
+      \g_xmtheorem_style_default_borderpct_tl
+      \l_xmtheorem_style_borderpct_tl
+  }
+
+
+\cs_new:Npn \xmtheorem_style_base:n #1
+  {
+    \prop_if_in:NnTF \g_xmtheorem_style_prop { #1/base }
+      { \prop_item:Nn \g_xmtheorem_style_prop { #1/base } }
+      { \tl_use:N \g_xmtheorem_style_default_base_tl }
+  }
+
+\cs_new:Npn \xmtheorem_style_backgroundpct:n #1
+  {
+    \prop_if_in:NnTF \g_xmtheorem_style_prop { #1/backgroundpct }
+      { \prop_item:Nn \g_xmtheorem_style_prop { #1/backgroundpct } }
+      { \tl_use:N \g_xmtheorem_style_default_backgroundpct_tl }
+  }
+
+\cs_new:Npn \xmtheorem_style_borderpct:n #1
+  {
+    \prop_if_in:NnTF \g_xmtheorem_style_prop { #1/borderpct }
+      { \prop_item:Nn \g_xmtheorem_style_prop { #1/borderpct } }
+      { \tl_use:N \g_xmtheorem_style_default_borderpct_tl }
+  }
+
+
+\cs_new:Npn \xmtheorem_style_backspec:n #1
+  {
+    \xmtheorem_style_base:n {#1}
+    !
+    \xmtheorem_style_backgroundpct:n {#1}
+    !
+    white
+  }
+
+\cs_new:Npn \xmtheorem_style_borderspec:n #1
+  {
+    \xmtheorem_style_base:n {#1}
+    !
+    \xmtheorem_style_borderpct:n {#1}
+    !
+    black
+  }
+
+\str_new:N \g_xm_postcode_name_str
+
+\NewDocumentCommand{\xmNewTheoremEnvPDF}{m m}
+  {
+    % Create a (presumably) 'standard' amsthm-theorem; THIS USES THE CURRENTLY ACTIVE (amsthm-)STYLE
+    \newtheorem{#1}{#2}
+
+    %\newcommand{\theH#1}{\thetitlenumber.\the#1}   % TODO: check if needed/wanted for hyperref ...
+
+    % Allow for numbering 1,2 vs 2.1.1, 2.1.2 to depend on in-xourse-or-not.
+    \cs_set:cpn { the#1 }
+    {
+      \xmtheoremtitle{#1}
+    }
+
+    % Save the original macro's, to be able to create a wrapper around the amsthm-version with the original name, but with extra optional arguments
+    \cs_gset_eq:cc { #1@inner }    { #1 }
+    \cs_gset_eq:cc { end#1@inner } { end#1 }
+
+    \cs_if_exist:cT { c@#1 }
+      {
+        \newcounter{#1@inner}
+      }
+
+    % Setup styles globally; only the color can be changed for now (but with \tcbset everything is possible )
+    \ifxmtheoremenvtcolorbox
+        \tcbset{#1-style/.style={
+                  default-style,
+                  colback = \xmtheorem_style_backspec:n{#1} ,
+                  borderline~west = { 2pt }{ 0pt }{ \xmtheorem_style_borderspec:n{#1}} ,
+             }
+        }
+    \fi
+
+    % Replace original with wrapper
+    \RenewDocumentEnvironment{#1}{ +O{} }
+      {
+        \xmtheorem_parse:nn {#1} {##1}%
+
+        \def\xmthmprecode{precode#1}
+        \def\xmthmpostcode{postcode#1}
+
+        \str_gset:Nn \g_xm_postcode_name_str { postcode #1 }    % save for later use
+
+        %  \typeout{DBG:~reneweddocenv~#1~with~\l_xmtheorem_title_tl.}
+
+        \bool_if:NF \l_xmtheorem_numbered_bool
+          {
+            % No numbers, and 'eat the blank' with \!.
+            \cs_set:cpn { the#1 } {\!}
+            % When no number, also not counted; so undo the add that already happened
+            \addtocounter{#1}{-1}
+          }
+
+        \bool_if:NTF \l_xmtheorem_print_bool
+          {
+            \ifxmtheoremenvtcolorbox
+              % Add the tcolorbox env (with a macro because of teX-nesting-issues)
+              \csname tcolorbox\endcsname[#1-style]%
+            \fi
+
+            % Add the (original) amsthm-env (with a macro because of teX-nesting-issues)
+            \tl_if_empty:NTF \l_xmtheorem_title_tl
+                {\csname #1 @inner \endcsname }
+                {\csname #1 @inner \endcsname [ \l_xmtheorem_title_tl ]}
+          }
+          {%
+            % Do not print (unless xmDebug is defined)
+            \cs_if_exist:cTF { xmDebug }
+              {             \bgroup\color{red} }%
+              {\setbox0\vbox\bgroup} % HACK: print to hidden box0 !!!%
+                \csname #1 @inner \endcsname%
+                %%% WRONG \setcounter{#1}{\value{#1@inner}}%
+          }
+        % Execute \precode<envname>  if it is defined
+        %%\cs_if_exist:cT { precode #1 } {\csname precode #1 \endcsname}
+        \expandafter\ifcsname \xmthmprecode \endcsname \csname\xmthmprecode\endcsname \fi
+      }
+      {% At END of environment
+        % Execute \postcode<envname>  if it is defined
+        \expandafter\ifcsname \xmthmpostcode \endcsname \csname\xmthmpostcode\endcsname \fi
+        %%\cs_if_exist_use:c { \g_xm_postcode_name_str }
+        %%%  This DOES NOT WORK, thus used temp variable !!!
+        %%%     \cs_if_exist:cT { postcode #1 } {\csname postcode #1 \endcsname}
+        \bool_if:NTF \l_xmtheorem_print_bool
+          {
+            % Close the tcolorbox environment if it was opened
+            \ifxmtheoremenvtcolorbox
+              \csname endtcolorbox\endcsname%
+            \fi
+          }
+          {%
+            % Close the non-print extra bgroup
+            \egroup%
+          }
+      }
+    % \typeout{DBG:~Renewed~environment~#1}
+  }
+
+%% To use infra in explsyntaxoff :-(
+\NewDocumentCommand{\xmTheoremNoNumber}{m}
+  {
+        \bool_if:NF \l_xmtheorem_numbered_bool
+          {
+            \cs_set:cpn { the#1 } {}
+            \addtocounter{#1}{-1}
+          }
+  }
+
+\ExplSyntaxOff
+
+\providecommand{\xmTheoremHeadLevel}{%
+  \romannumeral-`\q% Dit is een truc die TeX dwingt alles te expanderen tot een getal en de 'q' wist
+  \ifnum\value{subsubsection}>0   6%
+  \else\ifnum\value{subsection}>0 5%
+  \else                           4%
+  \fi%
+  \fi%
+}
+
+\newcommand{\xmNewTheoremEnvHTML}[2][]{%
+
+  \newcounter{#2}
+  \newenvironment{#2}[1][]%
+  {%
+    % Parse optional argument locally
+    \xmParseTheoremOptions{#2}{##1}    %% environment and optional args
+    \def\xmthmprecode{precode#2}
+    \def\xmthmpostcode{postcode#2}
+
+    \refstepcounter{problem}%
+    \stepcounter{identification}%
+
+    % update theorem counter if it exists
+    \ifcsdef{c@#2}
+      {\refstepcounter{#2}}
+      {}%
+
+    \xmTheoremNoNumber{#2}  % Removes the number is nonumbered
+
+    \ifvmode\IgnorePar\fi
+    \EndP
+
+      \ifxmcurrentexpandable
+        \HCode{
+          <section>
+          <details
+          class="theorem-like problem-environment #2"
+          id="problem\arabic{identification}"
+          \xmcurrentexpandedstate >
+        }
+        %% DBG: STATE=\xmcurrentexpandedstate   % \HCode might silently NOT print it !!!
+        \HCode{<summary class="summary-#2">}%
+        \HCode{<h\xmTheoremHeadLevel }
+        \HCode{ class="summary-header">}%
+          \initcap{\GetTranslation{#1}}
+          \ifcsvoid{the#2}%
+            {}
+            {\csuse{the#2}.}%
+        \HCode{</h\xmTheoremHeadLevel>}
+        %
+        \ifdefempty{\xmcurrenttitle}
+          {}
+          {
+            \HCode{<span class="summary-title">}%
+            \xmcurrenttitle%
+            \HCode{</span>}%
+          }
+        \HCode{</summary>}
+      \else
+        \HCode{
+          <section>
+          <div
+          class="theorem-like problem-environment #2"
+          id="problem\arabic{identification}"
+          titletext="\GetTranslation{#1}">
+        }
+        \HCode{<h\xmTheoremHeadLevel }
+              \HCode{ class="summary-header">}%
+          \initcap{\GetTranslation{#1}}
+          \ifcsvoid{the#2}%
+            {}
+            {\csuse{the#2}.}%
+        \HCode{</h\xmTheoremHeadLevel>}
+        \ifdefempty{\xmcurrenttitle}
+          {}
+          {
+            \HCode{<span class="theorem-like-title">}%
+            \xmcurrenttitle%
+            \HCode{</span>}%
+          }
+      \fi
+    \IgnoreIndent
+    \expandafter\ifcsname \xmthmprecode \endcsname \csname\xmthmprecode\endcsname \fi
+  }
+  {
+    \expandafter\ifcsname \xmthmpostcode \endcsname \csname\xmthmpostcode\endcsname \fi
+    \ifvmode\IgnorePar\fi
+    \EndP
+      \ifxmcurrentexpandable
+        \HCode{</details></section>}
+      \else
+        \HCode{</div></section>}
+      \fi
+    \IgnoreIndent
+  }%
+}
+
+\newcommand{\xmNewTheoremEnv}[2][]{%
+  \ifdefined\HCode
+    \xmNewTheoremEnvHTML[#1]{#2}
+  \else
+    \xmNewTheoremEnvPDF{#2}{\initcap{\GetTranslation{#1}}}
+  \fi
+}
+
+\newcommand{\xmtheoremtitle}[1]{%
+    \ifdefined\isXourse\thetitlenumber.\arabic{#1}\else\arabic{#1}\fi%
+}
+
+\providecommand{\theoremtitle}[1]{%   %% used in printstyle ...
+    \ifdefined\isXourse\thetitlenumber.\arabic{#1}\else\arabic{#1}\fi%
+}
+
+
+\xmSetDefaultTheoremStyle{ color_base=gray,    color_backgroundpct=5,  color_borderpct=45 }
+
+\xmSetTheoremStyle{definition}  { color_base=theory,  color_backgroundpct= 5, color_borderpct=45 }
+\xmSetTheoremStyle{notation}    { color_base=theory,  color_backgroundpct= 5, color_borderpct=45 }
+\xmSetTheoremStyle{corollary}   { color_base=theory,  color_backgroundpct= 5, color_borderpct=45 }
+\xmSetTheoremStyle{axiom}       { color_base=theory,  color_backgroundpct= 5, color_borderpct=45 }
+\xmSetTheoremStyle{theorem}     { color_base=theory,  color_backgroundpct= 2, color_borderpct=65 }
+\xmSetTheoremStyle{proposition} { color_base=theory,  color_backgroundpct= 2, color_borderpct=65 }
+\xmSetTheoremStyle{corollary}   { color_base=theory,  color_backgroundpct= 2, color_borderpct=65 }
+\xmSetTheoremStyle{algorithm}   { color_base=theory,  color_backgroundpct= 2, color_borderpct=65 }
+\xmSetTheoremStyle{explanation} { color_base=theory,  color_backgroundpct= 1, color_borderpct=75 }
+
+\xmSetTheoremStyle{example}     { color_base=example, color_backgroundpct= 3, color_borderpct=75 }
+\xmSetTheoremStyle{exercise}    { color_base=example, color_backgroundpct= 0, color_borderpct=50 }
+
+\xmSetTheoremStyle{remark}      { color_base=remark,  color_backgroundpct= 5, color_borderpct=75 }
+\xmSetTheoremStyle{warning}     { color_base=remark,  color_backgroundpct= 2, color_borderpct=65 }
+
 \theoremstyle{definition} % No italic (because this makes also text in TikZ italic !!!)
 
+%% Create all Ximera-provided theorem-environments
+\ExplSyntaxOn
+\seq_set_from_clist:Nn \l_my_theorems_seq
+  {
+theorem,
+algorithm,
+axiom,
+claim,
+conclusion,
+condition,
+conjecture,
+corollary,
+criterion,
+definition,
+example,
+explanation,
+fact,
+lemma,
+formula,
+idea,
+notation,
+model,
+observation,
+proposition,
+paradox,
+procedure,
+remark,
+summary,
+template,
+warning
+  }
 
-      \newtheorem{theorem}{\GetTranslation{Theorem}}
+\seq_map_inline:Nn \l_my_theorems_seq
+  {
+    \xmNewTheoremEnv[#1]{#1}    % TODO: fix optional title ...
+  }
 
-      \newtheorem{algorithm}{\GetTranslation{Algorithm}}
+\ExplSyntaxOff
 
-      \newtheorem{axiom}{\GetTranslation{Axiom}}
+\ifdefined\HCode
+   \let\c@explanation@inner\relax
+\else
+  \renewcommand{\theexplanation}{}   % HACK: no numbers shown
+\fi
 
-      \newtheorem{claim}{\GetTranslation{Claim}}
-
-      \newtheorem{conclusion}{\GetTranslation{Conclusion}}
-
-      \newtheorem{condition}{\GetTranslation{Condition}}
-
-      \newtheorem{conjecture}{\GetTranslation{Conjecture}}
-
-      \newtheorem{corollary}{\GetTranslation{Corollary}}
-
-      \newtheorem{criterion}{\GetTranslation{Criterion}}
-
-      \newtheorem{definition}{\GetTranslation{Definition}}
-
-      \newtheorem{example}{\GetTranslation{Example}}
-
-      \newtheorem*{explanation}{\GetTranslation{Explanation}}
-
-      \newtheorem{fact}{\GetTranslation{Fact}}
-
-      \newtheorem{lemma}{\GetTranslation{Lemma}}
-
-      \newtheorem{formula}{\GetTranslation{Formula}}
-
-      \newtheorem{idea}{\GetTranslation{Idea}}
-
-      \newtheorem{notation}{\GetTranslation{Notation}}
-
-      \newtheorem{model}{\GetTranslation{Model}}
-
-      \newtheorem{observation}{\GetTranslation{Observation}}
-
-      \newtheorem{proposition}{\GetTranslation{Proposition}}
-
-      \newtheorem{paradox}{\GetTranslation{Paradox}}
-
-      \newtheorem{procedure}{\GetTranslation{Procedure}}
-
-      \newtheorem{remark}{\GetTranslation{Remark}}
-
-      \newtheorem{summary}{\GetTranslation{Summary}}
-
-      \newtheorem{template}{\GetTranslation{Template}}
-
-      \newtheorem{warning}{\GetTranslation{Warning}}
 \renewcommand{\theenumi}{\textup{(\alph{enumi})}}
 \renewcommand{\labelenumi}{\theenumi}
 \renewcommand{\theenumii}{\textup{(\roman{enumii})}}

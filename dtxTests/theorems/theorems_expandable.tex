@@ -1,0 +1,116 @@
+% \newif\ifxmtheoremenvtcolorbox
+% \xmtheoremenvtcolorboxfalse
+\documentclass{ximera}
+\title{Theorem-Style Environments (in (sub(sub))sections)}
+%% \usepackage[dutch]{babel}
+
+\begin{document}
+\begin{abstract}
+    Tests/Examples of expandable option.
+\end{abstract}
+\maketitle
+
+%\colorlet{theory}{green}
+% \xmSetTheoremStyle{definition}  { color_base=none,  color_backgroundpct= 5, color_borderpct=45 }
+
+
+\section{Start of Test/Demo Area}
+\begin{algorithm}
+    This is an algorithm Environment.
+\end{algorithm}
+
+\begin{algorithm}[{Example of an expandable algoritm}, expandable]
+    This is an expandable algorithm Environment.
+\end{algorithm}
+
+\subsection{Start of a subsection}
+\begin{algorithm}
+    This is an algorithm Environment in a subsection.
+\end{algorithm}
+
+\subsection{Start of a second subsection}
+\begin{algorithm}
+    This is an algorithm Environment in a second subsection.
+\end{algorithm}
+
+\subsubsection{Start of a subsubsection}
+\begin{algorithm}
+    This is an algorithm Environment in a subsubsection.
+\end{algorithm}
+
+\subsection{All the other environments}
+
+\begin{axiom}
+    This is an axiom Environment.
+\end{axiom}% Used in theorems.dtx
+
+\xmSetTheoremStyle{claim}     { color_base=remark,  color_backgroundpct= 20, color_borderpct=65 }
+
+\begin{claim}
+    This is a claim Environment.
+\end{claim}% Used in theorems.dtx
+
+\xmSetTheoremStyle{claim}     { color_base=theory,  color_backgroundpct= 20, color_borderpct=65 }
+
+\begin{claim}
+    This is a claim Environment.
+\end{claim}% Used in theorems.dtx
+
+
+\providecommand{\tcbset}[1]{}    % if tcolorbox is not loaded...
+
+  \tcbset{xmdefault/.style={
+                %   boxrule     = 0pt,
+                %   boxsep      = 0pt,
+                  enhanced jigsaw,
+                %   sharp~corners,
+                  before skip = 5pt,
+                  after skip  = 20pt,
+                  breakable,
+  } }
+
+  \begin{claim}
+    This is a claim Environment.
+\end{claim}% Used in theorems.dtx
+
+
+\tcbset{claim-style/.style={colback=red} }
+        \tcbset{
+%   xmtheoremenv-apply = { {claim} {blanker} }
+  % xmtheoremenv-apply = { {algorithm} {colback=green!5, colframe=green!50!black, arc=0mm} }
+}
+
+\begin{claim}
+    This is a claim Environment.
+\end{claim}% Used in theorems.dtx
+
+\tcbset{claim-style/.style={colback=green} }
+
+\begin{claim}
+    This is a claim Environment.
+\end{claim}% Used in theorems.dtx
+
+\tcbset{claim-style/.style={blanker} }
+
+\begin{claim}
+    This is a claim Environment.
+\end{claim}% Used in theorems.dtx
+
+\begin{conclusion}
+    This is a conclusion Environment.
+\end{conclusion}% Used in theorems.dtx
+
+\begin{definition}
+    This is a definition Environment.
+\end{definition}% Used in theorems.dtx
+
+\begin{example}
+    This is an example Environment.
+\end{example}% Used in theorems.dtx
+
+\begin{explanation}
+    This is an explanation Environment.
+\end{explanation}% Used in theorems.dtx
+
+
+\end{document}

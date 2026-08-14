@@ -1,0 +1,152 @@
+\documentclass{ximera}
+
+
+\begin{document}
+\title{Theorem-Style Environments with options}{}
+\begin{abstract}\end{abstract}
+\maketitle
+
+%% fancy newline: only in PDF force a newline
+\ifdefined\HCode
+\newcommand{\nl}{}
+\else
+\newcommand{\nl}{\ \par} % newline (after heading of definition etc.)
+\fi
+
+% \xmNewTheoremEnv{definition}
+\xmNewTheoremEnv[box]{BoxI}
+
+
+\theoremstyle{indented}
+\xmNewTheoremEnv[MyProposition]{prop}%{xmpropositie}
+%\xmWrapTheoremEnv{prop}{xmpropositie}
+
+
+\begin{BoxI}[Veelterm,print=false]
+  Body, print=false
+\end{BoxI}
+\begin{BoxI}[Veelterm]
+Body  \verb|x^2|
+\begin{itemize}
+\item borderline
+\end{itemize}
+\end{BoxI}
+
+\begin{BoxI}[title={Veelterm, not numbered},nonumbered]
+Body no numbers
+\end{BoxI}
+
+\begin{BoxI}[title={Veelterm, not numbered not printed},noprint,nonumbered]
+Body, no number, no print
+\end{BoxI}
+
+\begin{BoxI}
+Body, no args
+\end{BoxI}
+
+
+\begin{definition}
+Body no args
+\end{definition}
+
+\begin{proposition}
+Body no args
+\end{proposition}
+
+\begin{prop}   Body no args  \end{prop}
+\begin{prop}[Stelling van Euclides]   met titel  \end{prop}
+\begin{prop}[title=Stelling van Euclides]   met title=  \end{prop}
+\begin{prop}[title=Stelling van Euclides,noprint]   met noprint, title=  \end{prop}
+\begin{prop}[title=Stelling van Euclides,expandable]   met expandable, title=  \end{prop}
+
+\begin{definition}[Veelterm]
+Body title Veelterm
+
+Met een tweede lijn.
+\end{definition}
+
+\begin{definition}[title={Veelterm, met een lege lijn (en een komma en haakjes in de title)}]
+
+ Body title Veelterm, met initiële lege lijn.
+
+ En een tweede lijn.
+\end{definition}
+
+\begin{definition}[title={Veelterm, met een lege lijn EN nl (en een komma en haakjes in de title)}]\nl
+
+ Body title Veelterm, met initiële lege lijn en de adhoc nl macro .
+
+ En een tweede lijn.
+\end{definition}
+
+\begin{definition}[title={Veelterm, zonder een lege lijn maar MET nl (en een komma en haakjes in de title)}]\nl
+ Body title Veelterm, met initiële lege lijn en de adhoc nl macro .
+
+ En een tweede lijn.
+\end{definition}
+
+
+\begin{definition}[print=false,expandable=true,title={Veelterm, expandable and no print}]
+Body noprint, expandable 
+\end{definition}
+
+\begin{definition}[print=false,expandable=true,expanded,title={Veelterm, expandable and expanded}]
+Body noprint, expandable AND expanded (initially!)
+\end{definition}
+
+\begin{definition}[print=false,foldable=true,title={Veelterm, foldable (synonym for expandable and expanded)}]
+Body noprint,  foldable (ie, expandable and expanded)
+\end{definition}
+
+\begin{definition}[print=false,expandable]
+Body noprint, expandable, NO title
+\end{definition}
+
+\begin{definition}[print=false]
+Body noprint,  NO title
+\end{definition}
+
+\begin{definition}[print=false,title={}]
+Body noprint,  empty title
+\end{definition}
+
+\begin{definition}[expandable=true]%,title={Dit is een titel, met komma}]
+Body expandable=true, NO title; check the correct number after lot's of non-printing definitions!
+\end{definition}
+
+\begin{definition}[expandable]%,title={Dit is een titel, met komma}]
+Body expandable, NO title; Hopefully the title is not 'expandable' !!!
+\end{definition}
+
+\begin{definition}[{Titel, met komma's, en, haakjes maar zonder title is gelijk aan}]
+Body, maar is de titel is waarschijnlijk \color{red}{FOUT}. 
+\end{definition}
+
+\begin{definition}[Titel1, title={titel met toekenning aan 'titl'}, noexpandable, onbekendeoptiewordttitel]
+Body met test titles
+\end{definition}
+
+\begin{definition}[Titel1, title={titel met toekenning aan 'title'}, noexpandable]
+Body met test titles
+\end{definition}
+
+
+\begin{definition}[Met een explanation, hint en oplossing]
+Body, met uitleg, hint en oplossing.
+\begin{explanation} De uitleg (explanation) \end{explanation}
+\begin{hint}        Een hint \end{hint}
+% \begin{uitkomst}    De  uitkomst\end{uitkomst}
+% \begin{oplossing}   De oplossing \end{oplossing}
+\end{definition}
+
+% %  DIT WERKT ALLICHT NIET:
+\begin{definition}[{{Titel, met komma's, en, haakjes maar zonder title=}}]
+Body, maar is de titel is waarschijnlijk FOUT. 
+\end{definition}
+
+
+% \begin{definition}[print,foldable=true,title={Dit is een titel, met komma}]
+% Body print, foldable
+% \end{definition}
+
+\end{document}

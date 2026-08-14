@@ -340,3 +340,83 @@ e.g. use "P1", "Problem 1", "Prob 1", "Exciting Problem 1", etc.
 .img-container button.show-btn {
   display: none;
 }
+
+
+
+/* remove all theorem- header formatting */
+h4.summary-header,
+h5.summary-header,
+h6.summary-header
+{
+	all: unset
+}
+
+/* and set them for ximera */
+section .summary-header {
+    display: inline;
+    text-transform: capitalize;
+    font-weight: bold;
+    padding-right: 0.5em;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+details.theorem-like .summary-title::before {
+    content: "(";
+}
+details.theorem-like .summary-title::after {
+    content: ")";
+}
+
+details.theorem-like .summary-title {
+    opacity: 0.75;
+    padding-right: 0.5em;
+}
+
+/* UNSET the old logic (in base.css !) */
+details.definition::before, 
+details.example::before, 
+details.theorem::before, 
+details.remark::before 
+{
+    content: unset;
+}
+
+div > .definition::before, 
+div > .example::before, 
+div > .theorem::before, 
+div > .remark::before 
+{
+    content: unset;
+}
+
+
+details.theorem-like:has( .summary-header)::before,
+div.theorem-like:has( .summary-header)::before 
+{
+	content: unset;
+	color:red;
+}
+
+/* set to '.' in base.css, but 'hidden' */
+div > .definition::after,
+div > .example::after,
+div > .theorem::after,
+div > .remark::after 
+{
+    content: unset;
+}
+
+
+/* 202608: OBSOLETE */
+.multiple-choice[titletext]::before {
+	content: unset;
+}
+
+
+.problem-environment[titletext]::before {
+	content: unset;
+}
+
+.theorem-like[titletext]::before {
+	content: unset;
+}
